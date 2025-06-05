@@ -1,4 +1,4 @@
-class Shop {
+public class Shop {
 
     protected Item[] items;
     protected Item[] itemsOnSale;

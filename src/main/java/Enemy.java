@@ -6,7 +6,7 @@
 public class Enemy extends Entity {
     private int difficulty;
     private int reward;
-    
+
     /**
      * Creates a new entity with specified stats.
      * @param maxHp the max hp of the enemy
@@ -14,11 +14,13 @@ public class Enemy extends Entity {
      * @param speed the speed stat of the enemy
      * @param actionPoint the action points the enemy has
      * @param attack the attack stat of the entity
+     * @param numTargets the number of player characters the enemy can target
      * @param difficulty the difficulty value of the entity
      * @param reward the amount of currency the enemy awards on death
      */
-    public Enemy(int maxHp, int hp, int speed, int actionPoint, int attack, int difficulty, int reward) {
-        super(maxHp, hp, speed, actionPoint, attack);
+    public Enemy(int maxHp, int hp, int speed, int actionPoints, int attack, int numTargets, int difficulty,
+            int reward) {
+        super(maxHp, hp, speed, actionPoints, attack, numTargets);
         this.difficulty = difficulty;
         this.reward = reward;
     }
@@ -32,27 +34,6 @@ public class Enemy extends Entity {
 
     /**
      * 
-     * @param mainTarget
-     * @param enemies
-     */
-    @Override
-    protected Entity[] selectTarget(int mainTarget, Entity[] enemies) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'selectTarget'");
-    }
-
-    /**
-     * 
-     * @param targets
-     */
-    @Override
-    protected void normalAttack(Entity[] targets) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'normalAttack'");
-    }
-
-    /**
-     * 
      */
     @Override
     protected void skill(Entity[] targets) {
@@ -60,7 +41,7 @@ public class Enemy extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'skill'");
     }
     /**
-     * Gets the enemy's difficulty value.
+     * Returns the enemy's difficulty value.
      * @return the difficulty value of the enemy
      */
     public int getDifficulty() {
@@ -76,7 +57,7 @@ public class Enemy extends Entity {
     }
 
     /**
-     * Gets the amount of currency the enemy awards on death.
+     * Returns the amount of currency the enemy awards on death.
      * @return the amount of currency the enemy awards on death
      */
     public int getReward() {

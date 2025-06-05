@@ -24,7 +24,7 @@ public class Gacha{
         cost = 160;
     }
 
-    public Weapon[] pullWeapon(int timesPulled){
+    public Weapon[] pullWeapon(int timesToPull){
         Random random = new Random();
         Weapon[] pulledWeapon = new Weapon[timesToPull];
         for (int i = 0; i < timesToPull; i++){
