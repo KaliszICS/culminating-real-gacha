@@ -1,6 +1,6 @@
 /**
  * General class representing entities in battle, used for hp, speed, and attack-related operations.
- * @author Richard Gao
+ * @author gacha
  * @version 1.0.0
  */
 public abstract class Entity {
