@@ -11,10 +11,10 @@ class Item {
      * @param cost
      * @param owned
      */
-    public Item(String desc, int cost, boolean owned) {
+    public Item(String desc, int cost) {
         this.desc = desc;
         this.cost = cost;
-        this.owned = owned;
+        this.owned = false;
     }
 
     /**

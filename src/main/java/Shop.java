@@ -10,8 +10,8 @@ public class Shop {
         random = new Random();
 
         //This is where the items are created
-        Item bazooka = new Item("boosts team damage", 25, false);
-        Item potion = new Item("heals the team", 15, false);
+        Item bazooka = new Item("boosts team damage", 25);
+        Item potion = new Item("heals the team", 15);
 
         this.items = new Item[] {bazooka, potion};
         this.itemsOnSale = new Item[3];
