@@ -4,12 +4,10 @@
  * @version 1.0.0
  */
 public class PlayerCharacter extends Entity {
-    private int ultCharge;
     private String dialogue;
     private String name;
     private int rarity;
     private Weapon weaponEquipped;
-    private boolean owned;
     private double critChance;
     private int critDamage;
     private int numTargetSkill;
@@ -23,7 +21,6 @@ public class PlayerCharacter extends Entity {
      * @param actionPoints
      * @param attack
      * @param numTargets
-     * @param ultCharge
      * @param dialogue
      * @param name
      * @param rarity
@@ -34,16 +31,14 @@ public class PlayerCharacter extends Entity {
      * @param numTargetSkill
      * @param numTargetUltimate
      */
-    public PlayerCharacter(int maxHp, int hp, int speed, int actionPoints, int attack, int numTargets, int ultCharge, String dialogue, String name,
+    public PlayerCharacter(int maxHp, int hp, int speed, int attack, int numTargets, String dialogue, String name,
     int rarity, Weapon weaponEquipped, boolean owned, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate) {
         // TODO: find a way to NOT MAKE THIS 16 PARAMETERS
-        super(maxHp, hp, speed, actionPoints, attack, numTargets);
-        this.ultCharge = ultCharge;
+        super(maxHp, hp, speed, attack, numTargets);
         this.dialogue = dialogue;
         this.name = name;
         this.rarity = rarity;
         this.weaponEquipped = weaponEquipped;
-        this.owned = owned;
         this.critChance = critChance;
         this.critDamage = critDamage;
         this.numTargetSkill = numTargetSkill;
@@ -66,20 +61,25 @@ public class PlayerCharacter extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'skill'");
     }
 
-    /**
-     * Returns how much charge the character has for their ultimate.
-     * @return how much charge the character has for their ultimate
-     */
-    public int getUltCharge() {
-        return ultCharge;
-    }
-
-    /**
-     * Changes how much charge the character has for their ultimate.
-     * @param ultCharge new amount of charge for the character's ultimate
-     */
-    public void setUltCharge(int ultCharge) {
-        this.ultCharge = ultCharge;
+        public void specialEffect(){
+        switch (this.weaponEquipped.getSpecialEffectIndex()){
+            case "":
+            break; //does not have special effect
+            case "Speed":
+            super.setSpeed(super.getSpeed()*2);//doubles current entity speed
+            break;
+            case "CritChance": 
+            setCritChance(getCritChance()*1.5);//multiplier to crit chance
+            break;
+            case "CritDamage":
+            setCritDamage(getCritDamage()*2);//double crit damage
+            break;
+            case "Heal":
+            super.setHp(getHp()+ (int)(super.getHp()*1.05));//heals 5% of current hp
+            if (super.getHp()> super.getMaxHp()){
+                super.setHp(super.getMaxHp());
+            }//if heal exceeds max health, hp is max health
+        }
     }
 
     /**
@@ -120,22 +120,6 @@ public class PlayerCharacter extends Entity {
      */
     public void setWeaponEquipped(Weapon weaponEquipped) {
         this.weaponEquipped = weaponEquipped;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public boolean isOwned() {
-        return owned;
-    }
-
-    /**
-     * 
-     * @param owned
-     */
-    public void setOwned(boolean owned) {
-        this.owned = owned;
     }
 
     /**
