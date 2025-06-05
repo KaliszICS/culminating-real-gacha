@@ -15,13 +15,36 @@ public class Gacha{
     
         rates4Star = 0.95;
         rates5Star = 1-rates4Star;
+        int index = 0;
+        while(playerCharacterList[index].getRarity()==4){
+            fourStarPC[index] = playerCharacterList[index];
+            index++;
+        }
+        for (int i = 0; i<playerCharacterList.length; i++){
+            fiveStarPC[i] = playerCharacterList[index];
+            index++;
+        }
 
-        fourStarPC = playerCharacterList[0];//0 is a temp, its meant to take part of the entire array
-        fiveStarPC = playerCharacterList[0];
-        fourStarWeapon = weapons[0];//0 is a temp, its meant to take part of the entire array
-        fiveStarWeapon = weapons[0];
+        while(playerCharacterList[index].getRarity()==4){
+            fourStarPC[index] = playerCharacterList[index];
+            index++;
+        }
+        for (int i = 0; i<playerCharacterList.length; i++){
+            fiveStarPC[i] = playerCharacterList[index];
+            index++;
+        }
+        
+        while(weapons[index].getRarity()==4){
+            fourStarWeapon[index] = weapons[index];
+            index++;
+        }
+        for (int i = 0; i<weapons.length; i++){
+            fiveStarWeapon[i] = weapons[index];
+            index++;
+        }
 
         cost = 160;
+        repeatCompensation = 100;
     }
 
     public Weapon[] pullWeapon(int timesToPull){
@@ -29,24 +52,24 @@ public class Gacha{
         Weapon[] pulledWeapon = new Weapon[timesToPull];
         for (int i = 0; i < timesToPull; i++){
             if(random.nextDouble() <= rates4Star){
-                pulledWeapon[i] = this.fourStarWeapon;
+                pulledWeapon[i] = this.fourStarWeapon[random.nextInt(fourStarWeapon.length)];
             }
             else{
-                pulledWeapon[i] = this.fiveStarWeapon;
+                pulledWeapon[i] = this.fiveStarWeapon[random.nextInt(fiveStarWeapon.length)];
             }
         }
         return pulledWeapon;
     }
 
-        public PlayerCharacter[] pullCharacter(int timesToPull){
+    public PlayerCharacter[] pullCharacter(int timesToPull){
         Random random = new Random();
         PlayerCharacter[] pulledPC = new PlayerCharacter[timesToPull];
         for (int i = 0; i < timesToPull; i++){
             if(random.nextDouble() <= rates4Star){
-                pulledPC[i] = this.fourStarPC;
+                pulledPC[i] = this.fourStarPC[random.nextInt(fourStarPC.length)];
             }
             else{
-                pulledPC[i] = this.fiveStarPC;
+                pulledPC[i] = this.fiveStarPC[random.nextInt(fiveStarPC.length)];
             }
         }
         return pulledPC;

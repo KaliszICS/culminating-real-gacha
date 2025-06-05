@@ -79,6 +79,8 @@ public class PlayerCharacter extends Entity {
             if (super.getHp()> super.getMaxHp()){
                 super.setHp(super.getMaxHp());
             }//if heal exceeds max health, hp is max health
+            break;
+            
         }
     }
 
