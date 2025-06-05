@@ -14,10 +14,10 @@ public class Weapon {
         this.description = description;
     }
 
-
     public int getAttackMod() {
         return this.attackMod;
     }
+
     public void setAttackMod(int attackMod) {
         this.attackMod = attackMod;
     }
@@ -46,7 +46,7 @@ public class Weapon {
         this.name = name;
     }
 
-        public String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
@@ -54,7 +54,7 @@ public class Weapon {
         this.description = description;
     }
 
-        public PlayerCharacter getEquippedTo() {
+    public PlayerCharacter getEquippedTo() {
         return this.equippedTo;
     }
 
