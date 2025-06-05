@@ -12,15 +12,14 @@ public class Enemy extends Entity {
      * @param maxHp the max hp of the enemy
      * @param hp the current hp of the enemy
      * @param speed the speed stat of the enemy
-     * @param actionPoint the action points the enemy has
      * @param attack the attack stat of the entity
      * @param numTargets the number of player characters the enemy can target
      * @param difficulty the difficulty value of the entity
      * @param reward the amount of currency the enemy awards on death
      */
-    public Enemy(int maxHp, int hp, int speed, int actionPoints, int attack, int numTargets, int difficulty,
+    public Enemy(int maxHp, int hp, int speed, int attack, int numTargets, String name, int difficulty,
             int reward) {
-        super(maxHp, hp, speed, actionPoints, attack, numTargets);
+        super(maxHp, hp, speed, attack, numTargets, name);
         this.difficulty = difficulty;
         this.reward = reward;
     }

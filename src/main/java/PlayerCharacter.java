@@ -31,10 +31,10 @@ public class PlayerCharacter extends Entity {
      * @param numTargetSkill
      * @param numTargetUltimate
      */
-    public PlayerCharacter(int maxHp, int hp, int speed, int attack, int numTargets, String dialogue, String name,
+    public PlayerCharacter(int maxHp, int hp, int speed, int attack, int numTargets, String name, String dialogue,
     int rarity, Weapon weaponEquipped, boolean owned, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate) {
         // TODO: find a way to NOT MAKE THIS 16 PARAMETERS
-        super(maxHp, hp, speed, attack, numTargets);
+        super(maxHp, hp, speed, attack, numTargets, name);
         this.dialogue = dialogue;
         this.name = name;
         this.rarity = rarity;
@@ -89,15 +89,7 @@ public class PlayerCharacter extends Entity {
     public String getDialogue() {
         return dialogue;
     }
-
-    /**
-     * 
-     * @return
-     */
-    public String getName() {
-        return name;
-    }
-
+    
     /**
      * 
      * @return

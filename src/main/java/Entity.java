@@ -10,23 +10,24 @@ public abstract class Entity {
     private int actionPoints;
     private int attack;
     private int numTargets;
+    private String name;
 
     /**
      * Creates an entity object with specififed maxHp, hp, speed, actionPoint, attack, and number of targetted enemies.
      * @param maxHp the maxHp of the entity
      * @param hp the current hp of the entity
      * @param speed the speed stat of the entity
-     * @param actionPoint the action points the entity has
      * @param attack the attack stat of the entity
      * @param numTargets the number of enemies the entity can target
      */
-    public Entity(int maxHp, int hp, int speed, int attack, int numTargets) {
+    public Entity(int maxHp, int hp, int speed, int attack, int numTargets, String name) {
         this.maxHp = maxHp;
         this.hp = hp;
         this.speed = speed;
         this.actionPoints = (int)(this.speed*1.25+100);//this value can be changed during battle while speed cannot. 
         this.attack = attack;
         this.numTargets = numTargets;
+        this.name = name;
     }
 
 
@@ -195,5 +196,14 @@ public abstract class Entity {
      */
     public void setNumTargets(int numTargets) {
         this.numTargets = numTargets;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " - " + getHp() + "/" + getMaxHp();
     }
 }
