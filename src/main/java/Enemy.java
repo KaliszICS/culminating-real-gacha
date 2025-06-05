@@ -1,7 +1,7 @@
 /**
  * Class representing an enemy in battle, stores their difficulty and reward on death.
  * @author gacha
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class Enemy extends Entity {
     private int difficulty;
