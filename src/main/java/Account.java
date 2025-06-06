@@ -2,7 +2,7 @@ public class Account {
     private String userName;
     private String password;
     private boolean[] playerCharacterUnlocked;
-    // probably should not be a weapon array idk
+    // probably should not be a weapon array idk could be boolean
     private Weapon[] weaponInv;
     private int gachaCurrency;
     private int shopCurrency;
