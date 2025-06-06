@@ -3,7 +3,7 @@
  * @author gacha
  * @version 1.1.0
  */
-public abstract class Entity {
+public abstract class Entity implements Comparable<Entity> {
     private int maxHp;
     private int hp;
     private int speed;
@@ -58,10 +58,8 @@ public abstract class Entity {
      * Performs the entity's basic attack on specified targets.
      * @param targets the targets to be attacked
      */
-    protected void normalAttack(Entity[] targets) {
-        for (int i = 0; i < targets.length; i++) {
-            targets[i].setHp(targets[i].getHp() - getAttack());
-        }
+    protected void normalAttack(Entity target) {
+        target.setHp(target.getHp() - getAttack());
     }
 
     /**
@@ -78,24 +76,17 @@ public abstract class Entity {
      * @param mainTarget the main target of the attack, in the center of the group of enemies being targetted
      * @param enemies the enemies to choose from as an array
      */
-    public void attack(int attackType, int mainTarget, Entity[] enemies) {
-        Entity[] targets = selectTarget(mainTarget, enemies);
-        if (attackType == 1) {
-            normalAttack(targets);
-        } else {
-            skill(targets);
-        }
-    }
+    public abstract void attack(int attackType, int mainTarget, Entity[] enemies);
 
     /**
-     * Ends the turn for the character.
+     * Ends the turn for the entity.
      */
     public void turnEnd() {
 
     }
 
     /**
-     * Begins the turn for the character.
+     * Begins the turn for the entity.
      */
     public void turnBegin() {
 
@@ -205,5 +196,11 @@ public abstract class Entity {
     @Override
     public String toString() {
         return getName() + " - " + getHp() + "/" + getMaxHp();
+    }
+
+
+    @Override
+    public int compareTo(Entity o) {
+        return -Integer.compare(getActionPoints(), o.getActionPoints());
     }
 }

@@ -15,30 +15,26 @@ public class Battle {
         this.skillPoints = skillPoints;
     }
 
-    public void startBattle(ArrayList<Entity> entities) {
-        //TODO: why an entities parameter when entities field exists
+    public void startBattle() {
     }
 
-    public boolean endBattle() {
-        //TODO: why boolean
-        return false;
+    public void endBattle() {
     }
 
-    public boolean nextBattle() {
-        //TODO: same as above
-        return false;
+    public void nextBattle() {
+       
     }
 
     private void takeTurn(Entity entity) {
-        //TODO: how do we know which entity is currently gonna go in the turn order is that taken care of elsewhere
+
     }
 
-    private void displayTurnOrder(ArrayList<Entity> entities) {
-        //TODO: again why entities parameter and also why void i really feel like it should be string
+    private void displayTurnOrder() {
+        
     }
 
-    private void reOrganizeTurnOrder(Entity[] changedEntities) {
-        //TODO: i feel like this entire method can kinda just be replaced with a sort at the end of taketurn
+    private void reOrganizeTurnOrder() {
+
     }
 
     public ArrayList<PlayerCharacter> getTeam() {

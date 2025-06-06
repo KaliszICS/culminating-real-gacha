@@ -24,11 +24,11 @@ public class Enemy extends Entity {
         this.reward = reward;
     }
 
-    /**
-     * Attacks the player's team using the enemy's attack pattern.
-     */
-    public void attackPattern() {
-        // TODO: i have no idea how enemies are gonna access your team
+    
+    @Override
+    public void attack(int attackType, int mainTarget, Entity[] enemies) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'attack'");
     }
 
     /**
@@ -70,5 +70,6 @@ public class Enemy extends Entity {
     public void setReward(int reward) {
         this.reward = reward;
     }
+
     
 }

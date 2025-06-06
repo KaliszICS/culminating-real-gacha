@@ -1,46 +1,41 @@
 public class Home {
     // update manually with every character
     public final PlayerCharacter[] PLAYER_CHARACTER_LIST = new PlayerCharacter[0];
+    public final Weapon[] WEAPONS = new Weapon[0];
+    public final Enemy[] ENEMIES = new Enemy[0];
     private Account account;
     private Shop shop;
-    // this could prob be a constant i'm not sure if it's every weapon in the game
-    private Weapon[] weapons;
+    private boolean playing;
+    private Gacha gacha;
 
-    public Home(Account account, Shop shop, Weapon[] weapons) {
+    public Home(Account account, Shop shop, Weapon[] weapons, Gacha gacha) {
         this.account = account;
         this.shop = shop;
-        this.weapons = weapons;
+        this.gacha = gacha;
     }
 
-    public PlayerCharacter[] characterGacha(int gachaCurrency) {
-        // TODO: feel like gacha currency could honestly just be number of pulls instead but ok
+    public PlayerCharacter[] characterGacha(int numOfPulls) {
         return null;
     }
     
-    public Weapon[] weaponGacha(int gachaCurrency) {
-        // TODO: gacha currency probably number of pulls instead
+    public Weapon[] weaponGacha(int numOfPulls) {
         return null;
     }
 
-    public void inventory(Weapon[] weaponInv) {
-        // TODO: hi hello what this do
-    }
-
     public void battle() {
-        // TODO: the battle class methods are a mess i don't even know how to begin writing this one
+        // TODO: figure it out
     }
 
     public void shop() {
-        // TODO: no idea how to start someone explain how do shop
+        // TODO: figure it out
     }
 
     public void viewAccount() {
         // TODO: make the account tostring to use here, no idea how it's formatted yet
     }
 
-    public boolean logout() {
-        // TODO: why boolean return?
-        return false;
+    public void logout() {
+        setPlaying(false);
     }
 
     public String filterDisplayedCharacter(int rarity) {
@@ -63,14 +58,22 @@ public class Home {
     }
     
     public Account getAccount() {
-        return account;
+        return this.account;
     }
 
     public Shop getShop() {
-        return shop;
+        return this.shop;
     }
 
-    public Weapon[] getWeapons() {
-        return weapons;
+    public boolean isPlaying() {
+        return this.playing;
+    }
+
+    public void setPlaying(boolean playing) {
+        this.playing = playing;
+    }
+
+    public Gacha getGacha() {
+        return this.gacha;
     }
 }

@@ -12,6 +12,7 @@ public class PlayerCharacter extends Entity {
     private int critDamage;
     private int numTargetSkill;
     private int numTargetUltimate;
+    private String skillEffect;
 
     /**
      * 
@@ -32,7 +33,7 @@ public class PlayerCharacter extends Entity {
      * @param numTargetUltimate
      */
     public PlayerCharacter(int maxHp, int hp, int speed, int attack, int numTargets, String name, String dialogue,
-    int rarity, Weapon weaponEquipped, boolean owned, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate) {
+    int rarity, Weapon weaponEquipped, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
         // TODO: find a way to NOT MAKE THIS 16 PARAMETERS
         super(maxHp, hp, speed, attack, numTargets, name);
         this.dialogue = dialogue;
@@ -43,6 +44,7 @@ public class PlayerCharacter extends Entity {
         this.critDamage = critDamage;
         this.numTargetSkill = numTargetSkill;
         this.numTargetUltimate = numTargetUltimate;
+        this.skillEffect = skillEffect;
     }
 
     /**
@@ -86,6 +88,12 @@ public class PlayerCharacter extends Entity {
                 break;
             
         }
+    }
+    
+    @Override
+    public void attack(int attackType, int mainTarget, Entity[] enemies) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'attack'");
     }
 
     /**
@@ -183,4 +191,13 @@ public class PlayerCharacter extends Entity {
     public void setNumTargetUltimate(int numTargetUltimate) {
         this.numTargetUltimate = numTargetUltimate;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSkillEffect() {
+        return skillEffect;
+    }
+
 }

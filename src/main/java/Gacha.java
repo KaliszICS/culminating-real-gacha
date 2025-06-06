@@ -8,8 +8,8 @@ public class Gacha{
     private Weapon[] fourStarWeapon;
     private Weapon[] fiveStarWeapon;
 
-    private int cost;
-    private int repeatCompensation;
+    public final int COST = 160;
+    public final int REPEAT_COMPENSATION = 100;
 
     public Gacha(PlayerCharacter[] playerCharacterList, Weapon[] weapons){
     
@@ -42,9 +42,6 @@ public class Gacha{
             fiveStarWeapon[i] = weapons[index];
             index++;
         }
-
-        cost = 160;
-        repeatCompensation = 100;
     }
 
     public Weapon[] pullWeapon(int timesToPull){
