@@ -82,15 +82,14 @@ public abstract class Entity implements Comparable<Entity> {
      * Ends the turn for the entity.
      */
     public void turnEnd() {
-
+        int endTurnActionPointLoss = 100;
+        setActionPoints(getActionPoints() - endTurnActionPointLoss);
     }
 
     /**
      * Begins the turn for the entity.
      */
-    public void turnBegin() {
-
-    }
+    public abstract void turnBegin();
 
     /**
      * Returns the max hp of the entity.
