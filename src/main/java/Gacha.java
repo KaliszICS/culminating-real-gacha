@@ -13,11 +13,11 @@ public class Gacha{
 
     public Gacha(PlayerCharacter[] playerCharacterList, Weapon[] weapons){
     
-        this.rates4Star = 0.95;
+        this.rates4Star = 0.95;//95% chance to get a 4-star
         this.rates5Star = 1-this.rates4Star;
         int index4StarList = 0;
         int index5StarList = 0;
-        
+
         for (int i = 0; i<playerCharacterList.length; i++){
             if (playerCharacterList[i].getRarity()==4){
                 this.fourStarPC[index4StarList] = playerCharacterList[i];
@@ -44,10 +44,10 @@ public class Gacha{
         }
     }
 
-    public Weapon[] pullWeapon(int timesToPull){
+    public Weapon[] pullWeapon(int numOfPulls){
         Random random = new Random();
-        Weapon[] pulledWeapon = new Weapon[timesToPull];
-        for (int i = 0; i < timesToPull; i++){
+        Weapon[] pulledWeapon = new Weapon[numOfPulls];
+        for (int i = 0; i < numOfPulls; i++){
             if(random.nextDouble() <= rates4Star){
                 pulledWeapon[i] = this.fourStarWeapon[random.nextInt(fourStarWeapon.length)];
             }
@@ -58,10 +58,10 @@ public class Gacha{
         return pulledWeapon;
     }
 
-    public PlayerCharacter[] pullCharacter(int timesToPull){
+    public PlayerCharacter[] pullCharacter(int numOfPulls){
         Random random = new Random();
-        PlayerCharacter[] pulledPC = new PlayerCharacter[timesToPull];
-        for (int i = 0; i < timesToPull; i++){
+        PlayerCharacter[] pulledPC = new PlayerCharacter[numOfPulls];
+        for (int i = 0; i < numOfPulls; i++){
             if(random.nextDouble() <= rates4Star){
                 pulledPC[i] = this.fourStarPC[random.nextInt(fourStarPC.length)];
             }
