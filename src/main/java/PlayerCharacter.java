@@ -63,30 +63,30 @@ public class PlayerCharacter extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'skill'");
     }
 
-        public void specialEffect(){
-            switch (this.weaponEquipped.getSpecialEffectIndex()){
-                case "":
-                break; //does not have special effect
-                
-                case "Speed":
-                super.setSpeed(super.getSpeed()*2);//doubles current entity speed
-                break;
+    public void weaponEffect(){
+        switch (this.weaponEquipped.getSpecialEffectIndex()){
+            case "":
+            break; //does not have special effect
             
-                case "CritChance": 
-                setCritChance(getCritChance()*1.5);//multiplier to crit chance
-                break;
-                
-                case "CritDamage":
-                setCritDamage(getCritDamage()*2);//double crit damage
-                break;
-                
-                case "Heal":
-                super.setHp(getHp()+ (int)(super.getHp()*1.05));//heals 5% of current hp
-                if (super.getHp()> super.getMaxHp()){
-                    super.setHp(super.getMaxHp());
-                }//if heal exceeds max health, hp is max health
-                break;
+            case "Speed":
+            super.setSpeed(super.getSpeed()*2);//doubles current entity speed
+            break;
+        
+            case "CritChance": 
+            setCritChance(getCritChance()*1.5);//multiplier to crit chance
+            break;
             
+            case "CritDamage":
+            setCritDamage(getCritDamage()*2);//double crit damage
+            break;
+            
+            case "Heal":
+            super.setHp(getHp()+ (int)(super.getHp()*1.05));//heals 5% of current hp
+            if (super.getHp()> super.getMaxHp()){
+                super.setHp(super.getMaxHp());
+            }//if heal exceeds max health, hp is max health
+            break;
+        
         }
     }
     
@@ -96,11 +96,13 @@ public class PlayerCharacter extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'attack'");
     }
 
-
     @Override
-    public void turnBegin(){
-
+    public void turnBegin() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'turnBegin'");
     }
+
+
     /**
      * 
      * @return

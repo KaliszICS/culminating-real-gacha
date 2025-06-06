@@ -39,6 +39,14 @@ public class Enemy extends Entity {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'skill'");
     }
+
+    @Override
+    public void turnBegin() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'turnBegin'");
+    }
+
+
     /**
      * Returns the enemy's difficulty value.
      * @return the difficulty value of the enemy
@@ -70,6 +78,5 @@ public class Enemy extends Entity {
     public void setReward(int reward) {
         this.reward = reward;
     }
-
     
 }
