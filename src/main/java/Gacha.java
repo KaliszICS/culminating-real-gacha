@@ -13,34 +13,34 @@ public class Gacha{
 
     public Gacha(PlayerCharacter[] playerCharacterList, Weapon[] weapons){
     
-        rates4Star = 0.95;
-        rates5Star = 1-rates4Star;
-        int index = 0;
-        while(playerCharacterList[index].getRarity()==4){
-            fourStarPC[index] = playerCharacterList[index];
-            index++;
-        }
+        this.rates4Star = 0.95;
+        this.rates5Star = 1-this.rates4Star;
+        int index4StarList = 0;
+        int index5StarList = 0;
+        
         for (int i = 0; i<playerCharacterList.length; i++){
-            fiveStarPC[i] = playerCharacterList[index];
-            index++;
-        }
-
-        while(playerCharacterList[index].getRarity()==4){
-            fourStarPC[index] = playerCharacterList[index];
-            index++;
-        }
-        for (int i = 0; i<playerCharacterList.length; i++){
-            fiveStarPC[i] = playerCharacterList[index];
-            index++;
+            if (playerCharacterList[i].getRarity()==4){
+                this.fourStarPC[index4StarList] = playerCharacterList[i];
+                index4StarList++;
+            }
+            else{
+                this.fiveStarPC[index5StarList] = playerCharacterList[i];
+                index5StarList++;
+            }
         }
         
-        while(weapons[index].getRarity()==4){
-            fourStarWeapon[index] = weapons[index];
-            index++;
-        }
+        index4StarList = 0;
+        index5StarList = 0;
+        
         for (int i = 0; i<weapons.length; i++){
-            fiveStarWeapon[i] = weapons[index];
-            index++;
+            if (weapons[i].getRarity()==4){
+                fourStarWeapon[index4StarList] = weapons[i];
+                index4StarList++;
+            }
+            else{
+                fiveStarWeapon[index5StarList] = weapons[i];
+                index5StarList++;
+            }
         }
     }
 
