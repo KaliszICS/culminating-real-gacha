@@ -1,20 +1,20 @@
-
 class Item {
 
     protected String desc;
     protected int cost;
-    protected boolean owned;
+    protected String name;
+    protected String effect;
 
     /**
      * Creates an item object that has a description, cost, and checks whether the player has the item already
-     * @param desc
-     * @param cost
-     * @param owned
+     * @param desc The description of the item
+     * @param cost The cost of the item
+     * @param name The name of the item
+     * @param effect The 
      */
-    public Item(String desc, int cost) {
+    public Item(String desc, int cost, String ) {
         this.desc = desc;
         this.cost = cost;
-        this.owned = false;
     }
 
     /**
@@ -40,14 +40,5 @@ class Item {
      */
     public int getCost(Item item) {
         return this.cost;
-    }
-
-    /**
-     *  Getter Method
-     * @param item the item parameter
-     * @return true if the player owns the item, false otherwise
-     */
-    public boolean getOwned(Item item) {
-        return this.owned;
     }
 }

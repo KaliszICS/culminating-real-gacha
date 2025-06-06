@@ -1,4 +1,5 @@
 public class Weapon {
+    
     private int attackMod;
     private int hpMod;
     private String specialEffect;
