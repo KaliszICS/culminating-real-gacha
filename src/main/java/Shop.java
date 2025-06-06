@@ -1,41 +1,30 @@
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Shop {
 
-    protected Item[] itemsOnSale;
-
-    //This is where the items are created
-    Item bazooka = 
-    Item potion = 
-    
-
-    this.items = new Item[] {bazooka, potion};
-
-
-    protected Item[] items = new Item[] {
-        new Item("boosts team damage", 25),
-        new Item("heals the team", 15),
-        new Item("a", 0)
+    //Array of Items (Constant)
+    public Item[] ITEMS = new Item[] {
+        new Item("Bazooka", 25, "boosts team damage", "Ka-boom"),
+        new Item("Health Elixir", 15, "boosts team helath", "Hallelujah"),
     };
+
+    //ArrayList of items that are on sale; will shoe 3 at one time for the player to choose from, unless they refresh to see 3 different ones
+    protected ArrayList<Item> itemsOnSale;
     
-    public Shop(Item[] items, Item[] itemsOnSale, Random random, int shopCurrency) {
-
-        random = new Random();
-
-        this.itemsOnSale = new Item[3];
-        for (int i=0; i<this.itemsOnSale.length; i++) {
-            this.itemsOnSale[i]=this.items[random.nextInt(10)];
-        }
+    public Shop() {
+        
+        this.itemsOnSale = new ArrayList<Item>();
     }
 
-    public void refresh(Random random) {
+    public void refresh() {
         
-        random = new Random();
-        this.itemsOnSale = new Item[3];
-        
-        for (int i=0; i<this.itemsOnSale.length; i++) {
-            this.itemsOnSale[i]=this.items[random.nextInt(10)];
-        }        
+        Random random = new Random();
+
+        this.itemsOnSale.clear();
+        this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
+        this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
+        this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
     }
 
     public void buy(Item item, int shopCurrency) {

@@ -1,5 +1,6 @@
 class Item {
 
+    //Instance Variables
     protected String desc;
     protected int cost;
     protected String name;
