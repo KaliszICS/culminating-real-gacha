@@ -1,33 +1,33 @@
 import java.util.ArrayList;
 
 public class Team {
-    private ArrayList<PlayerCharacter> onTeam;
+    private PlayerCharacter[] onTeam;
     
     public Team(ArrayList<PlayerCharacter> onTeam) {
-        this.onTeam = onTeam;
+        this.onTeam = new PlayerCharacter[4];
     }
 
     public String displayPlayerCharacter() {
         String team = "Team:\n";
         for (PlayerCharacter pc : onTeam) {
-            team += " - " + pc.toString() + "\n";
+            if (pc == null) {
+                team += " - EMPTY\n";
+            } else {
+                team += " - " + pc.toString() + "\n";
+            }
         }
         return team;
     }
 
-    public ArrayList<PlayerCharacter> getOnTeam() {
+    public void addToTeam(PlayerCharacter character, int index) {
+        getOnTeam()[index] = character;
+    }
+
+    public void removeFromTeam(int index) {
+        getOnTeam()[index] = null;
+    }
+
+    public PlayerCharacter[] getOnTeam() {
         return onTeam;
-    }
-
-    public void changeTeam() {
-        
-    }
-
-    private void addToTeam(PlayerCharacter character, int index) {
-        getOnTeam().add(index, character);
-    }
-
-    private void removeFromTeam(int index) {
-        getOnTeam().remove(index);
     }
 }
