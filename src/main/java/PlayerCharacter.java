@@ -96,6 +96,11 @@ public class PlayerCharacter extends Entity {
         throw new UnsupportedOperationException("Unimplemented method 'attack'");
     }
 
+
+    @Override
+    public void turnBegin(){
+
+    }
     /**
      * 
      * @return
@@ -170,26 +175,10 @@ public class PlayerCharacter extends Entity {
 
     /**
      * 
-     * @param numTargetSkill
-     */
-    public void setNumTargetSkill(int numTargetSkill) {
-        this.numTargetSkill = numTargetSkill;
-    }
-
-    /**
-     * 
      * @return
      */
     public int getNumTargetUltimate() {
         return numTargetUltimate;
-    }
-
-    /**
-     * 
-     * @param numTargetUltimate
-     */
-    public void setNumTargetUltimate(int numTargetUltimate) {
-        this.numTargetUltimate = numTargetUltimate;
     }
 
     public String getName() {

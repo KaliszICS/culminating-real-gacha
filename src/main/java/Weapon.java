@@ -8,7 +8,7 @@ public class Weapon {
     private PlayerCharacter equippedTo;
     private int rarity;
 
-    public Weapon(int attackMod, int hpMod, String specialEffect, String name, String description, int rarity) {
+    public Weapon(String name, int attackMod, int hpMod, String specialEffect, String description, int rarity) {
         this.attackMod = attackMod;
         this.hpMod = hpMod;
         this.specialEffect = specialEffect;
