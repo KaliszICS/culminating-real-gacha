@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 class Item {
 
     //Instance Variables
