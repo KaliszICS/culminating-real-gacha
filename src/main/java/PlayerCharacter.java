@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -129,6 +130,25 @@ public class PlayerCharacter extends Entity {
         }
     }
     
+    @Override
+    protected Entity[] selectTarget(int mainTarget, Entity[] enemies) {
+        ArrayList<Entity> targetable = new ArrayList<>();
+        if (getSkillEffect().equals("Heal") || getSkillEffect().equals("Pull")) {
+            for (int i = 0; i < enemies.length; i++) {
+                if (enemies[i] instanceof PlayerCharacter) {
+                    targetable.add(enemies[i]);
+                }
+            }
+        } else {
+            for (int i = 0; i < enemies.length; i++) {
+                if (enemies[i] instanceof Enemy) {
+                    targetable.add(enemies[i]);
+                }
+            }
+        }
+        return super.selectTarget(mainTarget, (Entity[]) targetable.toArray());
+    }
+
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         if (getUltCharge() == getUltMax()) {

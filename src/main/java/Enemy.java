@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -25,6 +26,16 @@ public class Enemy extends Entity {
         this.reward = reward;
     }
 
+    @Override
+    protected Entity[] selectTarget(int mainTarget, Entity[] enemies) {
+        ArrayList<Entity> targetable = new ArrayList<>();
+        for (int i = 0; i < enemies.length; i++) {
+            if (enemies[i] instanceof PlayerCharacter) {
+                targetable.add(enemies[i]);
+            }
+        }
+        return super.selectTarget(mainTarget, (Entity[]) targetable.toArray());
+    }
     
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
