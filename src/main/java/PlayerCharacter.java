@@ -32,7 +32,7 @@ public class PlayerCharacter extends Entity {
      * @param critChance
      * @param critDamage
      */
-    public PlayerCharacter(int maxHp, int speed, int attack, String name, String dialogue,
+    public PlayerCharacter(String name, String dialogue, int maxHp, int speed, int attack,
     int rarity, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
         super(maxHp, speed, attack, name);
         this.ultCharge = 0;
@@ -47,8 +47,8 @@ public class PlayerCharacter extends Entity {
         this.defending = false;
     }
 
-    public PlayerCharacter(int maxHp, int speed, int attack, String name, int ultMax, String dialogue,
-        int rarity, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
+    public PlayerCharacter(String name, String dialogue, int maxHp, int speed, int attack, int rarity, 
+    double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect, int ultMax) {
         super(maxHp, speed, attack, name);
         this.ultCharge = 0;
         this.ultMax = ultMax;
