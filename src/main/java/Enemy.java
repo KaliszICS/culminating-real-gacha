@@ -86,5 +86,4 @@ public class Enemy extends Entity {
     public void setReward(int reward) {
         this.reward = reward;
     }
-    
 }
