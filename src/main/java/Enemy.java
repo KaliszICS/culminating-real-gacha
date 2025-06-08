@@ -8,7 +8,6 @@ import java.util.Random;
 public class Enemy extends Entity {
     private int difficulty;
     private int reward;
-    private int numTargets;
 
     /**
      * Creates a new entity with specified stats.
@@ -21,9 +20,8 @@ public class Enemy extends Entity {
      * @param reward the amount of currency the enemy awards on death
      */
     public Enemy(int maxHp, int speed, int attack, int numTargets, String name, int difficulty, int reward) {
-        super(maxHp, speed, attack, name);
+        super(maxHp, speed, attack, name, numTargets);
         this.difficulty = difficulty;
-        this.numTargets = numTargets;
         this.reward = reward;
     }
 
@@ -87,13 +85,5 @@ public class Enemy extends Entity {
      */
     public void setReward(int reward) {
         this.reward = reward;
-    }
-
-    /**
-     * Returns the number of entities the enemy can target
-     * @return the number of entities the enemy can target
-     */
-    public int getNumTargets() {
-        return numTargets;
     }
 }

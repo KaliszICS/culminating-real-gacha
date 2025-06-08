@@ -10,6 +10,7 @@ public abstract class Entity implements Comparable<Entity> {
     private int actionPoints;
     private int attack;
     private String name;
+    private int numTargets;
 
     /**
      * Creates an entity object with specififed maxHp, hp, speed, actionPoint, attack, and number of targetted enemies.
@@ -18,9 +19,10 @@ public abstract class Entity implements Comparable<Entity> {
      * @param speed the speed stat of the entity
      * @param attack the attack stat of the entity
      */
-    public Entity(int maxHp, int speed, int attack, String name) {
+    public Entity(int maxHp, int speed, int attack, String name, int numTargets) {
         this.maxHp = maxHp;
         this.hp = maxHp;
+        this.numTargets = numTargets;
         this.speed = speed;
         this.actionPoints = (int)(this.speed*1.25+100);//this value can be changed during battle while speed cannot. 
         this.attack = attack;
@@ -169,6 +171,14 @@ public abstract class Entity implements Comparable<Entity> {
      */
     public void setAttack(int attack) {
         this.attack = attack;
+    }
+
+    /**
+     * Returns the number of entities the entity can target
+     * @return the number of entities the entity can target
+     */
+    public int getNumTargets() {
+        return numTargets;
     }
 
     public String getName() {
