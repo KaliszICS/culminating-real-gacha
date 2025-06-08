@@ -31,6 +31,7 @@ public class Enemy extends Entity {
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         Random random = new Random();
         int result = random.nextInt(101);
+        mainTarget = random.nextInt(5);
         if (result <= 70) {
             normalAttack(enemies[mainTarget]);
         } else {

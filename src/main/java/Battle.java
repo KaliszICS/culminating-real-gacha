@@ -5,14 +5,15 @@ public class Battle {
     private ArrayList<Enemy> enemies;
     private ArrayList<Entity> entities;
     private int skillPoints;
+    public final int SKILLPOINT_MAX = 5;
 
-    public Battle(ArrayList<PlayerCharacter> team, ArrayList<Enemy> enemies, int skillPoints) {
+    public Battle(ArrayList<PlayerCharacter> team, ArrayList<Enemy> enemies) {
         this.team = team;
         this.enemies = enemies;
         this.entities = new ArrayList<>();
         this.entities.addAll(team);
         this.entities.addAll(enemies);
-        this.skillPoints = skillPoints;
+        this.skillPoints = 3; //start with 3, max 5
     }
 
     public void startBattle() {
@@ -26,6 +27,14 @@ public class Battle {
     }
 
     private void takeTurn(Entity entity) {
+        entity.turnBegin();
+        //note: how about trying to run attack in turn begin, so turnBegin now gets an entity[] parameter, then it asks for attack type, then it does select target
+        //if attack type is heal we can find instanceOf playerCharacter
+        int userChoiceAttackType = 0;//scanner to get normal or skill
+        //depending on the attack type chosen
+        int userChoiceMainTarget = 0;//scanner to get main target
+        // battle should check if skill effect is heal or pull, so target will consist of playercharacters if true
+        //entity.attack(userChoiceAttackType, userChoiceMainTarget, )
 
     }
 
