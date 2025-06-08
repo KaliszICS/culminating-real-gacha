@@ -25,18 +25,27 @@ public class Shop {
     /**
      * 
      */
-    public void refresh(Account account) {
+    public String refresh(Account account) {
         
+        //If they have enough currency, they can purchase a refresh
         if (account.getShopCurrency() >= 15) {
+
+            account.setShopCurrency(account.getShopCurrency()-15);
             
+            //Refreshes the items that are on sale
+            Random random = new Random();
+            this.itemsOnSale.clear();
+            this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
+            this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
+            this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
+
+            return "The shop has been refreshed!";
         }
 
-        Random random = new Random();
-
-        this.itemsOnSale.clear();
-        this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
-        this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
-        this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
+        //If they don't have enough currency, they can't purcahse a refresh
+        else {
+            return "You do not have enough shopCurrency to purchase an itemOnSale refresh";
+        }
     }
 
     /**
