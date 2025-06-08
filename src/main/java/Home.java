@@ -1,6 +1,8 @@
 public class Home {
     // update manually with every character
-    public final PlayerCharacter[] PLAYER_CHARACTER_LIST = new PlayerCharacter[0];
+    public final PlayerCharacter[] PLAYER_CHARACTER_LIST = new PlayerCharacter[]{
+        
+    };
     public final Weapon[] WEAPONS = new Weapon[0];
     public final Enemy[] ENEMIES = new Enemy[0];
     private Account account;

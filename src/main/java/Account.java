@@ -33,8 +33,15 @@ public class Account {
         return gachaCurrency;
     }
 
+    public void setGachaCurrency(int currency){
+        this.gachaCurrency = currency;
+    }
     public int getShopCurrency() {
         return shopCurrency;
+    }
+
+    public void setShopCurrency(int currency){
+        this.shopCurrency = currency;
     }
 
     public Team getTeam() {

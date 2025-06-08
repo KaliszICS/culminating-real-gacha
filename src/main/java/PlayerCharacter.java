@@ -20,7 +20,6 @@ public class PlayerCharacter extends Entity {
     /**
      * 
      * @param maxHp
-     * @param hp
      * @param speed
      * @param actionPoints
      * @param attack
@@ -33,30 +32,30 @@ public class PlayerCharacter extends Entity {
      * @param critChance
      * @param critDamage
      */
-    public PlayerCharacter(int maxHp, int hp, int speed, int attack, int numTargets, String name, String dialogue,
-    int rarity, Weapon weaponEquipped, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
-        super(maxHp, hp, speed, attack, numTargets, name);
+    public PlayerCharacter(int maxHp, int speed, int attack, String name, String dialogue,
+    int rarity, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
+        super(maxHp, speed, attack, name);
         this.ultCharge = 0;
         this.ultMax = 100;
         this.dialogue = dialogue;
         this.name = name;
         this.rarity = rarity;
-        this.weaponEquipped = weaponEquipped;
+        this.weaponEquipped = null;//default to null unless later on equipped
         this.critChance = critChance;
         this.critDamage = critDamage;
         this.skillEffect = skillEffect;
         this.defending = false;
     }
 
-    public PlayerCharacter(int maxHp, int hp, int speed, int attack, int numTargets, String name, int ultMax, String dialogue,
-        int rarity, Weapon weaponEquipped, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
-        super(maxHp, hp, speed, attack, numTargets, name);
+    public PlayerCharacter(int maxHp, int speed, int attack, String name, int ultMax, String dialogue,
+        int rarity, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
+        super(maxHp, speed, attack, name);
         this.ultCharge = 0;
         this.ultMax = ultMax;
         this.dialogue = dialogue;
         this.name = name;
         this.rarity = rarity;
-        this.weaponEquipped = weaponEquipped;
+        this.weaponEquipped = null;
         this.critChance = critChance;
         this.critDamage = critDamage;
         this.skillEffect = skillEffect;
@@ -108,6 +107,7 @@ public class PlayerCharacter extends Entity {
     }
 
     public void weaponEffect(){
+        if (this.getWeaponEquipped()!=null){
         switch (this.weaponEquipped.getSpecialEffectIndex()){
             case "":
                 break; //does not have special effect
@@ -124,6 +124,8 @@ public class PlayerCharacter extends Entity {
                 super.setHp(Math.min(getHp()+ (int)(super.getHp()*1.05), getMaxHp()));//heals 5% of current hp
                 //if heal exceeds max health, hp is max health
                 break;
+
+        }
         }
     }
     

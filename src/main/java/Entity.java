@@ -9,7 +9,6 @@ public abstract class Entity implements Comparable<Entity> {
     private int speed;
     private int actionPoints;
     private int attack;
-    private int numTargets;
     private String name;
 
     /**
@@ -18,15 +17,13 @@ public abstract class Entity implements Comparable<Entity> {
      * @param hp the current hp of the entity
      * @param speed the speed stat of the entity
      * @param attack the attack stat of the entity
-     * @param numTargets the number of enemies the entity can target
      */
-    public Entity(int maxHp, int hp, int speed, int attack, int numTargets, String name) {
+    public Entity(int maxHp, int speed, int attack, String name) {
         this.maxHp = maxHp;
-        this.hp = hp;
+        this.hp = maxHp;
         this.speed = speed;
         this.actionPoints = (int)(this.speed*1.25+100);//this value can be changed during battle while speed cannot. 
         this.attack = attack;
-        this.numTargets = numTargets;
         this.name = name;
     }
 
@@ -47,6 +44,8 @@ public abstract class Entity implements Comparable<Entity> {
         if (getNumTargets() % 2 == 0) {
             leftIndex++;
         }
+        //change this to an abstract method? so that we can make selecttarget only take in enityt[] so it can choose
+        //between team and enemy
         Entity[] targets = new Entity[rightIndex - leftIndex + 1];
         for (int i = leftIndex; i <= rightIndex; i++) {
             targets[i - leftIndex] = enemies[i];
@@ -172,22 +171,6 @@ public abstract class Entity implements Comparable<Entity> {
         this.attack = attack;
     }
 
-    /**
-     * Returns the number of entities the entity can target
-     * @return the number of entities the entity can target
-     */
-    public int getNumTargets() {
-        return numTargets;
-    }
-
-    /**
-     * Changes the number of entities the entity can target
-     * @param numTargets the number of entities the entity can target
-     */
-    public void setNumTargets(int numTargets) {
-        this.numTargets = numTargets;
-    }
-
     public String getName() {
         return this.name;
     }
@@ -196,7 +179,6 @@ public abstract class Entity implements Comparable<Entity> {
     public String toString() {
         return getName() + " - " + getHp() + "/" + getMaxHp();
     }
-
 
     @Override
     public int compareTo(Entity o) {
