@@ -147,6 +147,7 @@ public class PlayerCharacter extends Entity {
 
     @Override
     public void turnBegin() {
+        System.out.println(getName() + "'s turn!");
         setDefending(false);
         Scanner scanner = new Scanner(System.in);
         System.out.println("1 - Attack");

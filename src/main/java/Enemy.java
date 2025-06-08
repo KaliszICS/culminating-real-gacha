@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Class representing an enemy in battle, stores their difficulty and reward on death.
  * @author gacha
@@ -27,8 +29,14 @@ public class Enemy extends Entity {
     
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'attack'");
+        Random random = new Random();
+        int result = random.nextInt(101);
+        if (result <= 70) {
+            normalAttack(enemies[mainTarget]);
+        } else {
+            Entity[] targets = selectTarget(mainTarget, enemies);
+            skill(targets);
+        }
     }
 
     /**
@@ -36,14 +44,14 @@ public class Enemy extends Entity {
      */
     @Override
     protected void skill(Entity[] targets) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'skill'");
+        for (int i = 0; i < targets.length; i++) {
+            normalAttack(targets[i]);
+        }
     }
 
     @Override
     public void turnBegin() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'turnBegin'");
+        System.out.println(getName() + "'s turn!");
     }
 
 
