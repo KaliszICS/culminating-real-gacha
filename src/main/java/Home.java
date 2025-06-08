@@ -1,5 +1,6 @@
 public class Home {
     // update manually with every character
+    
     public final PlayerCharacter[] PLAYER_CHARACTER_LIST = new PlayerCharacter[]{
     new PlayerCharacter("Diting", "Woof!", 2934, 102, 300, 4, 50, 2, 1, "Damage"), 
     new PlayerCharacter("Insect Guy", "Mm… It’s Gregor. Well, feel free to talk to me unless I’m asleep.", 3120, 149, 250, 4, 50, 3, 5, "Damage"),
