@@ -10,7 +10,7 @@ public abstract class Entity implements Comparable<Entity> {
     private int actionPoints;
     private int attack;
     private String name;
-    private int numTargets;
+    private int numTargetSkill;
 
     /**
      * Creates an entity object with specififed maxHp, hp, speed, actionPoint, attack, and number of targetted enemies.
@@ -19,10 +19,10 @@ public abstract class Entity implements Comparable<Entity> {
      * @param speed the speed stat of the entity
      * @param attack the attack stat of the entity
      */
-    public Entity(int maxHp, int speed, int attack, String name, int numTargets) {
+    public Entity(int maxHp, int speed, int attack, String name, int numTargetSkill) {
         this.maxHp = maxHp;
         this.hp = maxHp;
-        this.numTargets = numTargets;
+        this.numTargetSkill = numTargetSkill;
         this.speed = speed;
         this.actionPoints = (int)(this.speed*1.25+100);//this value can be changed during battle while speed cannot. 
         this.attack = attack;
@@ -41,9 +41,9 @@ public abstract class Entity implements Comparable<Entity> {
      * @return an array of entities acting as targets
      */
     protected Entity[] selectTarget(int mainTarget, Entity[] enemies) {
-        int leftIndex = Math.max(mainTarget - getNumTargets() / 2, 0);
-        int rightIndex = Math.min(mainTarget + getNumTargets() / 2, enemies.length - 1);
-        if (getNumTargets() % 2 == 0) {
+        int leftIndex = Math.max(mainTarget - getnumTargetSkill() / 2, 0);
+        int rightIndex = Math.min(mainTarget + getnumTargetSkill() / 2, enemies.length - 1);
+        if (getnumTargetSkill() % 2 == 0) {
             leftIndex++;
         }
         //change this to an abstract method? so that we can make selecttarget only take in enityt[] so it can choose
@@ -177,8 +177,8 @@ public abstract class Entity implements Comparable<Entity> {
      * Returns the number of entities the entity can target
      * @return the number of entities the entity can target
      */
-    public int getNumTargets() {
-        return numTargets;
+    public int getnumTargetSkill() {
+        return numTargetSkill;
     }
 
     public String getName() {
