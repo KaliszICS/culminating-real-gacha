@@ -18,7 +18,7 @@ public class Home {
     private boolean playing;
     private Gacha gacha;
 
-    public Home(Account account, Shop shop, Weapon[] weapons, Gacha gacha) {
+    public Home(Account account, Shop shop, Gacha gacha) {
         this.account = account;
         this.shop = shop;
         this.gacha = gacha;
