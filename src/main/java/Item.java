@@ -4,35 +4,40 @@
 class Item {
 
     //Instance Variables
-    protected String desc;
-    protected int cost;
     protected String name;
-    protected String effect;
+    protected int cost;
+    protected String desc;
+    protected String effectType;
+    protected int effectPotency;
+
 
     /**
      * Creates an item object that has a description, cost, and checks whether the player has the item already
      * @param name The name of the item
      * @param cost The cost of the item
      * @param desc The description of the item
-     * @param effect The item effect
+     * @param effectType The item effect type
+     * @param effectPotency The item effect potency
      */
-    public Item(String name, int cost, String desc, String effect) {
+    public Item(String name, int cost, String desc, String effectType, int effectPotency) {
         this.name = name;
         this.cost = cost;
         this.desc = desc;
-        this.effect = effect;
+        this.effectType = effectType;
+        this.effectPotency = effectPotency;
     }
 
     /**
-     * Someone do this idk what team does - aarooran
+     * Someone do this idk what team does - aarooran - i lied ill do this eventually
      * @param team
      */
     public void apply(Team team) {
+        
     }
 
     /**
      * Getter Method
-     * @return the item name
+     * @return String of the item name
      */
     public String getName() {
         return this.name;
@@ -40,7 +45,7 @@ class Item {
 
     /**
      * Getter Method
-     * @return the item cost
+     * @return int of the item cost
      */
     public int getCost() {
         return this.cost;
@@ -48,7 +53,7 @@ class Item {
 
     /**
      * Getter Method
-     * @return the item description
+     * @return String of the item description
      */
     public String getDesc() {
         return this.desc;
@@ -56,9 +61,17 @@ class Item {
 
     /**
      * Getter Method
-     * @return the item effect
+     * @return String of the item effect type
      */
-    public String getEffect() {
-        return this.effect;
+    public String getEffectType() {
+        return this.effectType;
+    }
+
+    /**
+     * Getter Method
+     * @return int of the item effect potency
+     */
+    public int getEffectPotency() {
+        return this.effectPotency;
     }
 }

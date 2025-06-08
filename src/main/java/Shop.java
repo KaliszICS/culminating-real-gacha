@@ -8,8 +8,8 @@ public class Shop {
 
     //Array of Items (Constant)
     public Item[] ITEMS = new Item[] {
-        new Item("Bazooka", 25, "boosts team damage", "Ka-boom"),
-        new Item("Health Elixir", 15, "boosts team health", "Hallelujah"),
+        new Item("Bazooka", 25, "Boosts team damage", "Health", 5),
+        new Item("Health Elixir", 15, "Boosts team health", "Hallelujah", 15),
     };
 
     //ArrayList of items that are on sale; will show 3 at one time for the player to choose from, unless they refresh to see 3 different ones
@@ -22,8 +22,11 @@ public class Shop {
         this.itemsOnSale = new ArrayList<Item>();
     }
 
+
     /**
      * 
+     * @param account
+     * @return
      */
     public String refresh(Account account) {
         
@@ -77,7 +80,7 @@ public class Shop {
 
     /**
      * Getter method
-     * @return the itemsOnSale ArrayList
+     * @return An ArrayList<Item> of the itemsOnSale
      */
     public ArrayList<Item> getItemsOnSale() {
         return this.itemsOnSale;
