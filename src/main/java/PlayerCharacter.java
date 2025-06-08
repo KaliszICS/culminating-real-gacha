@@ -1,18 +1,21 @@
+import java.util.Scanner;
+
 /**
  * Class representing a player character, holds their ultimates, rarity, equipped weapon, among other stats.
  * @author gacha
  * @version 1.0.0
  */
 public class PlayerCharacter extends Entity {
+    private int ultCharge;
+    private int ultMax;
     private String dialogue;
     private String name;
     private int rarity;
     private Weapon weaponEquipped;
     private double critChance;
     private int critDamage;
-    private int numTargetSkill;
-    private int numTargetUltimate;
     private String skillEffect;
+    private boolean defending;
 
     /**
      * 
@@ -29,29 +32,46 @@ public class PlayerCharacter extends Entity {
      * @param owned
      * @param critChance
      * @param critDamage
-     * @param numTargetSkill
-     * @param numTargetUltimate
      */
     public PlayerCharacter(int maxHp, int hp, int speed, int attack, int numTargets, String name, String dialogue,
     int rarity, Weapon weaponEquipped, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
-        // TODO: find a way to NOT MAKE THIS 16 PARAMETERS
         super(maxHp, hp, speed, attack, numTargets, name);
+        this.ultCharge = 0;
+        this.ultMax = 100;
         this.dialogue = dialogue;
         this.name = name;
         this.rarity = rarity;
         this.weaponEquipped = weaponEquipped;
         this.critChance = critChance;
         this.critDamage = critDamage;
-        this.numTargetSkill = numTargetSkill;
-        this.numTargetUltimate = numTargetUltimate;
         this.skillEffect = skillEffect;
+        this.defending = false;
+    }
+
+    public PlayerCharacter(int maxHp, int hp, int speed, int attack, int numTargets, String name, int ultMax, String dialogue,
+        int rarity, Weapon weaponEquipped, double critChance, int critDamage, int numTargetSkill, int numTargetUltimate, String skillEffect) {
+        super(maxHp, hp, speed, attack, numTargets, name);
+        this.ultCharge = 0;
+        this.ultMax = ultMax;
+        this.dialogue = dialogue;
+        this.name = name;
+        this.rarity = rarity;
+        this.weaponEquipped = weaponEquipped;
+        this.critChance = critChance;
+        this.critDamage = critDamage;
+        this.skillEffect = skillEffect;
+        this.defending = false;
     }
 
     /**
      * 
      */
-    public void ultimate() {
-        //TODO: please don't just give every character their ultimate through overrides that's a really bad way of doing it
+    public void ultimate(Entity[] targets) {
+        int runSkillTimesForUlt = 3;
+        for (int i = 0; i < runSkillTimesForUlt; i++) {
+            skill(targets);
+        }
+        setUltCharge(0);
     }
 
     /**
@@ -59,49 +79,99 @@ public class PlayerCharacter extends Entity {
      */
     @Override
     protected void skill(Entity[] targets) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'skill'");
+        // battle should check if skill effect is heal or pull, so target will consist of playercharacters if true
+        switch (getSkillEffect()) {
+            case "Damage":
+                for (int i = 0; i < targets.length; i++) {
+                    normalAttack(targets[i]);
+                }
+                break;
+            case "Heal":
+                for (int i = 0; i < targets.length; i++) {
+                    // replace getAttack with some value, might heal too much if based on attack
+                    targets[i].setHp(Math.min(targets[i].getMaxHp(), targets[i].getHp() + getAttack()));
+                }
+                break;
+            case "Push":
+                // read heal comment
+                for (int i = 0; i < targets.length; i++) {
+                    targets[i].setActionPoints(targets[i].getActionPoints() - getAttack());
+                }
+                break;
+            case "Pull":
+                // read heal comment
+                for (int i = 0; i < targets.length; i++) {
+                    targets[i].setActionPoints(targets[i].getActionPoints() + getAttack());
+                }
+                break;
+        }
     }
 
     public void weaponEffect(){
         switch (this.weaponEquipped.getSpecialEffectIndex()){
             case "":
-            break; //does not have special effect
-            
+                break; //does not have special effect
             case "Speed":
-            super.setSpeed(super.getSpeed()*2);//doubles current entity speed
-            break;
-        
+                super.setSpeed(super.getSpeed()*2);//doubles current entity speed
+                break;
             case "CritChance": 
-            setCritChance(getCritChance()*1.5);//multiplier to crit chance
-            break;
-            
+                setCritChance(getCritChance()*1.5);//multiplier to crit chance
+                break;
             case "CritDamage":
-            setCritDamage(getCritDamage()*2);//double crit damage
-            break;
-            
+                setCritDamage(getCritDamage()*2);//double crit damage
+                break;
             case "Heal":
-            super.setHp(getHp()+ (int)(super.getHp()*1.05));//heals 5% of current hp
-            if (super.getHp()> super.getMaxHp()){
-                super.setHp(super.getMaxHp());
-            }//if heal exceeds max health, hp is max health
-            break;
-        
+                super.setHp(Math.min(getHp()+ (int)(super.getHp()*1.05), getMaxHp()));//heals 5% of current hp
+                //if heal exceeds max health, hp is max health
+                break;
         }
     }
     
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'attack'");
+        if (getUltCharge() == getUltMax()) {
+            Entity[] targets = selectTarget(mainTarget, enemies);
+            ultimate(targets);
+        } else {
+            if (attackType == 1) {
+                normalAttack(enemies[mainTarget]);
+                setUltCharge(Math.min(getUltCharge() + 20, getUltMax()));
+            } else {
+                Entity[] targets = selectTarget(mainTarget, enemies);
+                skill(targets);
+                setUltCharge(Math.min(getUltCharge() + 33, getUltMax()));
+            }
+        }
+        
     }
 
     @Override
     public void turnBegin() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'turnBegin'");
+        setDefending(false);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("1 - Attack");
+        System.out.println("2 - Defend");
+        System.out.print("Would you like to attack or defend? ");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        scanner.close();
+        // check if user wants to defend, don't do anything here if no because once battle sees defending is false, it will call attack instead
+        if (choice == 2) {
+            setDefending(true);
+        }
     }
 
+    public int getUltCharge() {
+        return this.ultCharge;
+    }
+
+    public void setUltCharge(int ultCharge) {
+        this.ultCharge = ultCharge;
+    }
+
+    public int getUltMax() {
+        return this.ultMax;
+    }
 
     /**
      * 
@@ -167,22 +237,6 @@ public class PlayerCharacter extends Entity {
         this.critDamage = critDamage;
     }
     
-    /**
-     * 
-     * @return
-     */
-    public int getNumTargetSkill() {
-        return numTargetSkill;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public int getNumTargetUltimate() {
-        return numTargetUltimate;
-    }
-
     public String getName() {
         return name;
     }
@@ -191,4 +245,11 @@ public class PlayerCharacter extends Entity {
         return skillEffect;
     }
 
+    public boolean isDefending() {
+        return this.defending;
+    }
+
+    public void setDefending(boolean defending) {
+        this.defending = defending;
+    }
 }
