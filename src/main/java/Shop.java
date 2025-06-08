@@ -54,6 +54,23 @@ public class Shop {
      * @param account
      */
     public void buy(Item item, Account account) {
+
+        //Make sure that the item is currently on sale
+        boolean validItem = false;
+        int validItemIndex = -1;
+
+        for (int i = 0; i < itemsOnSale.size(); i++) {
+            if (this.itemsOnSale.get(i)==item) {
+                validItem = true;
+                validItemIndex = i;
+                i = this.itemsOnSale.size();
+            }
+        }
+
+        //If on sale, remove from itemsOnSale and give to the account
+        if (validItem==true) {
+            this.itemsOnSale.remove(validItemIndex);
+        }
     }
 
     /**
