@@ -32,37 +32,33 @@ class Item {
 
     /**
      * Getter Method
-     * @param item item parameter
      * @return the item name
      */
-    public String getName(Item item) {
+    public String getName() {
         return this.name;
     }
 
     /**
      * Getter Method
-     * @param item item parameter
      * @return the item cost
      */
-    public int getCost(Item item) {
+    public int getCost() {
         return this.cost;
     }
 
     /**
      * Getter Method
-     * @param item item parameter
      * @return the item description
      */
-    public String getDesc(Item item) {
+    public String getDesc() {
         return this.desc;
     }
 
     /**
      * Getter Method
-     * @param item item parameter
      * @return the item effect
      */
-    public String getEffect(Item item) {
+    public String getEffect() {
         return this.effect;
     }
 }

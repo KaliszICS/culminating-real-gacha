@@ -67,17 +67,12 @@ public class Shop {
             }
         }
 
-        //If on sale, remove from itemsOnSale and give to the account
+        //If item is valid, remove from itemsOnSale, take money from shopCurrenfcy and give to the account's team
         if (validItem==true) {
             this.itemsOnSale.remove(validItemIndex);
+            account.setShopCurrency(account.getShopCurrency()-item.getCost());
+            item.apply(account.getTeam());
         }
-    }
-
-    /**
-     * 
-     * @param item
-     */
-    public void search(Item item) {
     }
 
     /**
