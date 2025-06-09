@@ -44,6 +44,7 @@ public class Home {
     public void weaponGacha() {
         //asks how many pulls
         int numOfPulls = 0;
+        //this for loops to check if owned
         getGacha().pullWeapon(0);
         return;
     }
