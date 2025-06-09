@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.Random;
 /**
  * Class representing a player character, holds their ultimates, rarity, equipped weapon, among other stats.
  * @author gacha
@@ -83,7 +83,12 @@ public class PlayerCharacter extends Entity {
         switch (getSkillEffect()) {
             case "Damage":
                 for (int i = 0; i < targets.length; i++) {
-                    normalAttack(targets[i]);
+                    Random random = new Random();
+                        if (random.nextInt(101)>getCritChance()){
+                        setAttack(getAttack()*getCritDamage());
+                    }
+                        super.normalAttack(targets[i]);
+                        setAttack(getAttack() / getCritDamage());
                 }
                 break;
             case "Heal":
@@ -159,11 +164,13 @@ public class PlayerCharacter extends Entity {
         if (getUltCharge() == getUltMax()) {
             Entity[] targets = selectTarget(mainTarget, enemies);
             ultimate(targets);
-        } else {
+        } 
+        else {
             if (attackType == 1) {
                 normalAttack(enemies[mainTarget]);
                 setUltCharge(Math.min(getUltCharge() + 20, getUltMax()));
-            } else {
+            } 
+            else {
                 Entity[] targets = selectTarget(mainTarget, enemies);
                 skill(targets);
                 setUltCharge(Math.min(getUltCharge() + 33, getUltMax()));
@@ -190,6 +197,15 @@ public class PlayerCharacter extends Entity {
         }
     }
 
+    @Override
+        protected void normalAttack(Entity target) {
+        Random random = new Random();
+        if (random.nextInt(101)>getCritChance()){
+            setAttack(getAttack()*getCritDamage());
+        }
+        super.normalAttack(target);
+        setAttack(getAttack() / getCritDamage());
+    }
     public int getUltCharge() {
         return this.ultCharge;
     }

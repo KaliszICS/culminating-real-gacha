@@ -15,6 +15,9 @@ public class Battle {
         this.teammatesAlive = team.size();
         this.enemiesAlive = 0;
         this.entities = new ArrayList<>();
+        for (int i = 0; i<team.size(); i++){
+            team.get(i).weaponEffect();
+        }
         this.entities.addAll(team);
         this.skillPoints = 3; //start with 3, max 5
         this.waveNum = 0;
@@ -22,6 +25,7 @@ public class Battle {
     }
 
     public void startBattle() {
+
         while (getEnemiesAlive() > 0 || getTeammatesAlive() > 0) {
             reOrganizeTurnOrder();
             takeTurn(getEntities().get(0));
