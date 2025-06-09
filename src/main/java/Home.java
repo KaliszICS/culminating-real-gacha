@@ -69,7 +69,8 @@ public class Home {
     }
 
     public void battle() {
-        // TODO: figure it out
+        Battle battle = new Battle(account.getTeam());
+        battle.startBattle();
     }
 
     public void shop() {
