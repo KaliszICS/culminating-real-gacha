@@ -10,9 +10,8 @@ class Item {
     protected String effectType;
     protected int effectPotency;
 
-
     /**
-     * Creates an item object that has a description, cost, and checks whether the player has the item already
+     * Constructor that creates an item object that has a name, cost, description, effect type and effect potency
      * @param name The name of the item
      * @param cost The cost of the item
      * @param desc The description of the item
@@ -28,15 +27,13 @@ class Item {
     }
 
     /**
-     * Someone do this idk what team does - aarooran - i lied ill do this eventually
+     * 
      * @param team
      */
     public void apply(Team team) {
 
+        //Switch goes through to find the matching item effect type, then applies the affect potency to the each player in the team in regards to the effect type
         switch (getEffectType()) {
-
-            case "":
-                break; //does not have special effect
 
             case "Speed":
                 for (int i=0; i<team.getOnTeam().length; i++) {
