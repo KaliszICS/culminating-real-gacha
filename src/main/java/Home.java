@@ -1,3 +1,5 @@
+import java.security.Key;
+
 public class Home {
     // update manually with every character
     
@@ -12,7 +14,17 @@ public class Home {
     new PlayerCharacter("The Ventriloquist", "Its suffering that brings meaning to the futile life", 3450, 100, 250, 5, 35, 3, 3, "Push", 70)
 };
 
-    public final Weapon[] WEAPONS = new Weapon[0];
+    public final Weapon[] WEAPONS = new Weapon[]{
+        new Weapon("Halibut", 100, 400, "Heal", "Take a bite out of this weapon and you can feel fulfilled. It doesn’t taste great though", 4),
+        new Weapon("Bow", 150, 300, "CritDamage", "Wow, a dog using a bow, who could’ve seen that coming.", 4), 
+        new Weapon("Stick", 200, 100, "CritChance", "This is your punishment, THE STICK!!!", 4),
+        new Weapon("Stone", 200, 100, "CritDamage", "Sticks and stones may break my bones but ouch stop hitting me", 4),
+        new Weapon("Hiking Stick", 100, 100, "Speed", "I’m a stick, but I make you go fast!", 4),
+        new Weapon("Flashlight", 400, 950, "CritChance", "If they can’t see me then I have advantage hehe", 5),
+        new Weapon("Magical Stick", 450, 300, "CritDamage", "Key which hides the powers of the star, Reveal your true form before me. I, Sakura Kinomoto, command you under our contract. Release!", 5),
+        new Weapon("Magical gun", 500, 50, "Speed", "If there is a next life, you should really work out", 5),
+
+    };
     private Account account;
     private Shop shop;
     private boolean playing;

@@ -29,7 +29,7 @@ public class Weapon {
         return hpMod;
     }
     
-    public String getSpecialEffectIndex() {
+    public String getSpecialEffect() {
             return this.specialEffect;
     }
 
@@ -52,4 +52,10 @@ public class Weapon {
     public int getRarity() {
         return rarity;
     }
+
+    @Override
+    public String toString(){
+        return getName() + ": Attack" + getAttackMod() + ", MaxHP mod: " + getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect();
+    }
+
 }
