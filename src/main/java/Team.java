@@ -7,11 +7,12 @@ public class Team {
 
     public String displayPlayerCharacter() {
         String team = "Team:\n";
-        for (PlayerCharacter pc : onTeam) {
-            if (pc == null) {
-                team += " - EMPTY\n";
+        for (int i = 0; i < onTeam.length; i++) {
+            team += (i + 1) + " - ";
+            if (getOnTeam()[i] == null) {
+                team += "EMPTY\n";
             } else {
-                team += " - " + pc.toString() + "\n";
+                team += getOnTeam()[i].toString() + "\n";
             }
         }
         return team;
