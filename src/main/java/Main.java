@@ -13,6 +13,7 @@ public class Main {
 			System.out.print("Please enter your choice: ");
 			if (scanner.hasNextInt()) {
 				int choice = scanner.nextInt();
+				scanner.nextLine();
 				switch (choice) {
 					case 1:
 						account = Login.login();
