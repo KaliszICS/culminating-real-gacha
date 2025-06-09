@@ -68,7 +68,6 @@ public class Login {
     public static void gameStart(Account account) {
         Home home = new Home(account);
         Scanner scanner = new Scanner(System.in);
-        String check = scanner.nextLine();
         while (home.isPlaying()) {
             System.out.println("What do you want to do?\n");
             System.out.println("1 - Battle");
