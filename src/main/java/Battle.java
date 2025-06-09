@@ -71,6 +71,7 @@ public class Battle {
         entity.turnBegin();
         Entity[] targets;
         if (entity instanceof PlayerCharacter) {
+            displayTurnOrder();
             targets = new Entity[getEnemiesAlive()];
             int foundCount = 0;
             for (Entity e : getEntities()) {
