@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-
 public class Team {
     private PlayerCharacter[] onTeam;
     
-    public Team(ArrayList<PlayerCharacter> onTeam) {
+    public Team() {
         this.onTeam = new PlayerCharacter[4];
     }
 

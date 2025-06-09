@@ -2,11 +2,33 @@ public class Account {
     private String userName;
     private String password;
     private boolean[] playerCharacterUnlocked;
-    // probably should not be a weapon array idk could be boolean
-    private Weapon[] weaponInv;
+    private boolean[] weaponInv;
     private int gachaCurrency;
     private int shopCurrency;
     private Team team;
+
+    public Account(String userName, String password, boolean[] playerCharacterUnlocked, boolean[] weaponInv,
+            int gachaCurrency, int shopCurrency) {
+        this.userName = userName;
+        this.password = password;
+        this.playerCharacterUnlocked = playerCharacterUnlocked;
+        this.weaponInv = weaponInv;
+        this.gachaCurrency = gachaCurrency;
+        this.shopCurrency = shopCurrency;
+        this.team = new Team();
+    }
+
+    public Account(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+        // replace 0 with number of characters
+        this.playerCharacterUnlocked = new boolean[0];
+        // same as above for weapons
+        this.weaponInv = new boolean[0];
+        this.gachaCurrency = 0;
+        this.shopCurrency = 0;
+        this.team = new Team();
+    }
 
     public String displayTeam() {
         // doesn't need to be done but if this is all the method is it could be removed
@@ -25,7 +47,7 @@ public class Account {
         return playerCharacterUnlocked;
     }
 
-    public Weapon[] getWeaponInv() {
+    public boolean[] getWeaponInv() {
         return weaponInv;
     }
 

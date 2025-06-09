@@ -19,17 +19,20 @@ public class Home {
     private boolean playing;
     private Gacha gacha;
 
-    public Home(Account account, Shop shop, Gacha gacha) {
+    public Home(Account account) {
         this.account = account;
-        this.shop = shop;
-        this.gacha = gacha;
+        this.playing = true;
+        this.shop = new Shop();
+        this.gacha = new Gacha(PLAYER_CHARACTER_LIST, WEAPONS);
     }
 
-    public PlayerCharacter[] characterGacha(int numOfPulls) {
+    public PlayerCharacter[] characterGacha() {
+        // would probably be better to do user input for pulls in here, it's already messy as hell in gamestart for login
         return null;
     }
     
-    public Weapon[] weaponGacha(int numOfPulls) {
+    public Weapon[] weaponGacha() {
+        // read above comment
         return null;
     }
 
