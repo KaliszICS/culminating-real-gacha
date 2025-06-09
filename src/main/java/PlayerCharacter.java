@@ -16,6 +16,7 @@ public class PlayerCharacter extends Entity {
     private double critChance;
     private int critDamage;
     private String skillEffect;
+    private int ownedIndex;
 
     /**
      * 
@@ -31,7 +32,7 @@ public class PlayerCharacter extends Entity {
      * @param critChance
      * @param critDamage
      */
-    public PlayerCharacter(String name, String dialogue, int maxHp, int speed, int attack,
+    public PlayerCharacter(int ownedIndex, String name, String dialogue, int maxHp, int speed, int attack,
     int rarity, double critChance, int critDamage, int numTargets, String skillEffect) {
         super(maxHp, speed, attack, name, numTargets);
         this.ultCharge = 0;
@@ -43,9 +44,10 @@ public class PlayerCharacter extends Entity {
         this.critChance = critChance;
         this.critDamage = critDamage;
         this.skillEffect = skillEffect;
+        this.ownedIndex = ownedIndex;;
     }
 
-    public PlayerCharacter(String name, String dialogue, int maxHp, int speed, int attack, int rarity, 
+    public PlayerCharacter(int ownedIndex, String name, String dialogue, int maxHp, int speed, int attack, int rarity, 
     double critChance, int critDamage, int numTargets, String skillEffect, int ultMax) {
         super(maxHp, speed, attack, name, numTargets);
         this.ultCharge = 0;
@@ -57,6 +59,7 @@ public class PlayerCharacter extends Entity {
         this.critChance = critChance;
         this.critDamage = critDamage;
         this.skillEffect = skillEffect;
+        this.ownedIndex = ownedIndex;;
     }
 
     /**
