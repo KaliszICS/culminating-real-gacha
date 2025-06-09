@@ -318,8 +318,12 @@ public class PlayerCharacter extends Entity {
     }
 
     public String detailedToString(){
-        return getName() + ": Attack: " + getAttack() + ", Speed: " + getSpeed() + ", Hp: " + getHp()
+        String detailedString = getName() + ": Attack: " + getAttack() + ", Speed: " + getSpeed() + ", Hp: " + getHp()
         + "\n" + getDialogue() + "\n" + getRarity();
+        if (getWeaponEquipped() != null) {
+            detailedString += "\n" + "Weapon: " + getWeaponEquipped().getName();
+        }
+        return detailedString;
     }
 
     public int getOwnedIndex(){
@@ -329,5 +333,4 @@ public class PlayerCharacter extends Entity {
     public String getSkillEffect() {
         return skillEffect;
     }
-
 }

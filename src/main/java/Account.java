@@ -78,4 +78,12 @@ public class Account {
     public Team getTeam() {
         return team;
     }
+
+    @Override
+    public String toString() {
+        String accString = "Username: " + getUserName() + "\n";
+        accString += getTeam().displayPlayerCharacter();
+        accString += "Pull currency: " + getGachaCurrency() + "\n" + "Shop currency: " + getShopCurrency();
+        return accString;
+    }
 }
