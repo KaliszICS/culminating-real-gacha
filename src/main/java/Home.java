@@ -39,6 +39,14 @@ public class Home {
     public void characterGacha() {
         //asks how many pulls
         int numOfPulls = 0;
+        if (account.getGachaCurrency-numOfPulls*160 > account.getGachaCurrency){
+            System.out.println("do cant do");
+            numOfPulls = 0;// delete this and just say nope later after making the while loops
+        }
+        else{
+            account.setGachaCurrency(account.getGachaCurrency-numOfPulls*160);
+        }
+        
         //this for loops to check if owned
         PlayerCharacter[] pulled = getGacha().pullCharacter(0);
         for (int i = 0; i<numOfPulls; i++){
@@ -55,6 +63,13 @@ public class Home {
     public void weaponGacha() {
         //asks how many pulls
         int numOfPulls = 0;
+        if (account.getGachaCurrency-numOfPulls*160 > account.getGachaCurrency){
+            System.out.println("do cant do");
+            numOfPulls = 0;// delete this and just say nope later after making the while loops
+        }
+        else{
+            account.setGachaCurrency(account.getGachaCurrency-numOfPulls*160);
+        }
         //this for loops to check if owned
         Weapon[] pulled = getGacha().pullWeapon(0);
         for (int i = 0; i<numOfPulls; i++){

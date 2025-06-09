@@ -21,11 +21,9 @@ public class Account {
     public Account(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        // replace 0 with number of characters
         this.playerCharacterUnlocked = new boolean[8];
-        // same as above for weapons
         this.weaponsUnlocked = new boolean[8];
-        this.gachaCurrency = 0;
+        this.gachaCurrency = 10000000;
         this.shopCurrency = 0;
         this.team = new Team();
     }
