@@ -7,14 +7,16 @@ public class Weapon {
     private String description;
     private PlayerCharacter equippedTo;
     private int rarity;
+    private int ownedIndex;
 
-    public Weapon(String name, int attackMod, int hpMod, String specialEffect, String description, int rarity) {
+    public Weapon(String name, int attackMod, int hpMod, String specialEffect, String description, int rarity, int ownedIndex) {
         this.attackMod = attackMod;
         this.hpMod = hpMod;
         this.specialEffect = specialEffect;
         this.name = name;
         this.description = description;
         this.rarity = rarity;
+        this.ownedIndex = ownedIndex;
     }
 
     public int getAttackMod() {
@@ -43,6 +45,10 @@ public class Weapon {
 
     public PlayerCharacter getEquippedTo() {
         return this.equippedTo;
+    }
+
+    public int getOwnedIndex(){
+        return this.ownedIndex;
     }
 
     public void setEquippedTo(PlayerCharacter equippedTo) {
