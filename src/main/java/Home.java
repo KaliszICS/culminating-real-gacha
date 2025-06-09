@@ -23,7 +23,6 @@ public class Home {
         new Weapon("Flashlight", 400, 950, "CritChance", "If they can’t see me then I have advantage hehe", 5),
         new Weapon("Magical Stick", 450, 300, "CritDamage", "Key which hides the powers of the star, Reveal your true form before me. I, Sakura Kinomoto, command you under our contract. Release!", 5),
         new Weapon("Magical gun", 500, 50, "Speed", "If there is a next life, you should really work out", 5),
-
     };
     private Account account;
     private Shop shop;
@@ -42,9 +41,11 @@ public class Home {
         return null;
     }
     
-    public Weapon[] weaponGacha() {
-        // read above comment
-        return null;
+    public void weaponGacha() {
+        //asks how many pulls
+        int numOfPulls = 0;
+        getGacha().pullWeapon(0);
+        return;
     }
 
     public void battle() {

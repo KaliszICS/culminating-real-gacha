@@ -2,17 +2,17 @@ public class Account {
     private String userName;
     private String password;
     private boolean[] playerCharacterUnlocked;
-    private boolean[] weaponInv;
+    private boolean[] weaponsUnlocked;
     private int gachaCurrency;
     private int shopCurrency;
     private Team team;
 
-    public Account(String userName, String password, boolean[] playerCharacterUnlocked, boolean[] weaponInv,
+    public Account(String userName, String password, boolean[] playerCharacterUnlocked, boolean[] weaponsUnlocked,
             int gachaCurrency, int shopCurrency) {
         this.userName = userName;
         this.password = password;
         this.playerCharacterUnlocked = playerCharacterUnlocked;
-        this.weaponInv = weaponInv;
+        this.weaponsUnlocked = weaponsUnlocked;
         this.gachaCurrency = gachaCurrency;
         this.shopCurrency = shopCurrency;
         this.team = new Team();
@@ -24,7 +24,7 @@ public class Account {
         // replace 0 with number of characters
         this.playerCharacterUnlocked = new boolean[0];
         // same as above for weapons
-        this.weaponInv = new boolean[0];
+        this.weaponsUnlocked = new boolean[0];
         this.gachaCurrency = 0;
         this.shopCurrency = 0;
         this.team = new Team();
@@ -51,9 +51,14 @@ public class Account {
         this.playerCharacterUnlocked = playerCharacterUnlocked;
     }
 
-    public boolean[] getWeaponInv() {
-        return weaponInv;
+    public boolean[] getWeaponsUnlocked() {
+        return weaponsUnlocked;
     }
+
+    public void setWeaponsUnlocked(boolean[] weaponsUnlocked){
+        this.weaponsUnlocked = weaponsUnlocked;
+    }
+
 
     public int getGachaCurrency() {
         return gachaCurrency;
