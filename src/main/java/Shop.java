@@ -8,8 +8,10 @@ public class Shop {
 
     //Array of Items (Constant)
     public Item[] ITEMS = new Item[] {
-        new Item("Bazooka", 25, "Boosts team damage", "Hallelujah", 5),
-        new Item("Health Elixir", 15, "Boosts team health", "Health", 15),
+        new Item("Bazooka", 25, "Increase team CritDamage with this weapon of mass destruction!", "CritDamage", 2),
+        new Item("Health Elixir", 15, "Increase team Max health with this magical elixir from Mc. Donalds!", "Health", 1),
+        new Item("Wings", 15, "Increase team speed by having wing surgery on all team characters!", "Speed", 1),
+        new Item("Mr. Kalisz", 20, "Increase team CritChance with a teacher to help educate and strategize!", "CritChance", 3),
     };
 
     //ArrayList of items that are on sale; will show 3 at one time for the player to choose from, unless they refresh to see 3 different ones
@@ -24,8 +26,8 @@ public class Shop {
 
     /**
      * 
-     * @param account
-     * @return
+     * @param account the player's account, so that the methd can access their shopCurrency
+     * @return A String that mentions whether the player was able to buy a shop resfresh or not
      */
     public String refresh(Account account) {
         
@@ -52,10 +54,11 @@ public class Shop {
 
     /**
      * 
-     * @param item
-     * @param account
+     * @param item the item the player wants to buy
+     * @param account the player's account that the item should be applied to
+     * @return A String message that mentions whether the item was able to be bought or not
      */
-    public void buy(Item item, Account account) {
+    public String buy(Item item, Account account) {
 
         //Make sure that the item is currently on sale
         boolean validItem = false;
@@ -69,12 +72,16 @@ public class Shop {
             }
         }
 
-        //If item is valid, remove from itemsOnSale, take money from shopCurrenfcy and give to the account's team
+        //If item is valid, remove from itemsOnSale, take money from shopCurrenfcy, give to the account's team, and give output message
         if (validItem==true) {
             this.itemsOnSale.remove(validItemIndex);
             account.setShopCurrency(account.getShopCurrency()-item.getCost());
             item.apply(account.getTeam());
+            return "You have succesfully bought " + item.getName() + "!";
         }
+
+        //If item not valid, give output message
+        return "This item is currently not on sale. Buy a shop refresh to see if the preferred item comes on sale!";
     }
 
     /**

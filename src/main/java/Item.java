@@ -32,7 +32,36 @@ class Item {
      * @param team
      */
     public void apply(Team team) {
-        
+
+        switch (getEffectType()) {
+
+            case "":
+                break; //does not have special effect
+
+            case "Speed":
+                for (int i=0; i<team.getOnTeam().length; i++) {
+                    team.getOnTeam()[i].setSpeed(team.getOnTeam()[i].getSpeed() + (getEffectPotency()*5));
+                }
+                break;
+
+            case "CritChance": 
+                for (int i=0; i<team.getOnTeam().length; i++) {
+                    team.getOnTeam()[i].setCritChance(team.getOnTeam()[i].getCritChance() + (getEffectPotency()*5));
+                }
+                break;
+
+            case "CritDamage":
+                for (int i=0; i<team.getOnTeam().length; i++) {
+                    team.getOnTeam()[i].setCritDamage(team.getOnTeam()[i].getCritDamage() + (getEffectPotency()*5));
+                }
+                break;
+
+            case "Health":
+                for (int i=0; i<team.getOnTeam().length; i++) {
+                    team.getOnTeam()[i].setMaxHp(team.getOnTeam()[i].getMaxHp() + (getEffectPotency()*5));
+                }
+                break;
+        }
     }
 
     /**
