@@ -17,9 +17,15 @@ public class Main {
 				switch (choice) {
 					case 1:
 						account = Login.login();
+						if (account!=null){
+							choosing = false;
+						}
 						break;
 					case 2:
 						account = Login.signup();
+						if (account!=null){
+							choosing = false;
+						}
 						break;
 					case 3:
 						System.out.println("Goodbye!");

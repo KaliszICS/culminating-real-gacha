@@ -1,4 +1,5 @@
 import java.security.Key;
+import java.util.Scanner;
 
 public class Home {
     // update manually with every character
@@ -38,13 +39,13 @@ public class Home {
 
     public void characterGacha() {
         //asks how many pulls
-        int numOfPulls = 0;
-        if (account.getGachaCurrency-numOfPulls*160 > account.getGachaCurrency){
+        int numOfPulls = 10;
+        if (account.getGachaCurrency()-numOfPulls*160 > account.getGachaCurrency()){
             System.out.println("do cant do");
             numOfPulls = 0;// delete this and just say nope later after making the while loops
         }
         else{
-            account.setGachaCurrency(account.getGachaCurrency-numOfPulls*160);
+            account.setGachaCurrency(account.getGachaCurrency()-numOfPulls*160);
         }
         
         //this for loops to check if owned
@@ -62,13 +63,13 @@ public class Home {
     
     public void weaponGacha() {
         //asks how many pulls
-        int numOfPulls = 0;
-        if (account.getGachaCurrency-numOfPulls*160 > account.getGachaCurrency){
+        int numOfPulls = 10;
+        if (account.getGachaCurrency()-numOfPulls*160 > account.getGachaCurrency()){
             System.out.println("do cant do");
             numOfPulls = 0;// delete this and just say nope later after making the while loops
         }
         else{
-            account.setGachaCurrency(account.getGachaCurrency-numOfPulls*160);
+            account.setGachaCurrency(account.getGachaCurrency()-numOfPulls*160);
         }
         //this for loops to check if owned
         Weapon[] pulled = getGacha().pullWeapon(0);
@@ -78,13 +79,13 @@ public class Home {
             }
             else{
                 System.out.println(pulled[i].toString() + " is owned, shopCurrency +" + gacha.REPEAT_COMPENSATION);
-                account.setShopCurrency(account.getName() + gacha.REPEAT_COMPENSATION);
+                account.setShopCurrency(account.getShopCurrency() + gacha.REPEAT_COMPENSATION);
             }
         }
     }
 
     public void battle() {
-        Battle battle = new Battle(account.getTeam());
+        Battle battle = new Battle(account.getTeam().getOnTeam());
         battle.startBattle();
     }
 
@@ -129,7 +130,7 @@ public class Home {
     public void changeTeam() {
         System.out.println(account.getTeam().displayPlayerCharacter());
         //use this.playerCharacterlist and account.ownedCahracter to pick a character to add
-        account.getTeam().addToTeam();
+        // account.getTeam().addToTeam();
     }
 
     private void save() {

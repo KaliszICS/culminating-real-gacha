@@ -9,14 +9,17 @@ public class Battle {
     private int battleReward = 0;
     public final int SKILLPOINT_MAX = 5;
 
-    public Battle(ArrayList<PlayerCharacter> team) {
-        this.teammatesAlive = team.size();
+    public Battle(PlayerCharacter[] team) {
+        this.teammatesAlive = team.length;
         this.enemiesAlive = 0;
         this.entities = new ArrayList<>();
-        for (int i = 0; i<team.size(); i++){
-            team.get(i).weaponEffect();
+        for (int i = 0; i<team.length; i++){
+            team[i].weaponEffect();
         }
-        this.entities.addAll(team);
+        for (int i = 0; i<team.length; i++){
+            this.entities.add(team[i]);
+        }
+
         this.skillPoints = 3; //start with 3, max 5
         this.waveNum = 0;
         this.battleReward = 0;

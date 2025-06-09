@@ -18,6 +18,11 @@ public class Gacha{
         int index4StarList = 0;
         int index5StarList = 0;
 
+        fourStarPC = new PlayerCharacter[playerCharacterList.length];
+        fiveStarPC= new PlayerCharacter[playerCharacterList.length];
+        fourStarWeapon = new Weapon[weapons.length];
+        fiveStarWeapon = new Weapon[weapons.length];
+        
         for (int i = 0; i<playerCharacterList.length; i++){
             if (playerCharacterList[i].getRarity()==4){
                 this.fourStarPC[index4StarList] = playerCharacterList[i];

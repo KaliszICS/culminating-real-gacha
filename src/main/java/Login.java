@@ -26,11 +26,14 @@ public class Login {
             }  else {
                 System.out.println("Incorrect login info.");
             }
-        } catch (FileNotFoundException e) {
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("Account does not exist");
+        } 
+        catch (IOException e) {
             System.out.println(e);
-        } catch (IOException e) {
-            System.out.println(e);
-        } finally {
+        } 
+        finally {
             scanner.close();
             if (accFile != null) {
                 try {
@@ -65,6 +68,7 @@ public class Login {
     public static void gameStart(Account account) {
         Home home = new Home(account);
         Scanner scanner = new Scanner(System.in);
+        String check = scanner.nextLine();
         while (home.isPlaying()) {
             System.out.println("What do you want to do?\n");
             System.out.println("1 - Battle");
@@ -74,6 +78,7 @@ public class Login {
             System.out.println("5 - Weapon Gacha");
             System.out.println("6 - Logout\n");
             System.out.print("Please enter your choice: ");
+            String chec = scanner.nextLine();
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
