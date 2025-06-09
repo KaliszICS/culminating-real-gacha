@@ -322,6 +322,10 @@ public class PlayerCharacter extends Entity {
         + "\n" + getDialogue() + "\n" + getRarity();
     }
 
+    public int getOwnedIndex(){
+        return this.ownedIndex;
+    }
+
     public String getSkillEffect() {
         return skillEffect;
     }
