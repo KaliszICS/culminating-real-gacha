@@ -36,17 +36,36 @@ public class Home {
         this.gacha = new Gacha(PLAYER_CHARACTER_LIST, WEAPONS);
     }
 
-    public PlayerCharacter[] characterGacha() {
-        // would probably be better to do user input for pulls in here, it's already messy as hell in gamestart for login
-        return null;
+    public void characterGacha() {
+        //asks how many pulls
+        int numOfPulls = 0;
+        //this for loops to check if owned
+        PlayerCharacter[] pulled = getGacha().pullCharacter(0);
+        for (int i = 0; i<numOfPulls; i++){
+            if (account.getPlayerCharacterUnlocked()[pulled[i].getOwnedIndex()]==false){
+                account.getPlayerCharacterUnlocked()[pulled[i].getOwnedIndex()]=true;
+            }
+            else{
+                System.out.println(pulled[i].getName() + " is owned, shopCurrency +" + gacha.REPEAT_COMPENSATION);
+                account.setShopCurrency(account.getShopCurrency() + gacha.REPEAT_COMPENSATION);
+            }
+        }
     }
     
     public void weaponGacha() {
         //asks how many pulls
         int numOfPulls = 0;
         //this for loops to check if owned
-        getGacha().pullWeapon(0);
-        return;
+        Weapon[] pulled = getGacha().pullWeapon(0);
+        for (int i = 0; i<numOfPulls; i++){
+            if (account.getWeaponsUnlocked()[pulled[i].getOwnedIndex()]==false){
+                account.getWeaponsUnlocked()[pulled[i].getOwnedIndex()]=true;
+            }
+            else{
+                System.out.println(pulled[i].toString() + " is owned, shopCurrency +" + gacha.REPEAT_COMPENSATION);
+                account.setShopCurrency(account.getName() + gacha.REPEAT_COMPENSATION);
+            }
+        }
     }
 
     public void battle() {

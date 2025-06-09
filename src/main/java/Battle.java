@@ -70,9 +70,10 @@ public class Battle {
     }
 
     private void takeTurn(Entity entity) {
+        displayTurnOrder();
         Entity[] entityArr = (Entity[]) getEntities().toArray();
         setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));
-        displayTurnOrder();
+        entity.turnEnd();
         for (Entity e : entityArr) {
             if (e.getHp() <= 0) {
                 if (e instanceof PlayerCharacter) {

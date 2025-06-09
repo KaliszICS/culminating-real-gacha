@@ -50,11 +50,11 @@ public class Gacha{
         for (int i = 0; i < numOfPulls; i++){
             if(random.nextDouble() <= rates4Star){
                 pulledWeapon[i] = this.fourStarWeapon[random.nextInt(fourStarWeapon.length)];
-                System.out.println(pulledWeapon[i].toString());
+                System.out.println(pulledWeapon[i].detailedToString());
             }
             else{
                 pulledWeapon[i] = this.fiveStarWeapon[random.nextInt(fiveStarWeapon.length)];
-                System.out.println(pulledWeapon[i].toString());
+                System.out.println(pulledWeapon[i].detailedToString());
             }
         }
         return pulledWeapon;
