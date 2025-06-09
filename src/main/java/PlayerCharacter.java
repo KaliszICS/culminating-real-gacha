@@ -67,6 +67,7 @@ public class PlayerCharacter extends Entity {
      * 
      */
     public void ultimate(Entity[] targets) {
+        System.out.println(getName() + " activates their ultimate!");
         int runSkillTimesForUlt = 3;
         for (int i = 0; i < runSkillTimesForUlt; i++) {
             skill(targets);
@@ -88,20 +89,25 @@ public class PlayerCharacter extends Entity {
                 break;
             case "Heal":
                 for (int i = 0; i < targets.length; i++) {
-                    // replace getAttack with some value, might heal too much if based on attack
-                    targets[i].setHp(Math.min(targets[i].getMaxHp(), targets[i].getHp() + getAttack()));
+                    int change = getAttack();
+                    System.out.println(targets[i].getName() + " was healed for " + change + " HP!");
+                    targets[i].setHp(Math.min(targets[i].getMaxHp(), targets[i].getHp() + change));
                 }
                 break;
             case "Push":
                 // read heal comment
                 for (int i = 0; i < targets.length; i++) {
-                    targets[i].setActionPoints(targets[i].getActionPoints() - getAttack());
+                    int change = getAttack();
+                    System.out.println(targets[i].getName() + " had their action points decreased by " + change + "!");
+                    targets[i].setActionPoints(targets[i].getActionPoints() - change);
                 }
                 break;
             case "Pull":
                 // read heal comment
                 for (int i = 0; i < targets.length; i++) {
-                    targets[i].setActionPoints(targets[i].getActionPoints() + getAttack());
+                    int change = getAttack();
+                    System.out.println(targets[i].getName() + " had their action points increased by " + change + "!");
+                    targets[i].setActionPoints(targets[i].getActionPoints() + change);
                 }
                 break;
         }
@@ -180,6 +186,7 @@ public class PlayerCharacter extends Entity {
         scanner.close();
         // check if user wants to defend, don't do anything here if no because once battle sees defending is false, it will call attack instead
         if (choice == 2) {
+            System.out.println(getName() + " defends!");
             setDefending(true);
         }
     }

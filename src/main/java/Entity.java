@@ -60,6 +60,7 @@ public abstract class Entity implements Comparable<Entity> {
      * @param targets the targets to be attacked
      */
     protected void normalAttack(Entity target) {
+        System.out.println("Hit " + target.getName() + " for " + getAttack() + " damage!");
         target.setHp(target.getHp() - getAttack());
     }
 
