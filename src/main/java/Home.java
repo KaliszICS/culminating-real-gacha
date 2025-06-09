@@ -72,7 +72,7 @@ public class Home {
             account.setGachaCurrency(account.getGachaCurrency()-numOfPulls*160);
         }
         //this for loops to check if owned
-        Weapon[] pulled = getGacha().pullWeapon(0);
+        Weapon[] pulled = getGacha().pullWeapon(numOfPulls);
         for (int i = 0; i<numOfPulls; i++){
             if (account.getWeaponsUnlocked()[pulled[i].getOwnedIndex()]==false){
                 account.getWeaponsUnlocked()[pulled[i].getOwnedIndex()]=true;
