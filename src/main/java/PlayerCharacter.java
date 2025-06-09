@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 /**
  * Class representing a player character, holds their ultimates, rarity, equipped weapon, among other stats.
  * @author gacha
@@ -15,7 +15,7 @@ public class PlayerCharacter extends Entity {
     private Weapon weaponEquipped;
     private double critChance;
     private int critDamage;
-    private boolean defending;
+    private String skillEffect;
 
     /**
      * 
@@ -43,7 +43,6 @@ public class PlayerCharacter extends Entity {
         this.critChance = critChance;
         this.critDamage = critDamage;
         this.skillEffect = skillEffect;
-        this.defending = false;
     }
 
     public PlayerCharacter(String name, String dialogue, int maxHp, int speed, int attack, int rarity, 
@@ -58,7 +57,6 @@ public class PlayerCharacter extends Entity {
         this.critChance = critChance;
         this.critDamage = critDamage;
         this.skillEffect = skillEffect;
-        this.defending = false;
     }
 
     /**
@@ -155,7 +153,24 @@ public class PlayerCharacter extends Entity {
                 }
             }
         }
-        return super.selectTarget(mainTarget, (Entity[]) targetable.toArray());
+        System.out.println("Please choose your main target (target will be in the center of aoe): ");
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < targetable.size(); i++) {
+            System.out.println((i + 1) + " - " + targetable.get(i).toString());
+        }
+        boolean choosing = true;
+        int target = 0;
+        while (choosing) {
+            if (scanner.hasNextInt()) {
+                target = scanner.nextInt() - 1;
+                scanner.nextLine();
+                if (target >= 0 && target < targetable.size()) {
+                    choosing = false;
+                }
+            }
+        }
+        scanner.close();
+        return super.selectTarget(target, (Entity[]) targetable.toArray());
     }
 
     @Override
@@ -179,13 +194,36 @@ public class PlayerCharacter extends Entity {
     }
 
     @Override
-    public void turnBegin() {
+    public int turnBegin(int skillPointsAvailable, Entity[] targets) {
         System.out.println(getName() + "'s turn!");
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-        scanner.close();
+        boolean choosing = true;
+        while (choosing) {
+            System.out.println("What kind of attack would you like to do?");
+            System.out.println("1 - Normal Attack");
+            System.out.println("2 - Skill");
+            System.out.println("Skill points available: " + skillPointsAvailable);
+            System.out.print("Enter your choice: ");
+            if (scanner.hasNextInt()) {
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                if (choice == 2 && skillPointsAvailable == 0) {
+                    System.out.println("Out of skill points, can't use skill.");
+                } else if (choice > 2 || choice < 1) {
+                    System.out.println("Invalid number entered.");
+                } else {
+                    attack(choice, 0, targets);
+                    if (choice == 1) {
+                        scanner.close();
+                        return 0;
+                    }
+                    choosing = false;
+                }
+            }
         }
+        scanner.close();
+        return -1;
+    }
 
     @Override
         protected void normalAttack(Entity target) {
@@ -279,6 +317,10 @@ public class PlayerCharacter extends Entity {
     public String detailedToString(){
         return getName() + ": Attack: " + getAttack() + ", Speed: " + getSpeed() + ", Hp: " + getHp()
         + "\n" + getDialogue() + "\n" + getRarity();
+    }
+    
+    public String getSkillEffect() {
+        return skillEffect;
     }
 
 }

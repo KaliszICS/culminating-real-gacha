@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Class representing an enemy in battle, stores their difficulty and reward on death.
@@ -26,7 +27,9 @@ public class Enemy extends Entity {
                 targetable.add(enemies[i]);
             }
         }
-        return super.selectTarget(mainTarget, (Entity[]) targetable.toArray());
+        Random random = new Random();
+        int target = random.nextInt(enemies.length);
+        return super.selectTarget(target, (Entity[]) targetable.toArray());
     }
     
     @Override
@@ -51,7 +54,21 @@ public class Enemy extends Entity {
     }
 
     @Override
-    public void turnBegin() {
+    public int turnBegin(int skillPointsAvailable, Entity[] targets) {
         System.out.println(getName() + "'s turn!");
+        Random random = new Random();
+        int maxPercent = 100;
+        int choice = random.nextInt(maxPercent);
+        Entity[] targetable = selectTarget(0, targets);
+        int mainTarget = random.nextInt(targetable.length);
+        int chanceForNormalAttack = 70;
+        if (choice < chanceForNormalAttack) {
+            int normalAttack = 1;
+            attack(normalAttack, mainTarget, targets);
+        } else {
+            int skill = 2;
+            attack(skill, mainTarget, targets);
+        }
+        return 0;
     }
 }

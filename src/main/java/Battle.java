@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
 
 public class Battle {
     private int teammatesAlive;
@@ -72,95 +70,19 @@ public class Battle {
     }
 
     private void takeTurn(Entity entity) {
-        entity.turnBegin();
-        Entity[] targets;
-        if (entity instanceof PlayerCharacter) {
-            displayTurnOrder();
-            targets = new Entity[getEnemiesAlive()];
-            Entity[] healTargets = new Entity[getTeammatesAlive()];
-            int foundCount = 0;
-            int healCount = 0;
-            for (Entity e : getEntities()) {
-                if (e instanceof Enemy) {
-                    targets[foundCount] = e;
-                    foundCount++;
-                } else {
-                    healTargets[healCount] = e;
-                    healCount++;
-                }
-            }
-            Scanner scanner = new Scanner(System.in);
-            boolean choosing = true;
-            while (choosing) {
-                System.out.println("What kind of attack would you like to do?");
-                System.out.println("1 - Normal Attack");
-                System.out.println("2 - Skill");
-                System.out.println("Skill points available: " + getSkillPoints());
-                System.out.print("Enter your choice: ");
-                if (scanner.hasNextInt()) {
-                    int choice = scanner.nextInt();
-                    scanner.nextLine();
-                    if (choice == 2 && getSkillPoints() == 0) {
-                        System.out.println("Out of skill points, can't use skill.");
-                    } else if (choice > 2 || choice < 1) {
-                        System.out.println("Invalid number entered.");
-                    } else {
-                        System.out.println("Please choose your main target (target will be in the center of aoe): ");
-                        if (choice == 2 && (entity.getSkillEffect().equals("Heal") || entity.getSkillEffect().equals("Pull"))) {
-                            targets = healTargets;
-                        }
-                        for (int i = 0; i < targets.length; i++) {
-                            System.out.println((i + 1) + " - " + targets[i].toString());
-                        }
-                        if (scanner.hasNextInt()) {
-                            int mainTarget = scanner.nextInt() - 1;
-                            scanner.nextLine();
-                            if (mainTarget >= 0 && mainTarget < getEnemiesAlive()) {
-                                entity.attack(choice, mainTarget, targets);
-                                if (choice == 1) {
-                                    setSkillPoints(Math.min(getSkillPoints() + 1, SKILLPOINT_MAX));
-                                } else {
-                                    setSkillPoints(Math.max(getSkillPoints() - 1, 0));
-                                }
-                                choosing = false;
-                            }
-                        }
-                    }
-                }
-            }
-            scanner.close();
-        } else {
-            targets = new Entity[getTeammatesAlive()];
-            int foundCount = 0;
-            for (Entity e : getEntities()) {
+        Entity[] entityArr = (Entity[]) getEntities().toArray();
+        setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));
+        displayTurnOrder();
+        for (Entity e : entityArr) {
+            if (e.getHp() <= 0) {
                 if (e instanceof PlayerCharacter) {
-                    targets[foundCount] = e;
-                    foundCount++;
-                }
-            }
-            Random random = new Random();
-            int maxPercent = 100;
-            int choice = random.nextInt(maxPercent);
-            int mainTarget = random.nextInt(getTeammatesAlive());
-            int chanceForNormalAttack = 70;
-            if (choice < chanceForNormalAttack) {
-                int normalAttack = 1;
-                entity.attack(normalAttack, mainTarget, targets);
-            } else {
-                int skill = 2;
-                entity.attack(skill, mainTarget, targets);
-            }
-        }
-        for (int i = 0; i < targets.length; i++) {
-            if (targets[i].getHp() <= 0) {
-                getEntities().remove(targets[i]);
-                if (targets[i] instanceof PlayerCharacter) {
                     setTeammatesAlive(getTeammatesAlive() - 1);
                 } else {
                     int baseRewardYield = 10;
                     setEnemiesAlive(getEnemiesAlive() - 1);
                     setBattleReward(getBattleReward() + baseRewardYield * getWaveNum());
                 }
+                getEntities().remove(e);
             }
         }
     }
