@@ -13,7 +13,6 @@ public class Enemy extends Entity {
      * @param speed the speed stat of the enemy
      * @param attack the attack stat of the entity
      * @param numTargets the number of player characters the enemy can target
-     * @param reward the amount of currency the enemy awards on death
      */
     public Enemy(int maxHp, int speed, int attack, int numTargets, String name) {
         super(maxHp, speed, attack, name, numTargets);

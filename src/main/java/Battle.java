@@ -146,7 +146,7 @@ public class Battle {
                     setTeammatesAlive(getEnemiesAlive() - 1);
                 } else {
                     int baseRewardYield = 10;
-                    setEnemiesAlive(getTeammatesAlive() - 1);
+                    setEnemiesAlive(getEnemiesAlive() - 1);
                     setBattleReward(getBattleReward() + baseRewardYield * getWaveNum());
                 }
             }
