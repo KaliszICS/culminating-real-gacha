@@ -55,7 +55,7 @@ public class Weapon {
 
     @Override
     public String toString(){
-        return getName() + ": Attack" + getAttackMod() + ", MaxHP mod: " + getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect();
+        return getName() + ": Attack" + getAttackMod() + ", MaxHP mod: " + getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect() + "\n" + getRarity();
     }
 
 }

@@ -28,7 +28,6 @@ public class PlayerCharacter extends Entity {
      * @param name
      * @param rarity
      * @param weaponEquipped
-     * @param owned
      * @param critChance
      * @param critDamage
      */
@@ -275,6 +274,11 @@ public class PlayerCharacter extends Entity {
     
     public String getName() {
         return name;
+    }
+
+    public String detailedToString(){
+        return getName() + ": Attack: " + getAttack() + ", Speed: " + getSpeed() + ", Hp: " + getHp()
+        + "\n" + getDialogue() + "\n" + getRarity();
     }
 
 }

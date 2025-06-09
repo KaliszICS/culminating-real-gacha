@@ -47,6 +47,10 @@ public class Account {
         return playerCharacterUnlocked;
     }
 
+    public void setPlayerCharacterUnlocked(boolean[] playerCharacterUnlocked){
+        this.playerCharacterUnlocked = playerCharacterUnlocked;
+    }
+
     public boolean[] getWeaponInv() {
         return weaponInv;
     }
