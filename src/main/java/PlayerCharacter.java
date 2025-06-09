@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 /**
  * Class representing a player character, holds their ultimates, rarity, equipped weapon, among other stats.
  * @author gacha
@@ -157,24 +156,22 @@ public class PlayerCharacter extends Entity {
             }
         }
         System.out.println("Please choose your main target (target will be in the center of aoe): ");
-        Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < targetable.size(); i++) {
             System.out.println((i + 1) + " - " + targetable.get(i).toString());
         }
         boolean choosing = true;
         int target = 0;
         while (choosing) {
-            if (scanner.hasNextInt()) {
-                target = scanner.nextInt() - 1;
-                scanner.nextLine();
+            if (Main.scanner.hasNextInt()) {
+                target = Main.scanner.nextInt() - 1;
+                Main.scanner.nextLine();
                 if (target >= 0 && target < targetable.size()) {
                     choosing = false;
                 }
             } else {
-                scanner.next();
+                Main.scanner.next();
             }
         }
-        scanner.close();
         return super.selectTarget(target, (Entity[]) targetable.toArray());
     }
 
@@ -201,7 +198,6 @@ public class PlayerCharacter extends Entity {
     @Override
     public int turnBegin(int skillPointsAvailable, Entity[] targets) {
         System.out.println(getName() + "'s turn!");
-        Scanner scanner = new Scanner(System.in);
         boolean choosing = true;
         while (choosing) {
             System.out.println("What kind of attack would you like to do?");
@@ -209,9 +205,9 @@ public class PlayerCharacter extends Entity {
             System.out.println("2 - Skill");
             System.out.println("Skill points available: " + skillPointsAvailable);
             System.out.print("Enter your choice: ");
-            if (scanner.hasNextInt()) {
-                int choice = scanner.nextInt();
-                scanner.nextLine();
+            if (Main.scanner.hasNextInt()) {
+                int choice = Main.scanner.nextInt();
+                Main.scanner.nextLine();
                 if (choice == 2 && skillPointsAvailable == 0) {
                     System.out.println("Out of skill points, can't use skill.");
                 } else if (choice > 2 || choice < 1) {
@@ -219,16 +215,14 @@ public class PlayerCharacter extends Entity {
                 } else {
                     attack(choice, 0, targets);
                     if (choice == 1) {
-                        scanner.close();
                         return 1;
                     }
                     choosing = false;
                 }
             } else {
-                scanner.next();
+                Main.scanner.next();
             }
         }
-        scanner.close();
         return -1;
     }
 

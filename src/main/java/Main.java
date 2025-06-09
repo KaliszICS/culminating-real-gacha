@@ -1,10 +1,9 @@
 import java.util.Scanner;
 
 public class Main {
-
+	public static final Scanner scanner = new Scanner(System.in);
 	public static void main(String args[]) {
 		boolean choosing = true;
-		Scanner scanner = new Scanner(System.in);
 		Account account = null;
 		while (choosing) {
 			System.out.println("What would you like to do?");
