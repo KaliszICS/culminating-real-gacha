@@ -79,7 +79,6 @@ public class PlayerCharacter extends Entity {
      */
     @Override
     protected void skill(Entity[] targets) {
-        // battle should check if skill effect is heal or pull, so target will consist of playercharacters if true
         switch (getSkillEffect()) {
             case "Damage":
                 for (int i = 0; i < targets.length; i++) {
@@ -92,6 +91,7 @@ public class PlayerCharacter extends Entity {
                 }
                 break;
             case "Heal":
+            //heals allies
                 for (int i = 0; i < targets.length; i++) {
                     int change = getAttack();
                     System.out.println(targets[i].getName() + " was healed for " + change + " HP!");
@@ -99,7 +99,7 @@ public class PlayerCharacter extends Entity {
                 }
                 break;
             case "Push":
-                // read heal comment
+                // reduces enemy action point
                 for (int i = 0; i < targets.length; i++) {
                     int change = getAttack();
                     System.out.println(targets[i].getName() + " had their action points decreased by " + change + "!");
@@ -161,8 +161,9 @@ public class PlayerCharacter extends Entity {
 
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
+
+        Entity[] targets = selectTarget(mainTarget, enemies);
         if (getUltCharge() == getUltMax()) {
-            Entity[] targets = selectTarget(mainTarget, enemies);
             ultimate(targets);
         } 
         else {
@@ -171,7 +172,6 @@ public class PlayerCharacter extends Entity {
                 setUltCharge(Math.min(getUltCharge() + 20, getUltMax()));
             } 
             else {
-                Entity[] targets = selectTarget(mainTarget, enemies);
                 skill(targets);
                 setUltCharge(Math.min(getUltCharge() + 33, getUltMax()));
             }
@@ -182,20 +182,11 @@ public class PlayerCharacter extends Entity {
     @Override
     public void turnBegin() {
         System.out.println(getName() + "'s turn!");
-        setDefending(false);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1 - Attack");
-        System.out.println("2 - Defend");
-        System.out.print("Would you like to attack or defend? ");
         int choice = scanner.nextInt();
         scanner.nextLine();
         scanner.close();
-        // check if user wants to defend, don't do anything here if no because once battle sees defending is false, it will call attack instead
-        if (choice == 2) {
-            System.out.println(getName() + " defends!");
-            setDefending(true);
         }
-    }
 
     @Override
         protected void normalAttack(Entity target) {
@@ -286,11 +277,4 @@ public class PlayerCharacter extends Entity {
         return name;
     }
 
-    public boolean isDefending() {
-        return this.defending;
-    }
-
-    public void setDefending(boolean defending) {
-        this.defending = defending;
-    }
 }

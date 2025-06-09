@@ -32,6 +32,7 @@ public class Enemy extends Entity {
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         if (attackType == 1) {
+            
             normalAttack(enemies[mainTarget]);
         } else {
             Entity[] targets = selectTarget(mainTarget, enemies);
