@@ -116,7 +116,7 @@ public class PlayerCharacter extends Entity {
 
     public void weaponEffect(){
         if (this.getWeaponEquipped()!=null){
-        switch (this.weaponEquipped.getSpecialEffectIndex()){
+        switch (this.weaponEquipped.getSpecialEffect()){
             case "":
                 break; //does not have special effect
             case "Speed":
@@ -318,7 +318,7 @@ public class PlayerCharacter extends Entity {
         return getName() + ": Attack: " + getAttack() + ", Speed: " + getSpeed() + ", Hp: " + getHp()
         + "\n" + getDialogue() + "\n" + getRarity();
     }
-    
+
     public String getSkillEffect() {
         return skillEffect;
     }
