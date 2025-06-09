@@ -170,6 +170,8 @@ public class PlayerCharacter extends Entity {
                 if (target >= 0 && target < targetable.size()) {
                     choosing = false;
                 }
+            } else {
+                scanner.next();
             }
         }
         scanner.close();
@@ -222,6 +224,8 @@ public class PlayerCharacter extends Entity {
                     }
                     choosing = false;
                 }
+            } else {
+                scanner.next();
             }
         }
         scanner.close();

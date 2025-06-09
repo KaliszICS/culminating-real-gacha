@@ -34,6 +34,8 @@ public class Main {
 					default:
 						System.out.println("Invalid choice.");
 				}
+			} else {
+				scanner.next();
 			}
 		}
 		scanner.close();

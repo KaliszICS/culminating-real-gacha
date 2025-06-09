@@ -78,7 +78,6 @@ public class Login {
             System.out.println("5 - Weapon Gacha");
             System.out.println("6 - Logout\n");
             System.out.print("Please enter your choice: ");
-            String chec = scanner.nextLine();
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
@@ -102,6 +101,8 @@ public class Login {
                         home.logout();
                         break;
                 }
+            } else {
+                scanner.next();
             }
         }
         scanner.close();
