@@ -11,6 +11,7 @@ public abstract class Entity implements Comparable<Entity> {
     private int attack;
     private String name;
     private int numTargetSkill;
+    protected String skillEffect;
 
     /**
      * Creates an entity object with specififed maxHp, hp, speed, actionPoint, attack, and number of targetted enemies.
@@ -184,6 +185,10 @@ public abstract class Entity implements Comparable<Entity> {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getSkillEffect() {
+        return skillEffect;
     }
 
     @Override

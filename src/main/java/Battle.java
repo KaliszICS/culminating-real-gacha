@@ -73,11 +73,16 @@ public class Battle {
         if (entity instanceof PlayerCharacter) {
             displayTurnOrder();
             targets = new Entity[getEnemiesAlive()];
+            Entity[] healTargets = new Entity[getTeammatesAlive()];
             int foundCount = 0;
+            int healCount = 0;
             for (Entity e : getEntities()) {
                 if (e instanceof Enemy) {
                     targets[foundCount] = e;
                     foundCount++;
+                } else {
+                    healTargets[healCount] = e;
+                    healCount++;
                 }
             }
             Scanner scanner = new Scanner(System.in);
@@ -97,6 +102,9 @@ public class Battle {
                         System.out.println("Invalid number entered.");
                     } else {
                         System.out.println("Please choose your main target (target will be in the center of aoe): ");
+                        if (choice == 2 && (entity.getSkillEffect().equals("Heal") || entity.getSkillEffect().equals("Pull"))) {
+                            targets = healTargets;
+                        }
                         for (int i = 0; i < targets.length; i++) {
                             System.out.println((i + 1) + " - " + targets[i].toString());
                         }
@@ -142,8 +150,8 @@ public class Battle {
         for (int i = 0; i < targets.length; i++) {
             if (targets[i].getHp() <= 0) {
                 getEntities().remove(targets[i]);
-                if (entity instanceof PlayerCharacter) {
-                    setTeammatesAlive(getEnemiesAlive() - 1);
+                if (targets[i] instanceof PlayerCharacter) {
+                    setTeammatesAlive(getTeammatesAlive() - 1);
                 } else {
                     int baseRewardYield = 10;
                     setEnemiesAlive(getEnemiesAlive() - 1);

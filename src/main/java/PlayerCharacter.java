@@ -15,7 +15,6 @@ public class PlayerCharacter extends Entity {
     private Weapon weaponEquipped;
     private double critChance;
     private int critDamage;
-    private String skillEffect;
     private boolean defending;
 
     /**
@@ -269,10 +268,6 @@ public class PlayerCharacter extends Entity {
     
     public String getName() {
         return name;
-    }
-
-    public String getSkillEffect() {
-        return skillEffect;
     }
 
     public boolean isDefending() {
