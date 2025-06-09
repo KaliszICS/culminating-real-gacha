@@ -218,7 +218,7 @@ public class PlayerCharacter extends Entity {
                     attack(choice, 0, targets);
                     if (choice == 1) {
                         scanner.close();
-                        return 0;
+                        return 1;
                     }
                     choosing = false;
                 }
