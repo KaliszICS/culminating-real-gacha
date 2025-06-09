@@ -30,11 +30,6 @@ public class Account {
         this.team = new Team();
     }
 
-    public String displayTeam() {
-        // doesn't need to be done but if this is all the method is it could be removed
-        return getTeam().displayPlayerCharacter();
-    }
-
     public String getUserName() {
         return userName;
     }

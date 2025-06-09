@@ -33,12 +33,12 @@ public class Shop {
      * @param account the player's account, so that the methd can access their shopCurrency
      * @return A String that mentions whether the player was able to buy a shop resfresh or not
      */
-    public String refresh(Account account) {
+    public void refresh(Account account) {
         
         //If they have enough currency, they can purchase a refresh
-        if (account.getShopCurrency() >= 15) {
+        if (account.getShopCurrency() >= 50) {
 
-            account.setShopCurrency(account.getShopCurrency()-15);
+            account.setShopCurrency(account.getShopCurrency()-50);
             
             //Refreshes the items that are on sale
             Random random = new Random();
@@ -47,12 +47,12 @@ public class Shop {
             this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
             this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
 
-            return "The shop has been refreshed!";
+            System.out.println( "The shop has been refreshed!");
         }
 
         //If they don't have enough currency, they can't purcahse a refresh
         else {
-            return "You do not have enough shopCurrency to purchase an itemOnSale refresh";
+            System.out.println("You do not have enough shopCurrency to purchase an itemOnSale refresh");
         }
     }
 

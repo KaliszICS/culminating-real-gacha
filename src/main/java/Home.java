@@ -74,30 +74,47 @@ public class Home {
     }
 
     public void shop() {
-        // TODO: figure it out
+        //while loops to ask for user input
+        boolean trueFalse = false;
+        int a = 1;
+        int b = 2;
+        int c = 3;
+        while (trueFalse){
+            if (a == b){//user input
+                shop.refresh(account);
+            }
+            else if(b == c){//userinput
+                shop.buy(shop.getItemsOnSale().get(0), account);
+            }
+            else if(c == a){
+                trueFalse = false;
+            }
+        }
     }
 
     public void viewAccount() {
-        // TODO: make the account tostring to use here, no idea how it's formatted yet
+        System.out.println(account.toString());
     }
 
     public void logout() {
         setPlaying(false);
     }
 
-    public String filterDisplayedCharacter(int rarity) {
-        // i forgot if this is needed for actually getting the playercharacter objects
-        String characters = "Characters:\n";
-        for (int i = 0; i < PLAYER_CHARACTER_LIST.length; i++) {
-            if (getAccount().getPlayerCharacterUnlocked()[i] && PLAYER_CHARACTER_LIST[i].getRarity() == rarity) {
-                characters += PLAYER_CHARACTER_LIST[i].getName() + "\n";
-            }
-        }
-        return characters;
-    }
+    // public String filterDisplayedCharacter(int rarity) {
+    //     // i forgot if this is needed for actually getting the playercharacter objects
+    //     String characters = "Characters:\n";
+    //     for (int i = 0; i < PLAYER_CHARACTER_LIST.length; i++) {
+    //         if (getAccount().getPlayerCharacterUnlocked()[i] && PLAYER_CHARACTER_LIST[i].getRarity() == rarity) {
+    //             characters += PLAYER_CHARACTER_LIST[i].getName() + "\n";
+    //         }
+    //     }
+    //     return characters;
+    // }
 
     public void changeTeam() {
-        // TODO: figure out parameters for this
+        System.out.println(account.getTeam().displayPlayerCharacter());
+        //use this.playerCharacterlist and account.ownedCahracter to pick a character to add
+        account.getTeam().addToTeam();
     }
 
     private void save() {
