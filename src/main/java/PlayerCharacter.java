@@ -239,7 +239,7 @@ public class PlayerCharacter extends Entity {
             setAttack(getAttack()*getCritDamage());
         }
         super.normalAttack(target);
-        setAttack(getAttack() / getCritDamage());
+        setAttack(getAttackDefault());
     }
     public int getUltCharge() {
         return this.ultCharge;
