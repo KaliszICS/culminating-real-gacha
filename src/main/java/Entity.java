@@ -204,6 +204,11 @@ public abstract class Entity implements Comparable<Entity> {
     @Override
     public int compareTo(Entity o) {
         if (getActionPoints() == o.getActionPoints()) {
+            if (this instanceof PlayerCharacter && o instanceof Enemy) {
+                return -1;
+            } else if (this instanceof Enemy && o instanceof PlayerCharacter) {
+                return 1;
+            }
             return getName().compareTo(o.getName());
         }
         return -Integer.compare(getActionPoints(), o.getActionPoints());
