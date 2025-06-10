@@ -14,7 +14,8 @@ public class Home {
     new PlayerCharacter(4, "Anaxa", "Rule number one: Do not call me Anaxa. Rule number two: Never interrupt me — silence is golden. Remember that.", 2800, 97, 756, 5, 75, 2, 5, "Damage"),
     new PlayerCharacter(5, "Discord", "Make sense? Oh, what fun is there in making sense?", 5341, 92, 329, 5, 50, 2, 5,  "Push", 150),
     new PlayerCharacter(6, "Rosalina", "May the stars shine down on you...", 3500, 120, 300, 5, 75, 2, 1, "Pull", 130),
-    new PlayerCharacter(7, "The Ventriloquist", "Its suffering that brings meaning to the futile life", 3450, 100, 250, 5, 35, 3, 3, "Push", 70)
+    new PlayerCharacter(7, "The Ventriloquist", "Its suffering that brings meaning to the futile life", 3450, 100, 250, 5, 35, 3, 3, "Push", 70),
+    new PlayerCharacter(8, "Shamita", ":blushing smilie-face emoji:", 5342, 125, 500, 5, 50, 3, 3, "Push")
 };
 
     public final Weapon[] WEAPONS = new Weapon[]{
