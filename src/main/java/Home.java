@@ -118,22 +118,70 @@ public class Home {
     }
 
     public void shop() {
-        //while loops to ask for user input
-        boolean trueFalse = true;
-        int a = 1;
-        int b = 2;
-        int c = 3;
-        while (trueFalse){
-            if (a == b){ //user input
-                shop.refresh(account);
-            }
-            else if(b == c){ //userinput
-                shop.buy(shop.getItemsOnSale().get(0), account);
-            }
-            else if(c == a){
-                trueFalse = false;
-            }
-        }
+        Shop shop = new Shop();
+        System.out.println("Welcome to the shop! Buy a refresh for 150 shop currency to see what new items are on sale!");
+        System.out.println("Here are the items currently on sale: ");
+        System.out.println(shop.getItemsOnSale());
+        
+        boolean choosing = true;
+
+		while (choosing) {
+			System.out.println("What would you like to do?");
+			System.out.println("1 - Refresh Items on Sale (Cost: 150 shop currency)");
+			System.out.println("2 - Buy Item");
+			System.out.println("3 - Exit");
+			System.out.println("Please enter your choice: ");
+
+			if (Main.scanner.hasNextInt()) {
+				int choice = Main.scanner.nextInt();
+				Main.scanner.nextLine();
+
+				switch (choice) {
+					case 1:
+						shop.refresh(account);
+						break;
+
+					case 2:
+                        System.out.println("Which item would you like to buy?");
+
+                        if (Main.scanner.hasNextInt()) {
+				            int buyChoice = Main.scanner.nextInt();
+				            Main.scanner.nextLine();
+
+				            switch (buyChoice) {
+					            case 1:
+						            shop.buy(shop.getItemsOnSale().get(0), account);
+						            break;
+					            case 2:
+						            shop.buy(shop.getItemsOnSale().get(0), account);
+                                    break;
+					            case 3:
+						            shop.buy(shop.getItemsOnSale().get(0), account);
+                                    break;
+					            default:
+						            System.out.println("Invalid choice.");
+				            }
+			            }
+                        else {
+				            Main.scanner.next();
+			            }
+                        break;
+                    
+					case 3:
+						choosing = false;
+                        break;
+
+					default:
+						System.out.println("Invalid choice.");
+				}
+			}
+            
+            else {
+				Main.scanner.next();
+			}
+		}
+		
+        Main.scanner.close();
     }
 
     public void viewAccount() {

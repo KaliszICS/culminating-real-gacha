@@ -35,9 +35,9 @@ public class Shop {
     public void refresh(Account account) {
         
         //If they have enough currency, they can purchase a refresh
-        if (account.getShopCurrency() >= 50) {
+        if (account.getShopCurrency() >= 150) {
 
-            account.setShopCurrency(account.getShopCurrency()-50);
+            account.setShopCurrency(account.getShopCurrency()-150);
             
             //Refreshes the items that are on sale
             Random random = new Random();
