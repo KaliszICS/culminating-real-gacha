@@ -11,7 +11,7 @@ public class Battle {
 
     public Battle(PlayerCharacter[] team) {
 
-        this.teammatesAlive =0
+        this.teammatesAlive =0;
         this.enemiesAlive = 0;
         this.entities = new ArrayList<>();
         for (int i = 0; i<team.length; i++){
