@@ -142,6 +142,7 @@ public class Home {
 
     public void logout() {
         setPlaying(false);
+        save();
     }
 
     // public String filterDisplayedCharacter(int rarity) {
@@ -257,7 +258,6 @@ public class Home {
             writer.write(convertBoolArrToString(getAccount().getWeaponsUnlocked()));
             writer.write(getAccount().getGachaCurrency() + "\n");
             writer.write(getAccount().getShopCurrency() + "\n");
-            System.out.println("Account saved successfully.");
         } catch (IOException e) {
             System.out.println(e);
         } finally {
