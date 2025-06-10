@@ -40,8 +40,9 @@ public class Main {
 				scanner.next();
 			}
 		}
-		scanner.close();
+		
 		Login.gameStart(account);
+		scanner.close();
 	}
 
 }

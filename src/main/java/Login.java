@@ -95,8 +95,8 @@ public class Login {
                         break;
                 }
             } else {
-                Main.scanner.next();
-            }
+                 Main.scanner.next();
+             }
         }
     }
 
