@@ -10,15 +10,15 @@ public class Battle {
     public final int SKILLPOINT_MAX = 5;
 
     public Battle(PlayerCharacter[] team) {
-        this.teammatesAlive = team.length;
+
+        this.teammatesAlive =0
         this.enemiesAlive = 0;
         this.entities = new ArrayList<>();
         for (int i = 0; i<team.length; i++){
-            team[i].weaponEffect();
-        }
-        for (int i = 0; i<team.length; i++){
             if (team[i]!=null){
                 this.entities.add(team[i]);
+                team[i].weaponEffect();
+                teammatesAlive++;
             }
         }
 
