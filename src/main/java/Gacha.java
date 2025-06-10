@@ -23,10 +23,10 @@ public class Gacha{
         
         for (int i = 0; i<playerCharacterList.length; i++){
             if (playerCharacterList[i].getRarity()==4){
-                fourStarCharacter.add( playerCharacterList[i]);
+                fourStarCharacter.add(playerCharacterList[i]);
             }
             else{
-                fiveStarCharacter.add( playerCharacterList[i]);
+                fiveStarCharacter.add(playerCharacterList[i]);
             }
         }
         

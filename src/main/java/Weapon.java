@@ -60,7 +60,8 @@ public class Weapon {
     }
 
     public String detailedToString(){
-        return getName() + ": Attack" + getAttackMod() + ", MaxHP mod: " + getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect() + "\n" + getRarity();
+        return getName() +  ": \nAttack: " + getAttackMod() + ", MaxHP mod: " + 
+        getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect() + "\n" + "Rarity: " + getRarity();
     }
 
 }
