@@ -317,7 +317,7 @@ public class PlayerCharacter extends Entity {
 
     public String detailedToString(){
         String detailedString = getName() + ": Attack: " + getAttack() + ", Speed: " + getSpeed() + ", Hp: " + getHp()
-        + "\n" + getDialogue() + "\n" + "Rarity: " + getRarity();
+        + "\n" + "\"" + getDialogue() + "\""+ "\n" + "Rarity: " + getRarity();
         if (getWeaponEquipped() != null) {
             detailedString += "\n" + "Weapon: " + getWeaponEquipped().getName();
         }

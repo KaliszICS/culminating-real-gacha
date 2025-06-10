@@ -39,6 +39,7 @@ public class Home {
     }
 
     public void characterGacha() {
+        System.out.println("You currently have : "+ account.getGachaCurrency());
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
         int choice = 0;
         while (choice==0){
@@ -61,7 +62,7 @@ public class Home {
                     account.getPlayerCharacterUnlocked()[pulled[i].getOwnedIndex()]=true;
                 }
                 else{
-                    System.out.println(pulled[i].getName() + " is owned, shopCurrency +" + gacha.REPEAT_COMPENSATION);
+                    System.out.println("You have " + pulled[i].getName() + " already, shopCurrency +" + gacha.REPEAT_COMPENSATION);
                     account.setShopCurrency(account.getShopCurrency() + gacha.REPEAT_COMPENSATION);
                 }
             }
@@ -69,6 +70,7 @@ public class Home {
     }
     
     public void weaponGacha() {
+        System.out.println("You currently have : "+ account.getGachaCurrency());
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
         int choice = 0;
         while (choice==0){
@@ -91,7 +93,7 @@ public class Home {
                 account.getWeaponsUnlocked()[pulled[i].getOwnedIndex()]=true;
             }
             else{
-                System.out.println("You have " + pulled[i].getName() + "already, shopCurrency +" + gacha.REPEAT_COMPENSATION);
+                System.out.println("You have " + pulled[i].getName() + " already, shopCurrency +" + gacha.REPEAT_COMPENSATION);
                 account.setShopCurrency(account.getShopCurrency() + gacha.REPEAT_COMPENSATION);
             }
         }
@@ -188,6 +190,9 @@ public class Home {
                                 if (characterToAdd>-1 && characterToAdd<applicablePC.size()){                    
                                     account.getTeam().addToTeam(applicablePC.get(characterToAdd));
                                     applicablePC.remove(characterToAdd);
+                                }
+                                else{
+                                    System.out.println("Input invalid.");
                                 }
                             }
                             else{
