@@ -28,6 +28,7 @@ public class Battle {
     }
 
     public void startBattle() {
+        getEntities().add(new Enemy(1000000000, 0, 0, 0, "Zero-Line"));
         while (getTeammatesAlive() > 2){
             if (getEnemiesAlive()==0){     
                 nextBattle();     
@@ -69,7 +70,6 @@ public class Battle {
         for (int i = 0; i < getEnemiesAlive(); i++) {
             getEntities().add(new Enemy(3000 * getWaveNum(), 80 + 10*getWaveNum(), 100 * getWaveNum(), 4, enemyName + (i + 1)));
         }
-            getEntities().add(new Enemy(1000000000, 0, 0, 0, "Zero-Line"));
         startBattle();
     }
 
