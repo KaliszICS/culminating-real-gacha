@@ -78,6 +78,7 @@ public class Battle {
 
     private void takeTurn(Entity entity) {
         displayTurnOrder();
+        System.out.println();
         Entity[] entityArr = new Entity[]{};
         entityArr = (Entity[]) getEntities().toArray(entityArr);
         setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));

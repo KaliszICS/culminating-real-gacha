@@ -23,7 +23,7 @@ public class Home {
         new Weapon("Stone", 200, 100, "CritDamage", "Sticks and stones may break my bones but ouch stop hitting me", 4, 3),
         new Weapon("Hiking Stick", 100, 100, "Speed", "I’m a stick, but I make you go fast!", 4, 4),
         new Weapon("Flashlight", 400, 950, "CritChance", "If they can’t see me then I have advantage hehe", 5, 5),
-        new Weapon("Magical Stick", 450, 300, "CritDamage", "Key which hides the powers of the star, Reveal your true form before me. I, Sakura Kinomoto, command you under our contract. Release!", 5, 6),
+        new Weapon("Magical Key", 450, 300, "CritDamage", "Key which hides the powers of the star, Reveal your true form before me. I, Sakura Kinomoto, command you under our contract. Release!", 5, 6),
         new Weapon("Magical gun", 500, 50, "Speed", "If there is a next life, you should really work out", 5, 7),
     };
     private Account account;
@@ -101,6 +101,16 @@ public class Home {
     }
 
     public void battle() {
+        boolean hasCharacter = false;
+        for (int i = 0; i<4; i++){//4 is team size
+            if (account.getTeam().getOnTeam()[i]!=null){
+                hasCharacter = true;
+            }
+        }
+        if (!hasCharacter){// all are null
+            System.out.println("Your team is empty, you cannot engage in battle.");
+            return;
+        }
         Battle battle = new Battle(account.getTeam().getOnTeam());
         battle.startBattle();
         account.setGachaCurrency(account.getGachaCurrency() + battle.getBattleReward());

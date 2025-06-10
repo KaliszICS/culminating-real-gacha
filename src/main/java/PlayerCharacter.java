@@ -140,21 +140,23 @@ public class PlayerCharacter extends Entity {
     }
     
     @Override
-    protected Entity[] selectTarget(int mainTarget, Entity[] enemies) {
+    protected Entity[] selectTarget(int mainTarget, Entity[] enemies, int attackType) {
         ArrayList<Entity> targetable = new ArrayList<>();
-        if (getSkillEffect().equals("Heal") || getSkillEffect().equals("Pull")) {
-            for (int i = 0; i < enemies.length; i++) {
-                if (enemies[i] instanceof PlayerCharacter) {
-                    targetable.add(enemies[i]);
-                }
-            }
-        } else {
+        if (getSkillEffect().equals("Damage") || getSkillEffect().equals("Push") ||attackType == 1){
             for (int i = 0; i < enemies.length; i++) {
                 if (enemies[i] instanceof Enemy) {
                     targetable.add(enemies[i]);
                 }
             }
         }
+        else{
+            for (int i = 0; i < enemies.length; i++) {
+                if (enemies[i] instanceof PlayerCharacter) {
+                    targetable.add(enemies[i]);
+                }
+            }
+        }
+
         System.out.println("Please choose your main target (target will be in the center of aoe): ");
         for (int i = 0; i < targetable.size(); i++) {
             System.out.println((i) + " - " + targetable.get(i).toString());
@@ -163,7 +165,7 @@ public class PlayerCharacter extends Entity {
         int target = 0;
         while (choosing) {
             if (Main.scanner.hasNextInt()) {
-                target = Main.scanner.nextInt() - 1;
+                target = Main.scanner.nextInt();
                 Main.scanner.nextLine();
                 if (target >= 0 && target < targetable.size()) {
                     choosing = false;
@@ -173,23 +175,24 @@ public class PlayerCharacter extends Entity {
             }
         }
         Entity[] targetableArray = new Entity[]{};
-        return super.selectTarget(target, targetable.toArray(targetableArray));
+        return super.selectTarget(target, targetable.toArray(targetableArray), attackType);
     }
 
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         Entity[] targets = new Entity[]{};
         if (getUltCharge() == getUltMax()) {
-            targets = selectTarget(mainTarget, enemies);
+            targets = selectTarget(mainTarget, enemies, attackType);
             ultimate(targets);
         } 
         else {
             if (attackType == 1) {
-                normalAttack(enemies[mainTarget]);
+                targets = selectTarget(mainTarget, enemies, attackType);
+                normalAttack(targets[mainTarget]);
                 setUltCharge(Math.min(getUltCharge() + 20, getUltMax()));
             } 
             else {
-                targets = selectTarget(mainTarget, enemies);
+                targets = selectTarget(mainTarget, enemies, attackType);
                 skill(targets);
                 setUltCharge(Math.min(getUltCharge() + 33, getUltMax()));
             }
@@ -216,7 +219,7 @@ public class PlayerCharacter extends Entity {
                     System.out.println("Invalid number entered.");
                 } else {
                     attack(choice, 0, targets);
-                    if (choice == 1) {
+                    if (choice == 2) {
                         return 1;
                     }
                     choosing = false;

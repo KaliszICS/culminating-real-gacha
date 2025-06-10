@@ -40,7 +40,10 @@ public abstract class Entity implements Comparable<Entity> {
      * @param enemies the entities to choose from
      * @return an array of entities acting as targets
      */
-    protected Entity[] selectTarget(int mainTarget, Entity[] enemies) {
+    protected Entity[] selectTarget(int mainTarget, Entity[] enemies, int attackType) {
+        if (attackType ==1){
+            return new Entity[]{enemies[mainTarget]};
+        }
         int leftIndex = Math.max(mainTarget - getnumTargetSkill() / 2, 0);
         int rightIndex = Math.min(mainTarget + getnumTargetSkill() / 2, enemies.length - 1);
         if (getnumTargetSkill() % 2 == 0) {
