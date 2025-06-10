@@ -28,7 +28,7 @@ public class Enemy extends Entity {
             }
         }
         Random random = new Random();
-        int target = random.nextInt(enemies.length);
+        int target = random.nextInt(targetable.size());
         Entity[] tempArr = new Entity[]{};
         return super.selectTarget(target, targetable.toArray(tempArr), 1);
     }
