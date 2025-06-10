@@ -148,12 +148,9 @@ public class Home {
                     }
                     else{
                         ArrayList<PlayerCharacter> applicablePC= new ArrayList<>();
-                        int index = 0;
                         for (int i = 0; i<PLAYER_CHARACTER_LIST.length;i++){
                             if (account.getPlayerCharacterUnlocked()[i]){
-                                System.out.println("Index " + index + ": " + PLAYER_CHARACTER_LIST[i].detailedToString());
                                 applicablePC.add(PLAYER_CHARACTER_LIST[i]);
-                                index++;
                             }
                         }
                         for (int i =0; i<account.getTeam().getOnTeam().length; i++){
@@ -161,13 +158,23 @@ public class Home {
                                 applicablePC.remove(account.getTeam().getOnTeam()[i]);
                             }
                         }
-                        System.out.println("Choose a character to add, it will be added to the first open slot: ");
+                        for (int i = 0; i<applicablePC.size(); i++){
+                            System.out.println("Index " + i + ": " + applicablePC.get(i).detailedToString());
+                        }
+                        if (applicablePC.size()==0){
+                            System.out.println("You have no more characters to add");
+                            choosing = false;
+                        }
+                        else{
+                            System.out.println("Choose a character to add, it will be added to the first open slot: ");
+                        }
                         while (choosing){
                             if (Main.scanner.hasNextInt()){
                                 int characterToAdd = Main.scanner.nextInt();
                                 Main.scanner.nextLine();    
                                 if (characterToAdd>-1 && characterToAdd<applicablePC.size()){                    
                                     account.getTeam().addToTeam(applicablePC.get(characterToAdd));
+                                    applicablePC.remove(characterToAdd);
                                 }
                             }
                             else{

@@ -10,7 +10,7 @@ public class Team {
     public String displayPlayerCharacter() {
         String team = "Team:\n";
         for (int i = 0; i < onTeam.length; i++) {
-            team += (i + 1) + " - ";
+            team += (i) + " - ";
             if (getOnTeam()[i] == null) {
                 team += "EMPTY\n";
             } else {
@@ -25,6 +25,7 @@ public class Team {
         for (int i = 0; i<getOnTeam().length; i++){
             if (getOnTeam()[i]==null){
                 openSpace = i;
+                i=getOnTeam().length;
             }
         }
         getOnTeam()[openSpace] = character;
