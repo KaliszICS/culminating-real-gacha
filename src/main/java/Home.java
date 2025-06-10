@@ -1,5 +1,6 @@
 import java.security.Key;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Home {
     // update manually with every character
@@ -18,7 +19,7 @@ public class Home {
     public final Weapon[] WEAPONS = new Weapon[]{
         new Weapon("Halibut", 100, 400, "Heal", "Take a bite out of this weapon and you can feel fulfilled. It doesn’t taste great though", 4, 0),
         new Weapon("Bow", 150, 300, "CritDamage", "Wow, a dog using a bow, who could’ve seen that coming.", 4, 1), 
-        new Weapon("Stick", 200, 100, "CritChance", "This is your punishment, THE STICK!!!", 4, 2),
+        new Weapon("Stick", 200, 100, "CritChance", "I'm gonna beat you wiht a STICK!!!", 4, 2),
         new Weapon("Stone", 200, 100, "CritDamage", "Sticks and stones may break my bones but ouch stop hitting me", 4, 3),
         new Weapon("Hiking Stick", 100, 100, "Speed", "I’m a stick, but I make you go fast!", 4, 4),
         new Weapon("Flashlight", 400, 950, "CritChance", "If they can’t see me then I have advantage hehe", 5, 5),
@@ -129,8 +130,80 @@ public class Home {
 
     public void changeTeam() {
         System.out.println(account.getTeam().displayPlayerCharacter());
-        //use this.playerCharacterlist and account.ownedCahracter to pick a character to add
-        // account.getTeam().addToTeam();
+        boolean choosing = true;
+        while (choosing){
+            if (account.getTeam().getCharactersOnTeam()!=4){
+                System.out.println("1: Add a character to team");
+            }
+            if (account.getTeam().getCharactersOnTeam()!=0){
+                System.out.println("2: Remove a character from team");
+            }
+            System.out.println("3: Exit");
+            if (Main.scanner.hasNextInt()) {
+                int choice = Main.scanner.nextInt();
+                Main.scanner.nextLine();
+                if (choice ==1){
+                    if (account.getTeam().getCharactersOnTeam()==4){
+                        //does not do anything
+                    }
+                    else{
+                        ArrayList<PlayerCharacter> applicablePC= new ArrayList<>();
+                        int index = 0;
+                        for (int i = 0; i<PLAYER_CHARACTER_LIST.length;i++){
+                            if (account.getPlayerCharacterUnlocked()[i]){
+                                System.out.println("Index " + index + ": " + PLAYER_CHARACTER_LIST[i].detailedToString());
+                                applicablePC.add(PLAYER_CHARACTER_LIST[i]);
+                                index++;
+                            }
+                        }
+                        System.out.println("Choose a character to add, it will be added to the first open slot: ");
+                        while (choosing){
+                            if (Main.scanner.hasNextInt()){
+                                int characterToAdd = Main.scanner.nextInt();
+                                Main.scanner.nextLine();    
+                                if (characterToAdd>-1 && characterToAdd<applicablePC.size()){                    
+                                    account.getTeam().addToTeam(applicablePC.get(characterToAdd));
+                                }
+                            }
+                            else{
+                                Main.scanner.next();
+                            }
+                            choosing = false;
+                        }
+                        choosing = true;
+                    }
+                }
+                else if (choice ==2){
+                    if (account.getTeam().getCharactersOnTeam()==0){
+                        //does not do anything
+                    }
+                    else{
+                        System.out.println("Choose a character to remove: ");
+                        while (choosing){
+                            if (Main.scanner.hasNextInt()){
+                                int characterToRemove = Main.scanner.nextInt();
+                                Main.scanner.nextLine();
+                                account.getTeam().removeFromTeam(characterToRemove);
+                                choosing = false;
+                            }
+                            else{
+                                Main.scanner.next();
+                            }
+                        }
+                        choosing = true;
+                    }
+                    }
+                else if (choice == 3){
+                    break;
+                }
+                else{
+                    Main.scanner.next();
+                }
+            }
+             else {
+                 Main.scanner.next();
+             }
+        }
     }
 
     private void save() {
