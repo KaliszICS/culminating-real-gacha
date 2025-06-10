@@ -120,57 +120,73 @@ public class Home {
 
     public void shop() {
         Shop shop = new Shop();
-        System.out.println("Welcome to the shop! Buy a refresh for 150 shop currency to see what new items are on sale!");
-        System.out.println("Here are the items currently on sale: ");
-        System.out.println(shop.getItemsOnSale());
+        System.out.println("\nWelcome to the shop!");
+
+        if (shop.getItemsOnSale().size()>0) {
+            System.out.println("Here are the items currently on sale: ");
+            System.out.println(shop.getItemsOnSale().get(0));
+            System.out.println(shop.getItemsOnSale().get(1));
+            System.out.println(shop.getItemsOnSale().get(2));
+        }
+
+        else {
+            System.out.println("Buy a refresh for 150 shop currency to see what new items are on sale!");
+        }
         
         boolean choosing = true;
 
 		while (choosing) {
-			System.out.println("What would you like to do?");
+			System.out.println("\nWhat would you like to do?");
 			System.out.println("1 - Refresh Items on Sale (Cost: 150 shop currency)");
-			System.out.println("2 - Buy Item");
+            if (shop.getItemsOnSale().size()<0) {
+			    System.out.println("2 - Buy Item");
+            }
 			System.out.println("3 - Exit");
-			System.out.println("Please enter your choice: ");
+			System.out.println("\nPlease enter your choice: ");
 
 			if (Main.scanner.hasNextInt()) {
 				int choice = Main.scanner.nextInt();
 				Main.scanner.nextLine();
 
-				switch (choice) {
-					case 1:
-						shop.refresh(account);
-						break;
+                    switch (choice) {
+                        case 1:
+                            shop.refresh(account);
+                            break;
+                        
+                        case 2:
+                            if (shop.getItemsOnSale().size()<0) {
+                                System.out.println("Which item would you like to buy?");
 
-					case 2:
-                        System.out.println("Which item would you like to buy?");
+                                if (Main.scanner.hasNextInt()) {
+                                    int buyChoice = Main.scanner.nextInt();
+                                    Main.scanner.nextLine();
 
-                        if (Main.scanner.hasNextInt()) {
-				            int buyChoice = Main.scanner.nextInt();
-				            Main.scanner.nextLine();
-
-				            switch (buyChoice) {
-					            case 1:
-						            shop.buy(shop.getItemsOnSale().get(0), account);
-						            break;
-					            case 2:
-						            shop.buy(shop.getItemsOnSale().get(0), account);
-                                    break;
-					            case 3:
-						            shop.buy(shop.getItemsOnSale().get(0), account);
-                                    break;
-					            default:
-						            System.out.println("Invalid choice.");
-				            }
-			            }
-                        else {
-				            Main.scanner.next();
-			            }
-                        break;
-                    
-					case 3:
-						choosing = false;
-                        break;
+                                    switch (buyChoice) {
+                                        case 1:
+                                            shop.buy(shop.getItemsOnSale().get(0), account);
+                                            break;
+                                        case 2:
+                                            shop.buy(shop.getItemsOnSale().get(1), account);
+                                            break;
+                                        case 3:
+                                            shop.buy(shop.getItemsOnSale().get(2), account);
+                                            break;
+                                        default:
+                                            System.out.println("Invalid choice.");
+                                    }
+                                }
+                                else {
+                                    Main.scanner.next();
+                                }
+                            }
+                            else {
+                                System.out.println("\nInvalid choice.");
+                            }
+                            break;
+                        
+                        case 3:
+                            choosing = false;
+                            break;
 
 					default:
 						System.out.println("Invalid choice.");

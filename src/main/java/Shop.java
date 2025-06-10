@@ -42,18 +42,24 @@ public class Shop {
             //Refreshes the items that are on sale
             Random random = new Random();
             this.itemsOnSale.clear();
-            this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
-            this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
-            this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
+            this.itemsOnSale.add(this.ITEMS[random.nextInt(ITEMS.length)]);
+            this.itemsOnSale.add(this.ITEMS[random.nextInt(ITEMS.length)]);
+            this.itemsOnSale.add(this.ITEMS[random.nextInt(ITEMS.length)]);
 
-            System.out.println( "The shop has been refreshed!");
-            System.out.println(getItemsOnSale());
+            System.out.println( "\nThe shop has been refreshed! The current items on sale are:");
+            
+            for (int i=0; i)
+            
+            System.out.println(getItemsOnSale().get(0).getName() + ",  " + getItemsOnSale().get(0).getCost() + " shop currency\n"
+            + getItemsOnSale().get(0).getEffectType() + ", " + getItemsOnSale().get(0).getEffectPotency() + "\n"
+            + getItemsOnSale().get(0).getDesc());
+            System.out.println(getItemsOnSale().get(1));
+            System.out.println(getItemsOnSale().get(2));
         }
 
         //If they don't have enough currency, they can't purchase a refresh
         else {
-            System.out.println("You do not have enough shop currency to purchase an item on sale refresh");
-            System.out.println(getItemsOnSale());
+            System.out.println("\nYou do not have enough shop currency to purchase an item on sale refresh.");
         }
     }
 
@@ -82,11 +88,11 @@ public class Shop {
             this.itemsOnSale.remove(validItemIndex);
             account.setShopCurrency(account.getShopCurrency()-item.getCost());
             item.apply(account.getTeam());
-            return "You have succesfully bought " + item.getName() + "!";
+            return "\nYou have succesfully bought " + item.getName() + "!";
         }
 
         //If item not valid, give output message
-        return "This item is currently not on sale. Buy a shop refresh to see if the preferred item comes on sale!";
+        return "\nThis item is currently not on sale. Buy a shop refresh to see if the preferred item comes on sale!";
     }
 
     /**
