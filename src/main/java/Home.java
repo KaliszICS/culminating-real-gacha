@@ -119,15 +119,15 @@ public class Home {
 
     public void shop() {
         //while loops to ask for user input
-        boolean trueFalse = false;
+        boolean trueFalse = true;
         int a = 1;
         int b = 2;
         int c = 3;
         while (trueFalse){
-            if (a == b){//user input
+            if (a == b){ //user input
                 shop.refresh(account);
             }
-            else if(b == c){//userinput
+            else if(b == c){ //userinput
                 shop.buy(shop.getItemsOnSale().get(0), account);
             }
             else if(c == a){

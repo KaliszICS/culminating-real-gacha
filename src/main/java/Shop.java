@@ -47,11 +47,13 @@ public class Shop {
             this.itemsOnSale.add(this.ITEMS[random.nextInt(10)]);
 
             System.out.println( "The shop has been refreshed!");
+            System.out.println(getItemsOnSale());
         }
 
-        //If they don't have enough currency, they can't purcahse a refresh
+        //If they don't have enough currency, they can't purchase a refresh
         else {
-            System.out.println("You do not have enough shopCurrency to purchase an itemOnSale refresh");
+            System.out.println("You do not have enough shop currency to purchase an item on sale refresh");
+            System.out.println(getItemsOnSale());
         }
     }
 
@@ -75,7 +77,7 @@ public class Shop {
             }
         }
 
-        //If item is valid, remove from itemsOnSale, take money from shopCurrenfcy, give to the account's team, and give output message
+        //If item is valid, remove from itemsOnSale, take money from shopCurrency, give to the account's team, and give output message
         if (validItem==true) {
             this.itemsOnSale.remove(validItemIndex);
             account.setShopCurrency(account.getShopCurrency()-item.getCost());
