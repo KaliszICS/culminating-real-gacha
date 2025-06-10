@@ -110,7 +110,8 @@ public class Battle {
             int start = 0;
             int end = i - 1;
             int middle = 0;
-            int compare = 0; 
+            int compare = 0;
+            boolean found = false;
             while (start <= end) {
                 compare = getEntities().get(middle).compareTo(getEntities().get(i));
                 middle = (end + start) / 2;
@@ -120,11 +121,16 @@ public class Battle {
                     end = middle - 1;
                 } else {
                     start = end + 1;
+                    found = true;
                 }
             }
             Entity temp = getEntities().get(i);
             getEntities().remove(i);
-            getEntities().add(start, temp);
+            if (found) {
+                getEntities().add(middle, temp);
+            } else {
+                getEntities().add(start, temp);
+            }
         }
     }
 
