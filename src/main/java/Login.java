@@ -51,10 +51,14 @@ public class Login {
         String password = Main.scanner.nextLine();
         System.out.print("Please enter your password again: ");
         String confirmPass = Main.scanner.nextLine();
-        if (password.equals(confirmPass)) {
+        if (confirmPass ==password && username !="" && password!="") {
             System.out.println("Welcome " + username + "!");
             account = new Account(username, password);
-        } else {
+        } 
+        else if (username =="" && password==""){
+            System.out.println("Some areas are blank, account not made.");
+        }
+        else{
             System.out.println("Second password didn't match first, account not made.");
         }
         return account;

@@ -58,10 +58,12 @@ public class Gacha{
             if(random.nextDouble() <= rates4Star){
                 pulledWeapon[i] = this.fourStarWeapon[random.nextInt(fourStarWeapon.length)];
                 System.out.println(pulledWeapon[i].detailedToString());
+                System.out.println();
             }
             else{
                 pulledWeapon[i] = this.fiveStarWeapon[random.nextInt(fiveStarWeapon.length)];
                 System.out.println(pulledWeapon[i].detailedToString());
+                System.out.println();
             }
         }
         return pulledWeapon;
@@ -74,10 +76,12 @@ public class Gacha{
             if(random.nextDouble() <= rates4Star){
                 pulledPC[i] = this.fourStarPC[random.nextInt(fourStarPC.length)];
                 System.out.println(pulledPC[i].detailedToString());
+                System.out.println();
             }
             else{
                 pulledPC[i] = this.fiveStarPC[random.nextInt(fiveStarPC.length)];
                 System.out.println(pulledPC[i].detailedToString());
+                System.out.println();
             }
         }
         return pulledPC;

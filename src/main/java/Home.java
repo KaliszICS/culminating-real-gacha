@@ -39,49 +39,62 @@ public class Home {
     }
 
     public void characterGacha() {
-        //asks how many pulls
-        int numOfPulls = 10;
-        if (account.getGachaCurrency()-numOfPulls*160 > account.getGachaCurrency()){
-            System.out.println("do cant do");
-            numOfPulls = 0;// delete this and just say nope later after making the while loops
+        System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
+        int choice = 0;
+        while (choice!=0){
+        if (Main.scanner.hasNextInt()) {
+                choice = Main.scanner.nextInt();
+                Main.scanner.nextLine();
         }
         else{
-            account.setGachaCurrency(account.getGachaCurrency()-numOfPulls*160);
+            Main.scanner.nextLine();
         }
-        
-        //this for loops to check if owned
-        PlayerCharacter[] pulled = getGacha().pullCharacter(numOfPulls);
-        for (int i = 0; i<numOfPulls; i++){
-            if (account.getPlayerCharacterUnlocked()[pulled[i].getOwnedIndex()]==false){
-                account.getPlayerCharacterUnlocked()[pulled[i].getOwnedIndex()]=true;
-            }
-            else{
-                System.out.println(pulled[i].getName() + " is owned, shopCurrency +" + gacha.REPEAT_COMPENSATION);
-                account.setShopCurrency(account.getShopCurrency() + gacha.REPEAT_COMPENSATION);
+        }
+        if (account.getGachaCurrency()-choice*160 > account.getGachaCurrency()){
+            System.out.println("You do not have enough Gacha Currency: "+ account.getGachaCurrency() + ", Gacha cancelled");
+        }
+        else{
+            account.setGachaCurrency(account.getGachaCurrency()-choice*160);
+            PlayerCharacter[] pulled = getGacha().pullCharacter(choice);
+            for (int i = 0; i<choice; i++){
+                if (account.getPlayerCharacterUnlocked()[pulled[i].getOwnedIndex()]==false){
+                    account.getPlayerCharacterUnlocked()[pulled[i].getOwnedIndex()]=true;
+                }
+                else{
+                    System.out.println(pulled[i].getName() + " is owned, shopCurrency +" + gacha.REPEAT_COMPENSATION);
+                    account.setShopCurrency(account.getShopCurrency() + gacha.REPEAT_COMPENSATION);
+                }
             }
         }
     }
     
     public void weaponGacha() {
-        //asks how many pulls
-        int numOfPulls = 10;
-        if (account.getGachaCurrency()-numOfPulls*160 > account.getGachaCurrency()){
-            System.out.println("do cant do");
-            numOfPulls = 0;// delete this and just say nope later after making the while loops
+        System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
+        int choice = 0;
+        while (choice!=0){
+        if (Main.scanner.hasNextInt()) {
+                choice = Main.scanner.nextInt();
+                Main.scanner.nextLine();
         }
         else{
-            account.setGachaCurrency(account.getGachaCurrency()-numOfPulls*160);
+            Main.scanner.nextLine();
         }
-        //this for loops to check if owned
-        Weapon[] pulled = getGacha().pullWeapon(numOfPulls);
-        for (int i = 0; i<numOfPulls; i++){
+        }
+        if (account.getGachaCurrency()-choice*160 > account.getGachaCurrency()){
+            System.out.println("You do not have enough Gacha Currency: "+ account.getGachaCurrency() + ", Gacha cancelled");
+        }
+        else{
+            account.setGachaCurrency(account.getGachaCurrency()-choice*160);
+        Weapon[] pulled = getGacha().pullWeapon(choice);
+        for (int i = 0; i<choice; i++){
             if (account.getWeaponsUnlocked()[pulled[i].getOwnedIndex()]==false){
                 account.getWeaponsUnlocked()[pulled[i].getOwnedIndex()]=true;
             }
             else{
-                System.out.println(pulled[i].getName() + " is owned, shopCurrency +" + gacha.REPEAT_COMPENSATION);
+                System.out.println("You have " + pulled[i].getName() + "already, shopCurrency +" + gacha.REPEAT_COMPENSATION);
                 account.setShopCurrency(account.getShopCurrency() + gacha.REPEAT_COMPENSATION);
             }
+        }
         }
     }
 
