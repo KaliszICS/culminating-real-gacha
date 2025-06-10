@@ -82,6 +82,9 @@ public class Battle {
         Entity[] entityArr = new Entity[]{};
         entityArr = (Entity[]) getEntities().toArray(entityArr);
         setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));
+        if (getSkillPoints()>5){
+            setSkillPoints(5);
+        }
         entity.turnEnd();
         for (Entity e : entityArr) {
             if (e.getHp() <= 0) {

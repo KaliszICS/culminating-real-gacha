@@ -27,19 +27,17 @@ public class Enemy extends Entity {
                 targetable.add(enemies[i]);
             }
         }
-        Random random = new Random();
-        int target = random.nextInt(targetable.size());
         Entity[] tempArr = new Entity[]{};
-        return super.selectTarget(target, targetable.toArray(tempArr), 1);
+        return super.selectTarget(mainTarget, targetable.toArray(tempArr), 1);
     }
     
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         if (attackType == 1) {
-            
-            normalAttack(enemies[mainTarget]);
-        } else {
             Entity[] targets = selectTarget(mainTarget, enemies, 1);
+            normalAttack(targets[mainTarget]);
+        } else {
+            Entity[] targets = selectTarget(mainTarget, enemies, 2);
             skill(targets);
         }
     }
@@ -60,8 +58,8 @@ public class Enemy extends Entity {
         Random random = new Random();
         int maxPercent = 100;
         int choice = random.nextInt(maxPercent);
-        Entity[] targetable = selectTarget(0, targets, 1);
-        int mainTarget = random.nextInt(targetable.length);
+        int targetable = selectTarget(0, targets, -1).length;
+        int mainTarget = random.nextInt(targetable);
         int chanceForNormalAttack = 70;
         if (choice < chanceForNormalAttack) {
             int normalAttack = 1;
