@@ -1,8 +1,9 @@
 import java.util.Random;
+import java.util.ArrayList;
+
 public class Gacha{
 
     private double rates4Star;
-    private double rates5Star;
     private PlayerCharacter[] fourStarPC;
     private PlayerCharacter[] fiveStarPC;
     private Weapon[] fourStarWeapon;
@@ -13,40 +14,41 @@ public class Gacha{
 
     public Gacha(PlayerCharacter[] playerCharacterList, Weapon[] weapons){
     
-        this.rates4Star = 0.95;//95% chance to get a 4-star
-        this.rates5Star = 1-this.rates4Star;
-        int index4StarList = 0;
-        int index5StarList = 0;
+        this.rates4Star = 0.85;//85% chance to get a 4-star - > 15% for 5-star
 
-        fourStarPC = new PlayerCharacter[playerCharacterList.length];
-        fiveStarPC= new PlayerCharacter[playerCharacterList.length];
-        fourStarWeapon = new Weapon[weapons.length];
-        fiveStarWeapon = new Weapon[weapons.length];
+        ArrayList<PlayerCharacter> fourStarCharacter = new ArrayList<>();
+        ArrayList<PlayerCharacter> fiveStarCharacter = new ArrayList<>();
+        ArrayList<Weapon> fourStarWp = new ArrayList<>();
+        ArrayList<Weapon> fiveStarWp = new ArrayList<>();
         
         for (int i = 0; i<playerCharacterList.length; i++){
             if (playerCharacterList[i].getRarity()==4){
-                this.fourStarPC[index4StarList] = playerCharacterList[i];
-                index4StarList++;
+                fourStarCharacter.add( playerCharacterList[i]);
             }
             else{
-                this.fiveStarPC[index5StarList] = playerCharacterList[i];
-                index5StarList++;
+                fiveStarCharacter.add( playerCharacterList[i]);
             }
         }
-        
-        index4StarList = 0;
-        index5StarList = 0;
         
         for (int i = 0; i<weapons.length; i++){
             if (weapons[i].getRarity()==4){
-                fourStarWeapon[index4StarList] = weapons[i];
-                index4StarList++;
+                fourStarWp.add(weapons[i]);
             }
             else{
-                fiveStarWeapon[index5StarList] = weapons[i];
-                index5StarList++;
+                fiveStarWp.add(weapons[i]);
             }
         }
+
+        fourStarPC = new PlayerCharacter[fourStarCharacter.size()];
+        fourStarPC = fourStarCharacter.toArray(fourStarPC);
+        fiveStarPC = new PlayerCharacter[fiveStarCharacter.size()];
+        fiveStarPC = fiveStarCharacter.toArray(fiveStarPC);
+
+        fourStarWeapon = new Weapon[fourStarWp.size()];
+        fourStarWeapon = fourStarWp.toArray(fourStarWeapon);
+        fiveStarWeapon = new Weapon[fiveStarWp.size()];
+        fiveStarWeapon = fiveStarWp.toArray(fiveStarWeapon);
+
     }
 
     public Weapon[] pullWeapon(int numOfPulls){
