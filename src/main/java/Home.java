@@ -160,10 +160,10 @@ public class Home {
         boolean choosing = true;
         while (choosing){
             System.out.println(account.getTeam().displayPlayerCharacter());
-            if (account.getTeam().getNumCharactersOnTeam()!=4){
+            if (account.getTeam().getNumCharactersOnTeam()<4){
                 System.out.println("1: Add a character to team");
             }
-            if (account.getTeam().getNumCharactersOnTeam()!=0){
+            if (account.getTeam().getNumCharactersOnTeam()>0){
                 System.out.println("2: Remove a character from team");
                 System.out.println("3: Equip weapons");
             }
