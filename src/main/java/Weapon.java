@@ -15,6 +15,7 @@ public class Weapon {
         this.specialEffect = specialEffect;
         this.name = name;
         this.description = description;
+        this.equippedTo = null;
         this.rarity = rarity;
         this.ownedIndex = ownedIndex;
     }
@@ -58,9 +59,18 @@ public class Weapon {
     public int getRarity() {
         return rarity;
     }
-
+    
     @Override
     public String toString(){
+        String str = getName() +  ": \nAttack: " + getAttackMod() + ", MaxHP mod: " + 
+        getHpMod() + ", Special effect: " + getSpecialEffect();
+        if (getEquippedTo() != null) {
+            str += ", Equipped to " + getEquippedTo().getName();
+        }
+        return str;
+    }
+
+    public String detailedToString(){
         return getName() +  ": \nAttack: " + getAttackMod() + ", MaxHP mod: " + 
         getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect() + "\n" + "Rarity: " + getRarity();
     }
