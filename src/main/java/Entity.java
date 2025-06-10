@@ -203,6 +203,9 @@ public abstract class Entity implements Comparable<Entity> {
 
     @Override
     public int compareTo(Entity o) {
+        if (getActionPoints() == o.getActionPoints()) {
+            return getName().compareTo(o.getName());
+        }
         return -Integer.compare(getActionPoints(), o.getActionPoints());
     }
 }
