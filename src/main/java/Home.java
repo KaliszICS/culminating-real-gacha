@@ -1,5 +1,6 @@
-import java.security.Key;
-import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Home {
@@ -248,7 +249,26 @@ public class Home {
     }
 
     private void save() {
-        // TODO: figure out file saving later
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(getAccount().getUserName() + ".cha"));
+            writer.write(getAccount().getPassword() + "\n");
+            writer.write(convertBoolArrToString(getAccount().getPlayerCharacterUnlocked()));
+            writer.write(convertBoolArrToString(getAccount().getWeaponsUnlocked()));
+            writer.write(getAccount().getGachaCurrency() + "\n");
+            writer.write(getAccount().getShopCurrency() + "\n");
+            System.out.println("Account saved successfully.");
+        } catch (IOException e) {
+            System.out.println(e);
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            }
+        }
     }
     
     public Account getAccount() {
@@ -269,5 +289,17 @@ public class Home {
 
     public Gacha getGacha() {
         return this.gacha;
+    }
+
+    private String convertBoolArrToString(boolean[] arr) {
+        String str = "";
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]) {
+                str += "1";
+            } else {
+                str += "0";
+            }
+        }
+        return str + "\n";
     }
 }
