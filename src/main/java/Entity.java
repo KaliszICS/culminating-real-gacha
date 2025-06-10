@@ -192,7 +192,7 @@ public abstract class Entity implements Comparable<Entity> {
 
     @Override
     public String toString() {
-        return getName() + " - " + getHp() + "/" + getMaxHp();
+        return getName() + " - " + getHp() + "/" + getMaxHp() + ": " + getActionPoints();
     }
 
     @Override
