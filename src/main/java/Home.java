@@ -209,22 +209,31 @@ public class Home {
         boolean choosing = true;
         while (choosing){
             System.out.println(account.getTeam().displayPlayerCharacter());
-            if (account.getTeam().getNumCharactersOnTeam()<4){
+            boolean canAdd = account.getTeam().getNumCharactersOnTeam() < 4;
+            boolean canRemove = account.getTeam().getNumCharactersOnTeam() > 0;
+            int exitOption = 1;
+            if (canAdd) {
+                exitOption++;
+            }
+            if (canRemove) {
+                exitOption += 2;
+            }
+            if (canAdd){
                 System.out.println("1: Add a character to team");
             }
-            if (account.getTeam().getNumCharactersOnTeam()>0){
+            if (canRemove){
                 System.out.println("2: Remove a character from team");
                 System.out.println("3: Equip weapons");
             }
-            System.out.println("4: Exit");
+            System.out.println(exitOption + ": Exit");
             if (Main.scanner.hasNextInt()) {
                 int choice = Main.scanner.nextInt();
                 Main.scanner.nextLine();
-                if (choice ==1){
-                    if (account.getTeam().getNumCharactersOnTeam()==4){
+                if (choice == exitOption) {
+                    choosing = false;
+                } else if (choice ==1){
+                    if (account.getTeam().getNumCharactersOnTeam()!=4){
                         //does not do anything
-                    }
-                    else{
                         ArrayList<PlayerCharacter> applicablePC= new ArrayList<>();
                         for (int i = 0; i<PLAYER_CHARACTER_LIST.length;i++){
                             if (account.getPlayerCharacterUnlocked()[i]){
@@ -267,10 +276,8 @@ public class Home {
                     }
                 }
                 else if (choice ==2){
-                    if (account.getTeam().getNumCharactersOnTeam()==0){
+                    if (account.getTeam().getNumCharactersOnTeam()!=0){
                         //does not do anything
-                    }
-                    else{
                         System.out.println("Choose a character to remove: ");
                         while (choosing){
                             if (Main.scanner.hasNextInt()){
@@ -294,9 +301,6 @@ public class Home {
                     }
                 } else if (choice == 3) {
                     equipWeapons();
-                }
-                else if (choice == 4){
-                    choosing = false;
                 }
                 else{
                     Main.scanner.next();
@@ -356,12 +360,16 @@ public class Home {
         while (choosing) {
             String characterWeapons = "";
             characterWeapons += "Equipped weapons:\n";
+            int charCount = 0;
             for (int i = 0; i < team.length; i++) {
-                characterWeapons += (i + 1) + " - " + team[i].getName() + " Equipped: ";
-                if (team[i].getWeaponEquipped() == null) {
-                    characterWeapons += "None\n";
-                } else {
-                    characterWeapons += team[i].getWeaponEquipped().getName() + "\n";
+                if (team[i] != null) {
+                    charCount++;
+                    characterWeapons += charCount + " - " + team[i].getName() + " Equipped: ";
+                    if (team[i].getWeaponEquipped() == null) {
+                        characterWeapons += "None\n";
+                    } else {
+                        characterWeapons += team[i].getWeaponEquipped().getName() + "\n";
+                    }
                 }
             }
             System.out.println("What would you like to do?");
@@ -380,38 +388,63 @@ public class Home {
                         if (Main.scanner.hasNextInt()) {
                             character = Main.scanner.nextInt();
                             Main.scanner.nextLine();
-                            System.out.println("Available weapons:");
-                            int weapCount = 0;
-                            for (int i = 0; i < WEAPONS.length; i++) {
-                                if (getAccount().getWeaponsUnlocked()[i]) {
-                                    System.out.println((weapCount + 1) + ": " + WEAPONS[i].toString());
-                                    weapCount++;
-                                }
-                            }
-                            System.out.print("Please enter the number of the weapon you want to equip: ");
-                            int weaponNum = 0;
-                            if (Main.scanner.hasNextInt()) {
-                                weaponNum = Main.scanner.nextInt();
-                                Main.scanner.nextLine();
-                                Weapon weapon = null;
-                                int currWeapon = -1;
-                                for (int i = 0; i < WEAPONS.length && currWeapon < weaponNum; i++) {
+                            if (character < 1 || character > charCount) {
+                                System.out.println("Invalid choice.");
+                            } else {
+                                System.out.println("Available weapons:");
+                                int weapCount = 0;
+                                boolean foundWeapon = false;
+                                for (int i = 0; i < WEAPONS.length; i++) {
                                     if (getAccount().getWeaponsUnlocked()[i]) {
-                                        currWeapon++;
-                                        if (currWeapon == weaponNum) {
-                                            weapon = WEAPONS[i];
-                                        }
+                                        foundWeapon = true;
+                                        weapCount++;
+                                        System.out.println(weapCount + ": " + WEAPONS[i].toString());
                                     }
                                 }
-                                if (weapon.getEquippedTo() == null) {
-                                    System.out.println("Weapon already equipped to someone.");
+                                if (foundWeapon) {
+                                    System.out.print("Please enter the number of the weapon you want to equip: ");
+                                    int weaponNum = 0;
+                                    if (Main.scanner.hasNextInt()) {
+                                        weaponNum = Main.scanner.nextInt();
+                                        Main.scanner.nextLine();
+                                        if (weaponNum < 1 || weaponNum > weapCount) {
+                                            System.out.println("Invalid choice.");
+                                        } else {
+                                            Weapon weapon = null;
+                                            int currWeapon = 0;
+                                            for (int i = 0; i < WEAPONS.length && currWeapon < weaponNum; i++) {
+                                                if (getAccount().getWeaponsUnlocked()[i]) {
+                                                    currWeapon++;
+                                                    if (currWeapon == weaponNum) {
+                                                        weapon = WEAPONS[i];
+                                                    }
+                                                }
+                                            }
+                                            if (weapon.getEquippedTo() != null) {
+                                                System.out.println("Weapon already equipped to someone.");
+                                            } else {
+                                                int actualCharacterIndex = 0;
+                                                PlayerCharacter actualCharacter = null;
+                                                for (int i = 0; i < team.length &&actualCharacterIndex < character; i++) {
+                                                    if (team[i] != null) {
+                                                        actualCharacterIndex++;
+                                                        if (actualCharacterIndex == character) {
+                                                            actualCharacter = team[i];
+                                                        }
+                                                    }
+                                                }
+                                                actualCharacter.setWeaponEquipped(weapon);
+                                                weapon.setEquippedTo(actualCharacter);
+                                                System.out.println("Weapon equipped successfully.");
+                                            }
+                                        }
+                                    } else {
+                                        System.out.println("Invalid choice.")
+                                        Main.scanner.next();
+                                    }
                                 } else {
-                                    team[character].setWeaponEquipped(weapon);
-                                    weapon.setEquippedTo(team[character]);
-                                    System.out.println("Weapon equipped successfully.");
+                                    System.out.println("No weapons found.");
                                 }
-                            } else {
-                                Main.scanner.next();
                             }
                         } else {
                             Main.scanner.next();
@@ -423,10 +456,25 @@ public class Home {
                         if (Main.scanner.hasNextInt()) {
                             character = Main.scanner.nextInt();
                             Main.scanner.nextLine();
-                            team[character].getWeaponEquipped().setEquippedTo(null);
-                            team[character].setWeaponEquipped(null);
-                            System.out.println("Weapon unequipped.");
+                            if (character < 1 || character > charCount) {
+                                System.out.println("Invalid choice.");
+                            } else {
+                                int actualCharacterIndex = 0;
+                                PlayerCharacter actualCharacter = null;
+                                for (int i = 0; i < team.length && actualCharacterIndex < character; i++) {
+                                    if (team[i] != null) {
+                                        actualCharacterIndex++;
+                                        if (actualCharacterIndex == character) {
+                                            actualCharacter = team[i];
+                                        }
+                                    }
+                                }
+                                actualCharacter.getWeaponEquipped().setEquippedTo(null);
+                                actualCharacter.setWeaponEquipped(null);
+                                System.out.println("Weapon unequipped.");
+                            }
                         } else {
+                            System.out.println("Invalid choice.");
                             Main.scanner.next();
                         }
                         break;
