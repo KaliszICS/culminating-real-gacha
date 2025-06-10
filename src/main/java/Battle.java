@@ -106,6 +106,7 @@ public class Battle {
 
     private void reOrganizeTurnOrder() {
         for (int i = 1; i < getEntities().size(); i++) {
+            // if (getEntities().get(i).isActionPointChanged()){
             int start = 0;
             int end = i - 1;
             int middle = (end + start) / 2;
@@ -129,6 +130,7 @@ public class Battle {
             } else {
                 getEntities().add(middle, temp);
             }
+            //}
         }
     }
 
