@@ -71,7 +71,7 @@ public class Battle {
             enemyName = deepEnemy;
         }
         for (int i = 0; i < getEnemiesAlive(); i++) {
-            getEntities().add(new Enemy(3000 * getWaveNum(), 80 + 10*getWaveNum(), 100 * getWaveNum(), 4, enemyName));
+            getEntities().add(new Enemy(3000 * getWaveNum(), 80 + 10*getWaveNum(), 100 * getWaveNum(), 4, enemyName + (i + 1)));
         }
         startBattle();
     }
