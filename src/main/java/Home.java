@@ -132,10 +132,10 @@ public class Home {
         boolean choosing = true;
         while (choosing){
             System.out.println(account.getTeam().displayPlayerCharacter());
-            if (account.getTeam().getCharactersOnTeam()!=4){
+            if (account.getTeam().getNumCharactersOnTeam()!=4){
                 System.out.println("1: Add a character to team");
             }
-            if (account.getTeam().getCharactersOnTeam()!=0){
+            if (account.getTeam().getNumCharactersOnTeam()!=0){
                 System.out.println("2: Remove a character from team");
             }
             System.out.println("3: Exit");
@@ -143,7 +143,7 @@ public class Home {
                 int choice = Main.scanner.nextInt();
                 Main.scanner.nextLine();
                 if (choice ==1){
-                    if (account.getTeam().getCharactersOnTeam()==4){
+                    if (account.getTeam().getNumCharactersOnTeam()==4){
                         //does not do anything
                     }
                     else{
@@ -179,7 +179,7 @@ public class Home {
                     }
                 }
                 else if (choice ==2){
-                    if (account.getTeam().getCharactersOnTeam()==0){
+                    if (account.getTeam().getNumCharactersOnTeam()==0){
                         //does not do anything
                     }
                     else{

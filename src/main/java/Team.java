@@ -1,10 +1,10 @@
 public class Team {
     private PlayerCharacter[] onTeam;
-    private int charactersOnTeam;
+    private int numCharactersOnTeam;
     
     public Team() {
         this.onTeam = new PlayerCharacter[4];
-        this.charactersOnTeam = 0;
+        this.numCharactersOnTeam = 0;
     }
 
     public String displayPlayerCharacter() {
@@ -28,12 +28,12 @@ public class Team {
             }
         }
         getOnTeam()[openSpace] = character;
-        setCharactersOnTeam(getCharactersOnTeam()+1);
+        setNumCharactersOnTeam(getNumCharactersOnTeam()+1);
     }
 
     public void removeFromTeam(int index) {
         getOnTeam()[index] = null;
-        setCharactersOnTeam(getCharactersOnTeam()-1);
+        setNumCharactersOnTeam(getNumCharactersOnTeam()-1);
     }
 
     public PlayerCharacter[] getOnTeam() {
@@ -44,11 +44,11 @@ public class Team {
         this.onTeam = onTeam;
     }
 
-    public int getCharactersOnTeam() {
-        return charactersOnTeam;
+    public int getNumCharactersOnTeam() {
+        return numCharactersOnTeam;
     }
 
-    public void setCharactersOnTeam(int charactersOnTeam) {
-        this.charactersOnTeam = charactersOnTeam;
+    public void setNumCharactersOnTeam(int numCharactersOnTeam) {
+        this.numCharactersOnTeam = numCharactersOnTeam;
     }
 }
