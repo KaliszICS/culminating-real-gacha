@@ -180,8 +180,6 @@ public class Home {
 				Main.scanner.next();
 			}
 		}
-		
-        Main.scanner.close();
     }
 
     public void viewAccount() {
@@ -193,17 +191,6 @@ public class Home {
         setPlaying(false);
         save();
     }
-
-    // public String filterDisplayedCharacter(int rarity) {
-    //     // i forgot if this is needed for actually getting the playercharacter objects
-    //     String characters = "Characters:\n";
-    //     for (int i = 0; i < PLAYER_CHARACTER_LIST.length; i++) {
-    //         if (getAccount().getPlayerCharacterUnlocked()[i] && PLAYER_CHARACTER_LIST[i].getRarity() == rarity) {
-    //             characters += PLAYER_CHARACTER_LIST[i].getName() + "\n";
-    //         }
-    //     }
-    //     return characters;
-    // }
 
     public void changeTeam() {
         boolean choosing = true;
@@ -458,7 +445,8 @@ public class Home {
                             Main.scanner.nextLine();
                             if (character < 1 || character > charCount) {
                                 System.out.println("Invalid choice.");
-                            } else {
+                            } 
+                            else {
                                 int actualCharacterIndex = 0;
                                 PlayerCharacter actualCharacter = null;
                                 for (int i = 0; i < team.length && actualCharacterIndex < character; i++) {
@@ -469,7 +457,9 @@ public class Home {
                                         }
                                     }
                                 }
-                                actualCharacter.getWeaponEquipped().setEquippedTo(null);
+                                if (actualCharacter.getWeaponEquipped()!=null){
+                                    actualCharacter.getWeaponEquipped().setEquippedTo(null);
+                                }
                                 actualCharacter.setWeaponEquipped(null);
                                 System.out.println("Weapon unequipped.");
                             }
