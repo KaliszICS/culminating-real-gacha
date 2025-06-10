@@ -26,7 +26,10 @@ public abstract class Entity implements Comparable<Entity> {
         this.hp = maxHp;
         this.numTargetSkill = numTargetSkill;
         this.speed = speed;
-        this.actionPoints = (int)(this.speed*1.25+100);//this value can be changed during battle while speed cannot. 
+        this.actionPoints = (int)(this.speed*1.25+100);//this value affects turn order, speed is how fast they get this back
+        if (name.equals("Zero-Line")){
+            this.actionPoints=0; //to ensure that zero-line goes last, as it is a marker of next round
+        }
         this.attack = attack;
         this.name = name;
         this.attackDefault = attack;

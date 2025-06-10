@@ -208,7 +208,7 @@ public class PlayerCharacter extends Entity {
         while (choosing) {
             System.out.println("What kind of attack would you like to do?");
             System.out.println("1 - Normal Attack");
-            System.out.println("2 - Skill");
+            System.out.println("2 - Skill: " + getSkillEffect());
             System.out.println("Skill points available: " + skillPointsAvailable);
             System.out.print("Enter your choice: ");
             if (Main.scanner.hasNextInt()) {
