@@ -129,9 +129,9 @@ public class Home {
     // }
 
     public void changeTeam() {
-        System.out.println(account.getTeam().displayPlayerCharacter());
         boolean choosing = true;
         while (choosing){
+            System.out.println(account.getTeam().displayPlayerCharacter());
             if (account.getTeam().getCharactersOnTeam()!=4){
                 System.out.println("1: Add a character to team");
             }
@@ -154,6 +154,11 @@ public class Home {
                                 System.out.println("Index " + index + ": " + PLAYER_CHARACTER_LIST[i].detailedToString());
                                 applicablePC.add(PLAYER_CHARACTER_LIST[i]);
                                 index++;
+                            }
+                        }
+                        for (int i =0; i<account.getTeam().getOnTeam().length; i++){
+                            if (account.getTeam().getOnTeam()[i]!=null){
+                                applicablePC.remove(account.getTeam().getOnTeam()[i]);
                             }
                         }
                         System.out.println("Choose a character to add, it will be added to the first open slot: ");
