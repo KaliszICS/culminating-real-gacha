@@ -157,7 +157,7 @@ public class PlayerCharacter extends Entity {
         }
         System.out.println("Please choose your main target (target will be in the center of aoe): ");
         for (int i = 0; i < targetable.size(); i++) {
-            System.out.println((i + 1) + " - " + targetable.get(i).toString());
+            System.out.println((i) + " - " + targetable.get(i).toString());
         }
         boolean choosing = true;
         int target = 0;
@@ -172,14 +172,15 @@ public class PlayerCharacter extends Entity {
                 Main.scanner.next();
             }
         }
-        return super.selectTarget(target, (Entity[]) targetable.toArray());
+        Entity[] targetableArray = new Entity[]{};
+        return super.selectTarget(target, targetable.toArray(targetableArray));
     }
 
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
-
-        Entity[] targets = selectTarget(mainTarget, enemies);
+        Entity[] targets = new Entity[]{};
         if (getUltCharge() == getUltMax()) {
+            targets = selectTarget(mainTarget, enemies);
             ultimate(targets);
         } 
         else {
@@ -188,6 +189,7 @@ public class PlayerCharacter extends Entity {
                 setUltCharge(Math.min(getUltCharge() + 20, getUltMax()));
             } 
             else {
+                targets = selectTarget(mainTarget, enemies);
                 skill(targets);
                 setUltCharge(Math.min(getUltCharge() + 33, getUltMax()));
             }

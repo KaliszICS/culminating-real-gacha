@@ -17,7 +17,9 @@ public class Battle {
             team[i].weaponEffect();
         }
         for (int i = 0; i<team.length; i++){
-            this.entities.add(team[i]);
+            if (team[i]!=null){
+                this.entities.add(team[i]);
+            }
         }
 
         this.skillPoints = 3; //start with 3, max 5
@@ -26,16 +28,18 @@ public class Battle {
     }
 
     public void startBattle() {
-
-        while (getEnemiesAlive() > 0 || getTeammatesAlive() > 0) {
+        if (getEnemiesAlive() == 0) {
+            nextBattle();
+        }
+        while (getEnemiesAlive() > 0){
+        if(getTeammatesAlive() < 0) {
+            endBattle();
+            break;
+        }
             reOrganizeTurnOrder();
             takeTurn(getEntities().get(0));
         }
-        if (getEnemiesAlive() == 0) {
-            nextBattle();
-        } else {
-            endBattle();
-        }
+
     }
 
     public void endBattle() {
@@ -74,7 +78,8 @@ public class Battle {
 
     private void takeTurn(Entity entity) {
         displayTurnOrder();
-        Entity[] entityArr = (Entity[]) getEntities().toArray();
+        Entity[] entityArr = new Entity[]{};
+        entityArr = (Entity[]) getEntities().toArray(entityArr);
         setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));
         entity.turnEnd();
         for (Entity e : entityArr) {

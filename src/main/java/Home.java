@@ -103,6 +103,7 @@ public class Home {
     public void battle() {
         Battle battle = new Battle(account.getTeam().getOnTeam());
         battle.startBattle();
+        account.setGachaCurrency(account.getGachaCurrency() + battle.getBattleReward());
     }
 
     public void shop() {
