@@ -216,18 +216,16 @@ public class Home {
             boolean canAdd = account.getTeam().getNumCharactersOnTeam() < 4;
             boolean canRemove = account.getTeam().getNumCharactersOnTeam() > 0;
             int exitOption = 1;
+            int removeOption = 1;
             if (canAdd) {
                 exitOption++;
+                removeOption++;
+                System.out.println("1: Add a character to team");
             }
             if (canRemove) {
                 exitOption += 2;
-            }
-            if (canAdd){
-                System.out.println("1: Add a character to team");
-            }
-            if (canRemove){
-                System.out.println("2: Remove a character from team");
-                System.out.println("3: Equip weapons");
+                System.out.println(removeOption + ": Remove a character from team");
+                System.out.println((removeOption + 1) + ": Equip weapons");
             }
             System.out.println(exitOption + ": Exit");
             if (Main.scanner.hasNextInt()) {
