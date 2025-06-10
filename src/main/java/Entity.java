@@ -90,6 +90,9 @@ public abstract class Entity implements Comparable<Entity> {
      * Ends the turn for the entity.
      */
     public void turnEnd() {
+        if (getName().equals("Zero-Line")){
+            return;
+        }
         int endTurnActionPointLoss = 100;
         setActionPoints(getActionPoints() - endTurnActionPointLoss);
     }
@@ -198,6 +201,9 @@ public abstract class Entity implements Comparable<Entity> {
 
     @Override
     public String toString() {
+        if (getName().equals("Zero-Line")){
+            return getName() + ": " + getActionPoints();
+        }
         return getName() + " - " + getHp() + "/" + getMaxHp() + ": " + getActionPoints();
     }
 

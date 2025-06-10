@@ -18,7 +18,7 @@ public class Battle {
             if (team[i]!=null){
                 this.entities.add(team[i]);
                 team[i].weaponEffect();
-                teammatesAlive++;
+                setTeammatesAlive(getTeammatesAlive()+1);
             }
         }
 
@@ -28,18 +28,14 @@ public class Battle {
     }
 
     public void startBattle() {
-        if (getEnemiesAlive() == 0) {
-            nextBattle();
-        }
-        while (getEnemiesAlive() > 0){
-        if(getTeammatesAlive() < 0) {
-            endBattle();
-            break;
-        }
-            reOrganizeTurnOrder();
+        while (getTeammatesAlive() > 2){
+            if (getEnemiesAlive()==0){     
+                nextBattle();     
+            }
+            reOrganizeTurnOrder();     
             takeTurn(getEntities().get(0));
         }
-
+            endBattle();
     }
 
     public void endBattle() {
@@ -73,10 +69,17 @@ public class Battle {
         for (int i = 0; i < getEnemiesAlive(); i++) {
             getEntities().add(new Enemy(3000 * getWaveNum(), 80 + 10*getWaveNum(), 100 * getWaveNum(), 4, enemyName + (i + 1)));
         }
+            getEntities().add(new Enemy(1000000000, 0, 0, 0, "Zero-Line"));
         startBattle();
     }
 
     private void takeTurn(Entity entity) {
+        if (entity.getName().equals("Zero-Line")){
+            for (int i = 1; i<getEntities().size(); i++){
+                getEntities().get(i).setActionPoints(getEntities().get(i).getActionPoints()+getEntities().get(i).getSpeed());
+            }
+            return;
+        }
         displayTurnOrder();
         System.out.println();
         Entity[] entityArr = new Entity[]{};

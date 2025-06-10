@@ -33,6 +33,9 @@ public class Enemy extends Entity {
     
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
+        if (getName().equals("Zero-Line")){
+            return;
+        }
         if (attackType == 1) {
             Entity[] targets = selectTarget(mainTarget, enemies, 1);
             normalAttack(targets[mainTarget]);
@@ -54,6 +57,9 @@ public class Enemy extends Entity {
 
     @Override
     public int turnBegin(int skillPointsAvailable, Entity[] targets) {
+        if (getName().equals("Zero-Line")){
+            return 0;
+        }
         System.out.println(getName() + "'s turn!");
         Random random = new Random();
         int maxPercent = 100;

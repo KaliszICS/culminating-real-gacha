@@ -145,7 +145,7 @@ public class PlayerCharacter extends Entity {
         ArrayList<Entity> targetable = new ArrayList<>();
         if (getSkillEffect().equals("Damage") || getSkillEffect().equals("Push") ||attackType == 1){
             for (int i = 0; i < enemies.length; i++) {
-                if (enemies[i] instanceof Enemy) {
+                if (enemies[i] instanceof Enemy&& !enemies[i].getName().equals("Zero-Line")) {
                     targetable.add(enemies[i]);
                 }
             }
