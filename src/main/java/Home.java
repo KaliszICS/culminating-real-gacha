@@ -439,7 +439,7 @@ public class Home {
                                             }
                                         }
                                     } else {
-                                        System.out.println("Invalid choice.")
+                                        System.out.println("Invalid choice.");
                                         Main.scanner.next();
                                     }
                                 } else {
