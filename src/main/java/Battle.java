@@ -109,28 +109,22 @@ public class Battle {
             // if (getEntities().get(i).isActionPointChanged()){
             int start = 0;
             int end = i - 1;
-            int middle = (end + start) / 2;
+            int middle = 0;
             int compare = 0; 
             while (start <= end) {
                 compare = getEntities().get(middle).compareTo(getEntities().get(i));
+                middle = (end + start) / 2;
                 if (compare < 0) {
                     start = middle + 1;
-                    middle = (end + start) / 2;
                 } else if (compare > 0) {
                     end = middle - 1;
-                    middle = (end + start) / 2;
                 } else {
                     start = end + 1;
                 }
             }
             Entity temp = getEntities().get(i);
             getEntities().remove(i);
-            if (compare < 0) {
-                getEntities().add(middle + 1, temp);
-            } else {
-                getEntities().add(middle, temp);
-            }
-            //}
+            getEntities().add(start, temp);
         }
     }
 
