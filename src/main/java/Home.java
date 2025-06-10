@@ -41,7 +41,7 @@ public class Home {
     public void characterGacha() {
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
         int choice = 0;
-        while (choice!=0){
+        while (choice==0){
         if (Main.scanner.hasNextInt()) {
                 choice = Main.scanner.nextInt();
                 Main.scanner.nextLine();
@@ -71,7 +71,7 @@ public class Home {
     public void weaponGacha() {
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
         int choice = 0;
-        while (choice!=0){
+        while (choice==0){
         if (Main.scanner.hasNextInt()) {
                 choice = Main.scanner.nextInt();
                 Main.scanner.nextLine();
