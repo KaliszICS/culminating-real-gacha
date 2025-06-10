@@ -33,7 +33,9 @@ public class Team {
     }
 
     public void removeFromTeam(int index) {
-        getOnTeam()[index].getWeaponEquipped().setEquippedTo(null);
+        if (getOnTeam()[index].getWeaponEquipped()!=null){
+            getOnTeam()[index].getWeaponEquipped().setEquippedTo(null);
+        }
         getOnTeam()[index].setWeaponEquipped(null);
         getOnTeam()[index] = null;
         setNumCharactersOnTeam(getNumCharactersOnTeam()-1);

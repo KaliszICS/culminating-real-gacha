@@ -141,6 +141,7 @@ public class Home {
     }
 
     public void logout() {
+        System.out.println("Your characters will go back home, leaving behind their weapon and team.\nDon't forget to reassign them once you come back!");
         setPlaying(false);
         save();
     }
@@ -227,8 +228,15 @@ public class Home {
                             if (Main.scanner.hasNextInt()){
                                 int characterToRemove = Main.scanner.nextInt();
                                 Main.scanner.nextLine();
-                                account.getTeam().removeFromTeam(characterToRemove);
-                                choosing = false;
+                                if (characterToRemove>=0&&characterToRemove<=3){
+                                    if (account.getTeam().getOnTeam()[characterToRemove]!=null){
+                                        account.getTeam().removeFromTeam(characterToRemove);
+                                        choosing = false;
+                                    }
+                                }
+                                else{
+                                    System.out.println("Please enter a valid number");
+                                }
                             }
                             else{
                                 Main.scanner.next();
