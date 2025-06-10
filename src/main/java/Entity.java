@@ -9,6 +9,8 @@ public abstract class Entity implements Comparable<Entity> {
     private int speed;
     private int actionPoints;
     private int attack;
+    private int attackDefault;
+
     private String name;
     private int numTargetSkill;
 
@@ -27,6 +29,7 @@ public abstract class Entity implements Comparable<Entity> {
         this.actionPoints = (int)(this.speed*1.25+100);//this value can be changed during battle while speed cannot. 
         this.attack = attack;
         this.name = name;
+        this.attackDefault = attack;
     }
 
 
@@ -189,6 +192,9 @@ public abstract class Entity implements Comparable<Entity> {
         return this.name;
     }
 
+    public int getAttackDefault() {
+        return attackDefault;
+    }
 
     @Override
     public String toString() {

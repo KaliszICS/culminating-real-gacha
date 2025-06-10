@@ -84,9 +84,10 @@ public class PlayerCharacter extends Entity {
                     Random random = new Random();
                         if (random.nextInt(101)>getCritChance()){
                         setAttack(getAttack()*getCritDamage());
+                        setAttack(getAttack()*4);//default multiplier
                     }
                         super.normalAttack(targets[i]);
-                        setAttack(getAttack() / getCritDamage());
+                        setAttack(getAttackDefault());
                 }
                 break;
             case "Heal":
