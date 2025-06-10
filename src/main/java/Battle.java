@@ -29,10 +29,11 @@ public class Battle {
     }
 
     public void startBattle() {
-        while (getTeammatesAlive() > 2){
+        while (getTeammatesAlive() > 0){
             if (getEnemiesAlive()==0){     
                 nextBattle();     
             }   
+            reOrganizeTurnOrder();
             takeTurn(getEntities().get(0));
         }
             endBattle();
@@ -72,13 +73,7 @@ public class Battle {
         startBattle();
     }
 
-    private void takeTurn(Entity entity) {
-        if (entity.getName().equals("Zero-Line")){
-            for (int i = 1; i<getEntities().size(); i++){
-                getEntities().get(i).setActionPoints(getEntities().get(i).getActionPoints()+getEntities().get(i).getSpeed());
-            }
-        }
-        reOrganizeTurnOrder();  
+    private void takeTurn(Entity entity) {  
         displayTurnOrder();
         System.out.println();
         Entity[] entityArr = new Entity[]{};
@@ -86,6 +81,11 @@ public class Battle {
         setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));
         if (getSkillPoints()>5){
             setSkillPoints(5);
+        }
+        if (entity.getName().equals("Zero-Line")){
+            for (int i = 1; i<getEntities().size(); i++){
+                getEntities().get(i).setActionPoints(getEntities().get(i).getActionPoints()+getEntities().get(i).getSpeed());
+            }
         }
         entity.turnEnd();
         for (Entity e : entityArr) {
@@ -117,13 +117,15 @@ public class Battle {
             int compare = 0;
             boolean found = false;
             while (start <= end) {
-                compare = getEntities().get(middle).compareTo(getEntities().get(i));
                 middle = (end + start) / 2;
+                compare = getEntities().get(middle).compareTo(getEntities().get(i));//negative if middle faster
                 if (compare < 0) {
                     start = middle + 1;
-                } else if (compare > 0) {
+                } 
+                else if (compare > 0) {
                     end = middle - 1;
-                } else {
+                } 
+                else {
                     start = end + 1;
                     found = true;
                 }
