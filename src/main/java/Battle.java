@@ -21,6 +21,7 @@ public class Battle {
                 setTeammatesAlive(getTeammatesAlive()+1);
             }
         }
+        getEntities().add(new Enemy(1000000000, 0, 0, 0, "Zero-Line"));
 
         this.skillPoints = 3; //start with 3, max 5
         this.waveNum = 0;
@@ -28,12 +29,10 @@ public class Battle {
     }
 
     public void startBattle() {
-        getEntities().add(new Enemy(1000000000, 0, 0, 0, "Zero-Line"));
         while (getTeammatesAlive() > 2){
             if (getEnemiesAlive()==0){     
                 nextBattle();     
-            }
-            reOrganizeTurnOrder();     
+            }   
             takeTurn(getEntities().get(0));
         }
             endBattle();
@@ -80,6 +79,7 @@ public class Battle {
             }
             return;
         }
+        reOrganizeTurnOrder();  
         displayTurnOrder();
         System.out.println();
         Entity[] entityArr = new Entity[]{};
