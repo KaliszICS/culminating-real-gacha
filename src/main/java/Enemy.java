@@ -29,7 +29,8 @@ public class Enemy extends Entity {
         }
         Random random = new Random();
         int target = random.nextInt(enemies.length);
-        return super.selectTarget(target, (Entity[]) targetable.toArray(), 1);
+        Entity[] tempArr = new Entity[]{};
+        return super.selectTarget(target, targetable.toArray(tempArr), 1);
     }
     
     @Override
