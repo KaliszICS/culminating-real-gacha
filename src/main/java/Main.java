@@ -44,5 +44,4 @@ public class Main {
 		Login.gameStart(account);
 		scanner.close();
 	}
-
 }
