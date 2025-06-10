@@ -77,7 +77,6 @@ public class Battle {
             for (int i = 1; i<getEntities().size(); i++){
                 getEntities().get(i).setActionPoints(getEntities().get(i).getActionPoints()+getEntities().get(i).getSpeed());
             }
-            return;
         }
         reOrganizeTurnOrder();  
         displayTurnOrder();

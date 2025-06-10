@@ -109,7 +109,7 @@ public class PlayerCharacter extends Entity {
             case "Pull":
                 // read heal comment
                 for (int i = 0; i < targets.length; i++) {
-                    int change = getAttack()/2;
+                    int change = getAttack()/3;
                     System.out.println(targets[i].getName() + " had their action points increased by " + change + "!");
                     targets[i].setActionPoints(targets[i].getActionPoints() + change);
                 }
