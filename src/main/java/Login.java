@@ -92,7 +92,15 @@ public class Login {
                         home.characterGacha();
                         break;
                     case 5:
-                        home.weaponGacha();
+                        boolean ownCharacter = false;
+                        for (int i = 0; i < account.getPlayerCharacterUnlocked().length; i++) {
+                            ownCharacter = account.getPlayerCharacterUnlocked()[i] || ownCharacter;
+                        }
+                        if (ownCharacter) {
+                            home.weaponGacha();
+                        } else {
+                            System.out.println("You don't have any characters unlocked. Roll for a character first!");
+                        }
                         break;
                     case 6:
                         home.logout();
