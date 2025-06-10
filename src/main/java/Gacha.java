@@ -1,5 +1,5 @@
-import java.util.Random;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Gacha{
 
@@ -57,12 +57,12 @@ public class Gacha{
         for (int i = 0; i < numOfPulls; i++){
             if(random.nextDouble() <= rates4Star){
                 pulledWeapon[i] = this.fourStarWeapon[random.nextInt(fourStarWeapon.length)];
-                System.out.println(pulledWeapon[i].detailedToString());
+                System.out.println(pulledWeapon[i].toString());
                 System.out.println();
             }
             else{
                 pulledWeapon[i] = this.fiveStarWeapon[random.nextInt(fiveStarWeapon.length)];
-                System.out.println(pulledWeapon[i].detailedToString());
+                System.out.println(pulledWeapon[i].toString());
                 System.out.println();
             }
         }

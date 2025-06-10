@@ -59,7 +59,8 @@ public class Weapon {
         return rarity;
     }
 
-    public String detailedToString(){
+    @Override
+    public String toString(){
         return getName() +  ": \nAttack: " + getAttackMod() + ", MaxHP mod: " + 
         getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect() + "\n" + "Rarity: " + getRarity();
     }

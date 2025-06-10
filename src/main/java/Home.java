@@ -10,7 +10,7 @@ public class Home {
     new PlayerCharacter(0, "Diting", "Woof!", 2934, 102, 300, 4, 50, 2, 1, "Damage"), 
     new PlayerCharacter(1, "Insect Guy", "Mm… It’s Gregor. Well, feel free to talk to me unless I’m asleep.", 3120, 149, 250, 4, 50, 3, 5, "Damage"),
     new PlayerCharacter(2, "Ika", "Miewwww… Boing", 4673, 122, 530, 4, 100, 2, 3, "Heal"),
-    new PlayerCharacter(3, "Lighting", "HHHHHeeeeeeeeellllllllllllllllllllllllllllllllllllllllooooooooooooo", 6235, 1, 1000, 5, 50, 1, 1, "Damage"),
+    new PlayerCharacter(3, "Lighting", "HHHHHeeeeeeeeellllllllllllllllllllllllllllllllllllllllooooooooooooo", 6235, 1, 1000, 5, 0, 0, 1, "Damage"),
     new PlayerCharacter(4, "Anaxa", "Rule number one: Do not call me Anaxa. Rule number two: Never interrupt me — silence is golden. Remember that.", 2800, 97, 756, 5, 75, 2, 5, "Damage"),
     new PlayerCharacter(5, "Discord", "Make sense? Oh, what fun is there in making sense?", 5341, 92, 329, 5, 50, 2, 5,  "Push", 150),
     new PlayerCharacter(6, "Rosalina", "May the stars shine down on you...", 3500, 120, 300, 5, 75, 2, 1, "Pull"),
@@ -165,8 +165,9 @@ public class Home {
             }
             if (account.getTeam().getNumCharactersOnTeam()!=0){
                 System.out.println("2: Remove a character from team");
+                System.out.println("3: Equip weapons");
             }
-            System.out.println("3: Exit");
+            System.out.println("4: Exit");
             if (Main.scanner.hasNextInt()) {
                 int choice = Main.scanner.nextInt();
                 Main.scanner.nextLine();
@@ -235,9 +236,11 @@ public class Home {
                         }
                         choosing = true;
                     }
-                    }
-                else if (choice == 3){
-                    break;
+                } else if (choice == 3) {
+                    equipWeapons();
+                }
+                else if (choice == 4){
+                    choosing = false;
                 }
                 else{
                     Main.scanner.next();
@@ -289,6 +292,23 @@ public class Home {
 
     public Gacha getGacha() {
         return this.gacha;
+    }
+
+    private void equipWeapons() {
+        boolean choosing = true;
+        PlayerCharacter[] team = getAccount().getTeam().getOnTeam();
+        while (choosing) {
+            System.out.println("Equipped weapons:");
+            for (int i = 0; i < team.length; i++) {
+                System.out.print((i + 1) + " - " + team[i].getName() + " Equipped: ");
+                if (team[i].getWeaponEquipped() == null) {
+                    System.out.println("None");
+                } else {
+                    System.out.println(team[i].getWeaponEquipped().getName());
+                    System.out.println(team[i].getWeaponEquipped().toString());
+                }
+            }
+        }
     }
 
     private String convertBoolArrToString(boolean[] arr) {
