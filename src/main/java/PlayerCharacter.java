@@ -18,18 +18,19 @@ public class PlayerCharacter extends Entity {
     private int ownedIndex;
 
     /**
-     * 
-     * @param maxHp
-     * @param speed
-     * @param actionPoints
-     * @param attack
-     * @param numTargets
-     * @param dialogue
-     * @param name
-     * @param rarity
-     * @param weaponEquipped
-     * @param critChance
-     * @param critDamage
+     * Creates a playercharacter with specified parameters. ultCharge is initialized to 0, ultMax is initialized to 100, and weaponEquipped is initialized to null.
+     * @param ownedIndex the index of the playercharacter in Home.PLAYER_CHARACTER_LIST
+     * @param name the name of the playercharacter
+     * @param dialogue the dialogue the playercharacter says when pulled
+     * @param maxHp the max hp of the playercharacter
+     * @param speed the speed of the playercharacter
+     * @param attack the attack stat of the playercharacter
+     * @param rarity the rarity of the playercharacter
+     * @param critChance the chance the playercharacter has of getting a critical hit
+     * @param critDamage the multiplier the playercharacter attack stat gets on critical hit
+     * @param numTargets the number of entities the playercharacter targets with their skill
+     * @param skillEffect a string representing what effect the playercharacter skill has (either Damage, Heal, Pull, or Push)
+     * @see Home#PLAYER_CHARACTER_LIST
      */
     public PlayerCharacter(int ownedIndex, String name, String dialogue, int maxHp, int speed, int attack,
     int rarity, double critChance, int critDamage, int numTargets, String skillEffect) {
@@ -46,6 +47,22 @@ public class PlayerCharacter extends Entity {
         this.ownedIndex = ownedIndex;;
     }
 
+    /**
+     * Creates a playercharacter with specified parameters. ultCharge is initialized to 0 and weaponEquipped is initialized to null.
+     * @param ownedIndex the index of the playercharacter in Home.PLAYER_CHARACTER_LIST
+     * @param name the name of the playercharacter
+     * @param dialogue the dialogue the playercharacter says when pulled
+     * @param maxHp the max hp of the playercharacter
+     * @param speed the speed of the playercharacter
+     * @param attack the attack stat of the playercharacter
+     * @param rarity the rarity of the playercharacter
+     * @param critChance the chance the playercharacter has of getting a critical hit
+     * @param critDamage the multiplier the playercharacter attack stat gets on critical hit
+     * @param numTargets the number of entities the playercharacter targets with their skill
+     * @param skillEffect a string representing what effect the playercharacter skill has (either Damage, Heal, Pull, or Push)
+     * @param ultMax the max value of the playercharacter's ultcharge, ultimate will be used once ultcharge reaches this value
+     * @see Home#PLAYER_CHARACTER_LIST
+     */
     public PlayerCharacter(int ownedIndex, String name, String dialogue, int maxHp, int speed, int attack, int rarity, 
     double critChance, int critDamage, int numTargets, String skillEffect, int ultMax) {
         super(maxHp, speed, attack, name, numTargets);
@@ -62,7 +79,9 @@ public class PlayerCharacter extends Entity {
     }
 
     /**
-     * 
+     * Activates the playercharacter's ultimate once their ultCharge reaches ultMax by running skill 3 times.
+     * @param targets the available targets for the ultimate
+     * @see PlayerCharacter#skill
      */
     public void ultimate(Entity[] targets) {
         System.out.println(getName() + " activates their ultimate!");
@@ -74,7 +93,20 @@ public class PlayerCharacter extends Entity {
     }
 
     /**
+     * Activates the playercharacter's skill on specified targets. A skill can have 4 possible skill effects:<br><br>
      * 
+     * Damage:<br>
+     * - Performs the entity's basic attack on all specified targets at once.<br>
+     * Heal:<br>
+     * - Heals the targets of the skill, increasing their hp by the entity's attack stat.<br>
+     * Push:<br>
+     * - Reduces the action points of the targets, making them move later.<br>
+     * Pull:<br>
+     * - Increases the action points of the targets, making them move earlier.<br><br>
+     * 
+     * In order to check which skill to run, playercharacter checks the value of this.skillEffect.
+     * @param targets the entities that are targetted by the skill
+     * @see PlayerCharacter#skillEffect
      */
     @Override
     protected void skill(Entity[] targets) {
@@ -120,29 +152,45 @@ public class PlayerCharacter extends Entity {
         }
     }
 
+    /**
+     * Applies the effect of the weapon onto the playercharacter's stats. There are 4 possible effects for the weapon:<br><br>
+     * 
+     * Speed:<br>
+     * - Doubles the playercharacter's speed.<br>
+     * CritChance:<br>
+     * - Multiplies the playercharacter's crit chance by 1.5.<br>
+     * CritDamage:<br>
+     * - Doubles the playercharacter's damage multiplier on crit.<br>
+     * Heal:<br>
+     * - Heals the playercharacter by 5% of their current hp. This heal can make the playercharacter's hp go above maxHp.
+     */
     public void weaponEffect(){
         if (this.getWeaponEquipped()!=null){
-        switch (this.weaponEquipped.getSpecialEffect()){
-            case "":
-                break; //does not have special effect
-            case "Speed":
-                super.setSpeed(super.getSpeed()*2);//doubles current entity speed
-                break;
-            case "CritChance": 
-                setCritChance(getCritChance()*1.5);//multiplier to crit chance
-                break;
-            case "CritDamage":
-                setCritDamage(getCritDamage()*2);//double crit damage
-                break;
-            case "Heal":
-                super.setHp(Math.min(getHp()+ (int)(super.getHp()*1.05), getMaxHp()));//heals 5% of current hp
-                //if heal exceeds max health, hp is max health
-                break;
+            switch (this.weaponEquipped.getSpecialEffect()){
+                case "":
+                    break; //does not have special effect
+                case "Speed":
+                    super.setSpeed(super.getSpeed()*2);//doubles current entity speed
+                    break;
+                case "CritChance": 
+                    setCritChance(getCritChance()*1.5);//multiplier to crit chance
+                    break;
+                case "CritDamage":
+                    setCritDamage(getCritDamage()*2);//double crit damage
+                    break;
+                case "Heal":
+                    super.setHp(Math.min(getHp()+ (int)(super.getHp()*1.05), getMaxHp()));//heals 5% of current hp
+                    //if heal exceeds max health, hp is max health
+                    break;
 
-        }
+            }
         }
     }
     
+    /**
+     * Playercharacter implementation of selectTarget. Depending on skill type, puts all enemies or playercharacters into an entity array, gets maintarget through user input, and passes those values into entity implementation.
+     * @see Entity#selectTarget
+     */
     @Override
     protected Entity[] selectTarget(int mainTarget, Entity[] enemies, int attackType) {
         ArrayList<Entity> targetable = new ArrayList<>();
@@ -182,6 +230,10 @@ public class PlayerCharacter extends Entity {
         return super.selectTarget(target, targetable.toArray(targetableArray), attackType);
     }
 
+    /**
+     * Playercharacter implementation of attack. Runs ultimate immediately if fully charged, otherwise increases ultCharge by 20 on normal attack or 33 on skill use, then runs entity implementation to run the actual attack.
+     * @see Entity#attack
+     */
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         Entity[] targets = new Entity[]{};
@@ -199,6 +251,10 @@ public class PlayerCharacter extends Entity {
         
     }
 
+    /**
+     * Playercharacter implementation of turnBegin. Gets type of attack through user input and passes it into attack with an arbitrary value for mainTarget.
+     * @see Entity#turnBegin
+     */
     @Override
     public int turnBegin(int skillPointsAvailable, Entity[] targets) {
         if (getWeaponEquipped()!=null){
@@ -233,6 +289,10 @@ public class PlayerCharacter extends Entity {
         return -1;
     }
 
+    /**
+     * Uses the playercharacter normal attack on the target. Checks if the attack is a crit, multiplies attack stat, then runs entity implementation and resets attack stat after.
+     * @see Entity#normalAttack
+     */
     @Override
         protected void normalAttack(Entity target) {
         if (getWeaponEquipped()!=null){
@@ -245,86 +305,111 @@ public class PlayerCharacter extends Entity {
         super.normalAttack(target);
         setAttack(getAttackDefault());
     }
+
+    /**
+     * Returns how much charge the playercharacter has for their ultimate
+     * @return an int representing how much charge the playercharacter has for their ultimate
+     */
     public int getUltCharge() {
         return this.ultCharge;
     }
 
+    /**
+     * Changes how much charge the playercharacter has for their ultimate
+     * @param ultCharge an int representing the new amount of charge the player character has for their ultimate
+     */
     public void setUltCharge(int ultCharge) {
         this.ultCharge = ultCharge;
     }
 
+    /**
+     * Returns the max amount of ultCharge the playercharacter can have for their ultimate, in other words how much ultCharge is required for their ultimate.
+     * @return the max amount of ultcharge the playercharacter can have for their ultimate
+     */
     public int getUltMax() {
         return this.ultMax;
     }
 
     /**
-     * 
-     * @return
+     * Returns the dialogue the playercharacter says when they are pulled.
+     * @return the dialogue the playercharacter says when pulled
      */
     public String getDialogue() {
         return dialogue;
     }
     
     /**
-     * 
-     * @return
+     * Returns the rarity of the playercharacter.
+     * @return the rarity of the playercharacter
      */
     public int getRarity() {
         return rarity;
     }
 
     /**
-     * 
-     * @return
+     * Returns the weapon the playercharacter has equipped.
+     * @return the weapon the playercharacter has equipped
      */
     public Weapon getWeaponEquipped() {
         return weaponEquipped;
     }
 
     /**
-     * 
-     * @param weaponEquipped
+     * Changes the weapon the playercharacter has equipped.
+     * @param weaponEquipped the new weapon the playercharacter should have equipped
      */
     public void setWeaponEquipped(Weapon weaponEquipped) {
         this.weaponEquipped = weaponEquipped;
     }
 
     /**
-     * 
-     * @return
+     * Returns the chance the playercharacter has for a critical hit.
+     * @return the chance the playercharacter has for a critical hit
      */
     public double getCritChance() {
         return critChance;
     }
 
     /**
-     * 
-     * @param critChance
+     * Changes the chance the playercharacter has for a critical hit.
+     * @param critChance the new chance the playercharacter should have for a critical hit
      */
     public void setCritChance(double critChance) {
         this.critChance = critChance;
     }
 
     /**
-     * 
-     * @return
+     * Returns the multiplier the playercharacter has for their damage on crit.
+     * @return the multiplier the playercharacter has for crit damage
      */
     public int getCritDamage() {
         return critDamage;
     }
 
     /**
-     * 
-     * @param critDamage
+     * Changes the multiplier the playercharacter has for their damage on crit.
+     * @param critDamage the new multiplier the playercharacter should have for crit damage
      */
     public void setCritDamage(int critDamage) {
         this.critDamage = critDamage;
     }
     
+    /**
+     * Returns the name of the playercharacter.
+     * @return the name of the playercharacter
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns a more detailed string representation of the playercharacter, mainly for use when they are pulled. This string is in the following form:<br><br>
+     * 
+     * (this.name): Attack: (this.attack), Speed: (this.speed), Hp: (this.hp)<Br>
+     * "(this.dialogue)"<br>
+     * Rarity: (this.rarity)
+     * @return a more detailed string representation of the playercharacter
+     */
     public String detailedToString(){
         String detailedString = getName() + ": Attack: " + getAttack() + ", Speed: " + getSpeed() + ", Hp: " + getHp()
         + "\n" + "\"" + getDialogue() + "\""+ "\n" + "Rarity: " + getRarity();
@@ -334,10 +419,19 @@ public class PlayerCharacter extends Entity {
         return detailedString;
     }
 
+    /**
+     * Returns the playercharacter's position in Home.PLAYER_CHARACTER_LIST.
+     * @return the playercharacter's position in Home.PLAYER_CHARACTEr_LIST
+     * @see Home#PLAYER_CHARACTER_LIST
+     */
     public int getOwnedIndex(){
         return this.ownedIndex;
     }
 
+    /**
+     * Returns the playercharacter's skill effect.
+     * @return the playercharacter's skill effect.
+     */
     public String getSkillEffect() {
         return skillEffect;
     }
