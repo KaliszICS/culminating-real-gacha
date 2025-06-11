@@ -119,14 +119,14 @@ public class Home {
     }
 
     public void shop() {
-        Shop shop = new Shop();
+
         System.out.println("\nWelcome to the shop!");
 
         if (shop.getItemsOnSale().size()>0) {
             System.out.println("Here are the items currently on sale: ");
-            System.out.println(shop.getItemsOnSale().get(0));
-            System.out.println(shop.getItemsOnSale().get(1));
-            System.out.println(shop.getItemsOnSale().get(2));
+            System.out.println(shop.getItemsOnSale().get(0).getName());
+            System.out.println(shop.getItemsOnSale().get(1).getName());
+            System.out.println(shop.getItemsOnSale().get(2).getName());
         }
 
         else {
@@ -166,14 +166,15 @@ public class Home {
                                     Main.scanner.nextLine();
 
                                     switch (buyChoice) {
+                                        //buyChoice is the item index +1
                                         case 1:
-                                            shop.buy(shop.getItemsOnSale().get(0), account);
+                                            shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
                                             break;
                                         case 2:
-                                            shop.buy(shop.getItemsOnSale().get(1), account);
+                                            shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
                                             break;
                                         case 3:
-                                            shop.buy(shop.getItemsOnSale().get(2), account);
+                                            shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
                                             break;
                                         default:
                                             System.out.println("\nInvalid choice.\n");

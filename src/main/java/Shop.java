@@ -57,7 +57,7 @@ public class Shop {
 
         //If they don't have enough currency, they can't purchase a refresh
         else {
-            System.out.println("\nYou do not have enough shop currency to purchase an item on sale refresh.");
+            System.out.println("\nYou do not have enough shop currency to purchase an item on sale refresh.\n");
         }
     }
 
@@ -67,30 +67,13 @@ public class Shop {
      * @param account the player's account that the item should be applied to
      * @return A String message that mentions whether the item was able to be bought or not
      */
-    public String buy(Item item, Account account) {
-
-        //Make sure that the item is currently on sale
-        boolean validItem = false;
-        int validItemIndex = -1;
-
-        for (int i = 0; i < itemsOnSale.size(); i++) {
-            if (this.itemsOnSale.get(i)==item) {
-                validItem = true;
-                validItemIndex = i;
-                i = this.itemsOnSale.size();
-            }
-        }
+    public void buy(Item item, Account account) {
 
         //If item is valid, remove from itemsOnSale, take money from shopCurrency, give to the account's team, and give output message
-        if (validItem==true) {
-            this.itemsOnSale.remove(validItemIndex);
-            account.setShopCurrency(account.getShopCurrency()-item.getCost());
-            item.apply(account.getTeam());
-            return "\nYou have succesfully bought " + item.getName() + "!";
-        }
-
-        //If item not valid, give output message
-        return "\nThis item is currently not on sale. Buy a shop refresh to see if the preferred item comes on sale!";
+        this.itemsOnSale.remove(item);
+        account.setShopCurrency(account.getShopCurrency()-item.getCost());
+        item.apply(account.getTeam());
+        System.out.println("\nYou have succesfully bought " + item.getName() + "!");
     }
 
     /**

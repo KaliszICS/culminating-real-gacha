@@ -32,36 +32,72 @@ class Item {
      */
     public void apply(Team team) {
 
-        for (int i=0; i<team.getOnTeam().length; i++) {
-            if (team.getOnTeam()[i]!=null) {
-        }
-
-
-        }
         //Switch goes through to find the matching item effect type, then applies the affect potency to the each player in the team in regards to the effect type
         switch (getEffectType()) {
 
             case "Speed":
+                int counter = 4;
+
                 for (int i=0; i<team.getOnTeam().length; i++) {
-                    team.getOnTeam()[i].setSpeed(team.getOnTeam()[i].getSpeed() + (getEffectPotency()*5));
+                    //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
+
+                    if (team.getOnTeam()[i]!=null) {
+                        team.getOnTeam()[i].setSpeed(team.getOnTeam()[i].getSpeed() + (getEffectPotency()*5));
+                        counter--;
+                    }
                 }
+
+                if (counter==4) {
+                    System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
+                }
+                
                 break;
 
             case "CritChance": 
                 for (int i=0; i<team.getOnTeam().length; i++) {
-                    team.getOnTeam()[i].setCritChance(team.getOnTeam()[i].getCritChance() + (getEffectPotency()*5));
+                    //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
+                    int counter = 4;
+
+                    if (team.getOnTeam()[i]!=null) {
+                        team.getOnTeam()[i].setCritChance(team.getOnTeam()[i].getCritChance() + (getEffectPotency()*5));
+                        counter--;
+                    }
+
+                    if (counter==4) {
+                        System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
+                    }
                 }
                 break;
 
             case "CritDamage":
                 for (int i=0; i<team.getOnTeam().length; i++) {
-                    team.getOnTeam()[i].setCritDamage(team.getOnTeam()[i].getCritDamage() + (getEffectPotency()*5));
+                    //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
+                    int counter = 4;
+
+                    if (team.getOnTeam()[i]!=null) {
+                        team.getOnTeam()[i].setCritDamage(team.getOnTeam()[i].getCritDamage() + (getEffectPotency()*5));
+                        counter--;
+                    }
+
+                    if (counter==4) {
+                        System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
+                    }
                 }
                 break;
 
             case "Health":
                 for (int i=0; i<team.getOnTeam().length; i++) {
-                    team.getOnTeam()[i].setMaxHp(team.getOnTeam()[i].getMaxHp() + (getEffectPotency()*5));
+                    //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
+                    int counter = 4;
+
+                    if (team.getOnTeam()[i]!=null) {
+                        team.getOnTeam()[i].setMaxHp(team.getOnTeam()[i].getMaxHp() + (getEffectPotency()*5));
+                        counter--;
+                    }
+
+                    if (counter==4) {
+                        System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
+                    }
                 }
                 break;
         }
