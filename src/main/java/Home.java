@@ -314,7 +314,7 @@ public class Home {
                         }
                         choosing = true;
                     }
-                } else if (choice == 3) {
+                } else if (choice == 3 && canRemove) {
                     equipWeapons();
                 }
                 else{
