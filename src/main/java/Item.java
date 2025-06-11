@@ -32,6 +32,12 @@ class Item {
      */
     public void apply(Team team) {
 
+        for (int i=0; i<team.getOnTeam().length; i++) {
+            if (team.getOnTeam()[i]!=null) {
+        }
+
+
+        }
         //Switch goes through to find the matching item effect type, then applies the affect potency to the each player in the team in regards to the effect type
         switch (getEffectType()) {
 

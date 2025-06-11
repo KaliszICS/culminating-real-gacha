@@ -46,14 +46,13 @@ public class Shop {
             this.itemsOnSale.add(this.ITEMS[random.nextInt(ITEMS.length)]);
             this.itemsOnSale.add(this.ITEMS[random.nextInt(ITEMS.length)]);
 
-            System.out.println( "\nThe shop has been refreshed! The current items on sale are:");
+            System.out.println( "\nThe shop has been refreshed! The current items on sale are:\n");
             
-            
-            System.out.println(getItemsOnSale().get(0).getName() + ",  " + getItemsOnSale().get(0).getCost() + " shop currency\n"
-            + getItemsOnSale().get(0).getEffectType() + ", " + getItemsOnSale().get(0).getEffectPotency() + "\n"
-            + getItemsOnSale().get(0).getDesc());
-            System.out.println(getItemsOnSale().get(1));
-            System.out.println(getItemsOnSale().get(2));
+            for (int i=0; i<this.itemsOnSale.size(); i++) {
+                System.out.println(getItemsOnSale().get(i).getName() + ",  " + getItemsOnSale().get(i).getCost() + " shop currency\n"
+                + getItemsOnSale().get(i).getEffectType() + ", Potency Level: " + getItemsOnSale().get(i).getEffectPotency() + "\n"
+                + getItemsOnSale().get(i).getDesc() + "\n");
+            }
         }
 
         //If they don't have enough currency, they can't purchase a refresh

@@ -130,16 +130,16 @@ public class Home {
         }
 
         else {
-            System.out.println("Buy a refresh for 150 shop currency to see what new items are on sale!");
+            System.out.println("Buy a refresh for 150 shop currency to see what new items are on sale!\n");
         }
         
         boolean choosing = true;
 
 		while (choosing) {
-			System.out.println("\nWhat would you like to do?");
+			System.out.println("What would you like to do?");
 			System.out.println("1 - Refresh Items on Sale (Cost: 150 shop currency)");
-            if (shop.getItemsOnSale().size()<0) {
-			    System.out.println("2 - Buy Item");
+            if (shop.getItemsOnSale().size()>0) {
+			    System.out.println("2 - Buy Item (Will be applied to each charatcer currently on your team)");
             }
 			System.out.println("3 - Exit");
 			System.out.println("\nPlease enter your choice: ");
@@ -154,8 +154,12 @@ public class Home {
                             break;
                         
                         case 2:
-                            if (shop.getItemsOnSale().size()<0) {
-                                System.out.println("Which item would you like to buy?");
+                            if (shop.getItemsOnSale().size()>0) {
+                                System.out.println("Which item would you like to buy?\n");
+                                System.out.println("1 - " + shop.getItemsOnSale().get(0).getName());
+                                System.out.println("2 - " + shop.getItemsOnSale().get(1).getName());
+                                System.out.println("3 - " + shop.getItemsOnSale().get(2).getName());
+                                System.out.println("\nPlease enter your choice: ");
 
                                 if (Main.scanner.hasNextInt()) {
                                     int buyChoice = Main.scanner.nextInt();
@@ -172,7 +176,7 @@ public class Home {
                                             shop.buy(shop.getItemsOnSale().get(2), account);
                                             break;
                                         default:
-                                            System.out.println("Invalid choice.");
+                                            System.out.println("\nInvalid choice.\n");
                                     }
                                 }
                                 else {
@@ -180,7 +184,7 @@ public class Home {
                                 }
                             }
                             else {
-                                System.out.println("\nInvalid choice.");
+                                System.out.println("\nThere are currently no items on sale.\n");
                             }
                             break;
                         
