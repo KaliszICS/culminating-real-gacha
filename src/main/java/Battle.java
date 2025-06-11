@@ -1,31 +1,46 @@
 import java.util.ArrayList;
 /**
- * 
+ * Class representing a battlefield
+ * Stores number of enemeis and teammates alive, the entities in battle, skillpoint, current wave number, and battle reward
+ * @version 1.0.0
+ * @author gacha
  */
 public class Battle {
+
     private int teammatesAlive;
+    private PlayerCharacter[] team;
     private int enemiesAlive;
     private ArrayList<Entity> entities;
     private int skillPoints;
     private int waveNum;
     private int battleReward = 0;
+
     public final int SKILLPOINT_MAX = 5;
 
+    /**
+     * creates a battle with the team given
+     * @param team the team that will be in battle
+     */
     public Battle(PlayerCharacter[] team) {
-
+        this.team = team;
         this.teammatesAlive =0;
         this.enemiesAlive = 0;
         this.entities = new ArrayList<>();
+
         for (int i = 0; i<team.length; i++){
-            if (team[i]!=null){
+            if (team[i]!=null){//if character on team have a weapon, their special effects and modifiers are applied here
                 this.entities.add(team[i]);
                 team[i].weaponEffect();
+                team[i].setAttack(team[i].getAttack() + team[i].getWeaponEquipped().getAttackMod());
+                team[i].setMaxHp(team[i].getWeaponEquipped().getHpMod()+team[i].getMaxHpDefault());
                 setTeammatesAlive(getTeammatesAlive()+1);
             }
         }
+        //add an entity to combat called "Zero-Line", which, during its turn, does not attack but adds every entity's speed to their action point
+        //the Zero-Line makes it so that only entities with >=0 action point can have their turn
         getEntities().add(new Enemy(1000000000, 0, 0, 0, "Zero-Line"));
 
-        this.skillPoints = 3; //start with 3, max 5
+        this.skillPoints = 3; //start with 3, max 5, used each time a PlayerCharacter uses their skill
         this.waveNum = 0;
         this.battleReward = 0;
     }
@@ -33,21 +48,31 @@ public class Battle {
     public void startBattle() {
         while (getTeammatesAlive() > 0 && getEnemiesAlive() > 0) { 
             reOrganizeTurnOrder();
-            takeTurn(getEntities().get(0));                
+            takeTurn(getEntities().get(0));//the entity on top of the turn order takes their turn                
         }
         if (getTeammatesAlive() <= 0) {
             endBattle();
+            
         } else {
             nextBattle();
         }
     }
 
     public void endBattle() {
+        for (int i = 0; i<team.length; i++){
+            if (team[i]!=null){//if character on team have a weapon, their special effects and modifiers are applied here
+                team[i].setAttack(team[i].getAttackDefault());
+                team[i].setMaxHp(team[i].getMaxHpDefault());
+            }
+        }
         System.out.println("Game over!");
         System.out.println("Reward payout: " + getBattleReward());
         // at this point home should add payout to account gacha currency/shop currency
     }
 
+    /**
+     * adds new enemies to the ArrayList<Entities> with respect to the current wave number, after the previous wave is done
+     */
     public void nextBattle() {
         int startEnemies = 3;
         int startThreshold = 3;
@@ -73,9 +98,13 @@ public class Battle {
         for (int i = 0; i < getEnemiesAlive(); i++) {
             getEntities().add(new Enemy(3000 * getWaveNum(), 80 + 10*getWaveNum(), 100 * getWaveNum(), 4, enemyName + (i + 1)));
         }
-        startBattle();
+        startBattle();//starts battle again with new enemies
     }
 
+    /**
+     * lets the entity given by parameter take turn
+     * @param entity the entity that takes their turn
+     */
     private void takeTurn(Entity entity) {  
         displayTurnOrder();//shows currently who's alive and who's coming up
         System.out.println();

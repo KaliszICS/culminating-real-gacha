@@ -112,9 +112,6 @@ public class PlayerCharacter extends Entity {
     protected void skill(Entity[] targets) {
         switch (getSkillEffect()) {
             case "Damage":
-                if (getWeaponEquipped()!=null){
-                    setAttack(getAttack() + getWeaponEquipped().getAttackMod());
-                }
                 for (int i = 0; i < targets.length; i++) {
                     Random random = new Random();
                     if (random.nextInt(101)>getCritChance()){
@@ -257,9 +254,6 @@ public class PlayerCharacter extends Entity {
      */
     @Override
     public int turnBegin(int skillPointsAvailable, Entity[] targets) {
-        if (getWeaponEquipped()!=null){
-            setMaxHp(getWeaponEquipped().getHpMod()+super.getMaxHpDefault());
-        }
         System.out.println(getName() + "'s turn!");
         boolean choosing = true;
         while (choosing) {
@@ -407,12 +401,12 @@ public class PlayerCharacter extends Entity {
      * 
      * (this.name): Attack: (this.attack), Speed: (this.speed), Hp: (this.hp)<Br>
      * "(this.dialogue)"<br>
-     * Rarity: (this.rarity)
+     * Rarity: (this.rarity) Stars
      * @return a more detailed string representation of the playercharacter
      */
     public String detailedToString(){
         String detailedString = getName() + ": Attack: " + getAttack() + ", Speed: " + getSpeed() + ", Hp: " + getHp()
-        + "\n" + "\"" + getDialogue() + "\""+ "\n" + "Rarity: " + getRarity();
+        + "\n" + "\"" + getDialogue() + "\""+ "\n" + "Rarity: " + getRarity() + " Stars";
         if (getWeaponEquipped() != null) {
             detailedString += "\n" + "Weapon: " + getWeaponEquipped().getName();
         }
