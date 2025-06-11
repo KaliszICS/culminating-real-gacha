@@ -48,7 +48,6 @@ public class Shop {
 
             System.out.println( "\nThe shop has been refreshed! The current items on sale are:");
             
-            for (int i=0; i)
             
             System.out.println(getItemsOnSale().get(0).getName() + ",  " + getItemsOnSale().get(0).getCost() + " shop currency\n"
             + getItemsOnSale().get(0).getEffectType() + ", " + getItemsOnSale().get(0).getEffectPotency() + "\n"

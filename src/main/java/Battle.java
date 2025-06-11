@@ -33,10 +33,12 @@ public class Battle {
             if (getEnemiesAlive()==0){     
                 nextBattle();     
             }   
+            if (getTeammatesAlive()!=0){
             reOrganizeTurnOrder();
-            takeTurn(getEntities().get(0));
+            takeTurn(getEntities().get(0));                
+            }
         }
-            endBattle();
+        endBattle();
     }
 
     public void endBattle() {
