@@ -74,7 +74,7 @@ public class Login {
             System.out.println("4 - Character Gacha");
             System.out.println("5 - Weapon Gacha");
             System.out.println("6 - View account");
-            System.out.println("6 - Logout\n");
+            System.out.println("7 - Logout\n");
             System.out.print("Please enter your choice: ");
             if (Main.scanner.hasNextInt()) {
                 int choice = Main.scanner.nextInt();
