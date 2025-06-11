@@ -82,7 +82,7 @@ public class PlayerCharacter extends Entity {
             case "Damage":
                 for (int i = 0; i < targets.length; i++) {
                     Random random = new Random();
-                        if (random.nextInt(101)>getCritChance()){
+                    if (random.nextInt(101)>getCritChance()){
                         setAttack(getAttack()*getCritDamage());
                         setAttack(getAttack()*4);//default multiplier of 4 for skill
                     }
@@ -185,18 +185,13 @@ public class PlayerCharacter extends Entity {
         if (getUltCharge() == getUltMax()) {
             targets = selectTarget(mainTarget, enemies, attackType);
             ultimate(targets);
-        } 
-        else {
+        } else {
             if (attackType == 1) {
-                targets = selectTarget(mainTarget, enemies, attackType);
-                normalAttack(targets[mainTarget]);
                 setUltCharge(Math.min(getUltCharge() + 20, getUltMax()));
-            } 
-            else {
-                targets = selectTarget(mainTarget, enemies, attackType);
-                skill(targets);
+            } else {
                 setUltCharge(Math.min(getUltCharge() + 33, getUltMax()));
             }
+            super.attack(attackType, mainTarget, enemies);
         }
         
     }
@@ -235,7 +230,7 @@ public class PlayerCharacter extends Entity {
     @Override
         protected void normalAttack(Entity target) {
         Random random = new Random();
-        if (random.nextInt(101)>getCritChance()){
+        if (random.nextInt(100)+1>getCritChance()){
             setAttack(getAttack()*getCritDamage());
         }
         super.normalAttack(target);

@@ -36,24 +36,19 @@ public class Enemy extends Entity {
     }
     
     /**
-     * Enemy implementation of attack. Runs selectTarget with specified parameters, then runs normalAttack if attackType is 1 or skill if attackType is 2.
+     * Enemy implementation of attack. Doesn't run if method is run with Zero-Line entity (see Battle.takeTurn()), otherwise runs Entity implementation.
      * @see Entity#attack
      * @see Enemy#selectTarget
      * @see Entity#normalAttack
      * @see Enemy#skill
+     * @see Battle#takeTurn
      */
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         if (getName().equals("Zero-Line")){
             return;
         }
-        if (attackType == 1) {
-            Entity[] targets = selectTarget(mainTarget, enemies, 1);
-            normalAttack(targets[mainTarget]);
-        } else {
-            Entity[] targets = selectTarget(mainTarget, enemies, 2);
-            skill(targets);
-        }
+        super.attack(attackType, mainTarget, enemies);
     }
 
     /**
@@ -68,8 +63,11 @@ public class Enemy extends Entity {
     }
 
     /**
-     * Enemy implementation of turnBegin. Chooses randomly between normalAttack and skill, with a 70% chance for normal attack, then randomly chooses a mainTarget for the attack.
+     * Enemy implementation of turnBegin. Chooses randomly between normalAttack and skill, with a 70% chance for normal attack, then randomly chooses a mainTarget for the attack.<br><br>
+     * 
+     * Does not run if run on the Zero-Line Entity (See Battle.takeTurn()).
      * @see Entity#turnBegin
+     * @see Battle#takeTurn
      */
     @Override
     public int turnBegin(int skillPointsAvailable, Entity[] targets) {

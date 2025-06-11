@@ -15,11 +15,13 @@ public abstract class Entity implements Comparable<Entity> {
     private int numTargetSkill;
 
     /**
-     * Creates an entity object with specififed maxHp, hp, speed, actionPoint, attack, and number of targetted enemies.
+     * Creates an entity object with specififed parameters.
      * @param maxHp the maxHp of the entity
      * @param hp the current hp of the entity
      * @param speed the speed stat of the entity
      * @param attack the attack stat of the entity
+     * @param name the name of the entity
+     * @param numTargetSkill the number of targets the entity's skill targets
      */
     public Entity(int maxHp, int speed, int attack, String name, int numTargetSkill) {
         this.maxHp = maxHp;
@@ -55,8 +57,6 @@ public abstract class Entity implements Comparable<Entity> {
         if (getnumTargetSkill() % 2 == 0) {
             leftIndex++;
         }
-        //change this to an abstract method? so that we can make selecttarget only take in enityt[] so it can choose
-        //between team and enemy
         Entity[] targets = new Entity[rightIndex - leftIndex + 1];
         for (int i = leftIndex; i <= rightIndex; i++) {
             targets[i - leftIndex] = enemies[i];
@@ -65,8 +65,8 @@ public abstract class Entity implements Comparable<Entity> {
     }
     
     /**
-     * Performs the entity's basic attack on specified targets.
-     * @param targets the targets to be attacked
+     * Performs the entity's basic attack on the specified target, decreasing their hp by the entity's attack stat.
+     * @param target the target to be attacked
      */
     protected void normalAttack(Entity target) {
         System.out.println("Hit " + target.getName() + " for " + getAttack() + " damage!");
@@ -74,8 +74,19 @@ public abstract class Entity implements Comparable<Entity> {
     }
 
     /**
-     * Performs the entity's unique skill on specified targets.
-     * @param targets the targets to be attacked
+     * Performs the entity's unique skill on specified targets. Skills are special attacks, and require spending a skill point to activate. There are 4 types of skills:<br><br>
+     * 
+     * Damage:<br>
+     * - Performs the entity's basic attack on all specified targets at once.<br>
+     * Heal:<br>
+     * - Heals the targets of the skill, increasing their hp by the entity's attack stat.<br>
+     * Push:<br>
+     * - Reduces the action points of the targets, making them move later.<br>
+     * Pull:<br>
+     * - Increases the action points of the targets, making them move earlier.<br><br>
+     * 
+     * Implement accordingly to handle skill logic for possible skill types of subclasses.
+     * @param targets the targets of the skill
      */
     protected abstract void skill(Entity[] targets);
 
@@ -87,10 +98,18 @@ public abstract class Entity implements Comparable<Entity> {
      * @param mainTarget the main target of the attack, in the center of the group of enemies being targetted
      * @param enemies the enemies to choose from as an array
      */
-    public abstract void attack(int attackType, int mainTarget, Entity[] enemies);
+    public void attack(int attackType, int mainTarget, Entity[] enemies) {
+        Entity[] targets = selectTarget(mainTarget, enemies, attackType);
+        if (attackType == 1) {
+            normalAttack(targets[mainTarget]);
+        } else {
+            skill(targets);
+        }
+    }
 
     /**
-     * Ends the turn for the entity.
+     * Ends the turn for the entity by decreasing their action points by 100. Does not run on the Zero-Line entity (see Battle.takeTurn()).
+     * @see Battle#takeTurn
      */
     public void turnEnd() {
         if (getName().equals("Zero-Line")){
@@ -101,7 +120,13 @@ public abstract class Entity implements Comparable<Entity> {
     }
 
     /**
-     * Begins the turn for the entity.
+     * Begins the turn for the entity by getting parameters for Entity.attack().<br><br>
+     * 
+     * Implement accordingly to get parameters.
+     * @param skillPointsAvailable the skill points available for the turn
+     * @param targets the targets available for attack
+     * @return the change in skillPoints for battle
+     * @see Entity#attack
      */
     public abstract int turnBegin(int skillPointsAvailable, Entity[] targets);
 
@@ -163,7 +188,7 @@ public abstract class Entity implements Comparable<Entity> {
     }
 
     /**
-     * Changes the number of action points the entity has
+     * Changes the number of action points the entity has.
      * @param actionPoints the new number of action points the entity has
      */
     public void setActionPoints(int actionPoints) {
@@ -179,7 +204,7 @@ public abstract class Entity implements Comparable<Entity> {
     }
 
     /**
-     * Changes the current attack of the entity
+     * Changes the current attack of the entity.
      * @param attack the new attack of the entity
      */
     public void setAttack(int attack) {
@@ -187,21 +212,35 @@ public abstract class Entity implements Comparable<Entity> {
     }
 
     /**
-     * Returns the number of entities the entity can target
+     * Returns the number of entities the entity can target.
      * @return the number of entities the entity can target
      */
     public int getnumTargetSkill() {
         return numTargetSkill;
     }
-    
+
+    /**
+     * Returns the name of the entity.
+     * @return the name of the entity
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Returns the attack stat of the entity on initialization. Used for resets in case of attack stat changing.
+     * @return the original attack stat of the entity
+     */
     public int getAttackDefault() {
         return attackDefault;
     }
 
+    /**
+     * Returns a string representation of the entity. This string is formatted in the following way:<br><br>
+     * 
+     * (this.name) - (this.hp)/(this.maxHp), Action points: (this.actionPoints)
+     * @return a string representing the entity
+     */
     @Override
     public String toString() {
         if (getName().equals("Zero-Line")){
@@ -210,6 +249,13 @@ public abstract class Entity implements Comparable<Entity> {
         return getName() + " - " + getHp() + "/" + getMaxHp() + ", Action points: " + getActionPoints();
     }
 
+    /**
+     * Compares the current entity to another entity based on action points. This comparison is reversed, so an entity with more action points is "smaller" than an entity with less action points.<br><br>
+     * 
+     * If 2 entities have the same amount of action points, they are based on the lexicographical order of their names instead, though playerCharacters will be considered "smaller" than enemies.
+     * @param o the entity being compared to
+     * @return a number less than 0 if the current entity is "smaller", a number greater than 0 if the current entity is "larger", and 0 if the two entities are the same size
+     */
     @Override
     public int compareTo(Entity o) {
         if (getActionPoints() == o.getActionPoints()) {
