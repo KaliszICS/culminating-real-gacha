@@ -41,7 +41,7 @@ public class Home {
     }
 
     public void characterGacha() {
-        System.out.println("You currently have : "+ account.getGachaCurrency());
+        System.out.println("You currently have : "+ account.getGachaCurrency() + "Gacha Currencies");
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
         int choice = 0;
         while (choice==0){
@@ -72,7 +72,7 @@ public class Home {
     }
     
     public void weaponGacha() {
-        System.out.println("You currently have : "+ account.getGachaCurrency());
+        System.out.println("You currently have : "+ account.getGachaCurrency() + "Gacha Currencies");
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
         int choice = 0;
         while (choice==0){
@@ -145,6 +145,7 @@ public class Home {
 
 		while (choosing) {
 			System.out.println("What would you like to do?");
+            System.out.println("You currently have : "+ account.getGachaCurrency() + "Gacha Currencies");
 			System.out.println("1 - Refresh Items on Sale (Cost: 150 shop currency)");
             if (shop.getItemsOnSale().size()>0) {
 			    System.out.println("2 - Buy Item (Will be applied to each charatcer currently on your team)");
