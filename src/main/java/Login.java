@@ -22,11 +22,11 @@ public class Login {
                 int shopCurrency = Integer.parseInt(accFile.readLine());
                 account = new Account(username, password, playerCharacterUnlocked, weaponInv, gachaCurrency, shopCurrency);
             }  else {
-                System.out.println("Incorrect login info.");
+                System.out.println("\nIncorrect login info.");
             }
         } 
         catch (FileNotFoundException e) {
-            System.out.println("Account does not exist");
+            System.out.println("\nAccount does not exist");
         } 
         catch (IOException e) {
             System.out.println(e);
