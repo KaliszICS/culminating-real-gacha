@@ -105,6 +105,7 @@ public class Login {
                         break;
                     case 6:
                         home.viewAccount();
+                        break;
                     case 7:
                         home.logout();
                         break;

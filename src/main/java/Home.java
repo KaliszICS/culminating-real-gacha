@@ -84,7 +84,10 @@ public class Home {
             Main.scanner.nextLine();
         }
         }
-        if (account.getGachaCurrency()-choice*160 > account.getGachaCurrency()){
+        if(choice<0){
+            System.out.println("You do not have enough Gacha Currency: "+ account.getGachaCurrency() + ", Gacha cancelled");
+        }
+        else if (account.getGachaCurrency()-choice*160 > account.getGachaCurrency()){
             System.out.println("You do not have enough Gacha Currency: "+ account.getGachaCurrency() + ", Gacha cancelled");
         }
         else{
