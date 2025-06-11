@@ -108,17 +108,21 @@ public class Battle {
     private void takeTurn(Entity entity) {  
         displayTurnOrder();//shows currently who's alive and who's coming up
         System.out.println();
-        Entity[] entityArr = new Entity[]{};
-        entityArr = (Entity[]) getEntities().toArray(entityArr);
-        setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));
-        if (getSkillPoints()>5){
-            setSkillPoints(5);
-        }
-        if (entity.getName().equals("Zero-Line")){
+
+        if (entity.getName().equals("Zero-Line")){//if the current entity is the Zero-line, it adds the speed of every entity in battle to their action point
             for (int i = 1; i<getEntities().size(); i++){
                 getEntities().get(i).setActionPoints(getEntities().get(i).getActionPoints()+getEntities().get(i).getSpeed());
             }
+            return;
         }
+        
+        Entity[] entityArr = new Entity[]{};
+        entityArr = (Entity[]) getEntities().toArray(entityArr);//converts the arraylist of entities to an array to be used in entity.turnBegin
+        setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));//entity.turnBegin returns the skill point they used
+        if (getSkillPoints()>5){//skillPoint capped at 5
+            setSkillPoints(5);
+        }
+
         entity.turnEnd();
         for (Entity e : entityArr) {
             if (e.getHp() <= 0) {
