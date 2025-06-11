@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Home {
-    // update manually with every character
+    // every character added manually
     
     public final PlayerCharacter[] PLAYER_CHARACTER_LIST = new PlayerCharacter[]{
     new PlayerCharacter(0, "Diting", "Woof!", 2934, 102, 300, 4, 50, 2, 1, "Damage"), 
@@ -42,7 +42,7 @@ public class Home {
 
     public void characterGacha() {
         System.out.println("You currently have : "+ account.getGachaCurrency() + " Gacha Currencies");
-        System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
+        System.out.println("How many times do you want to pull? (" + gacha.COST + " Gacha Currency per pull)");
         int choice = 0;
         while (choice==0){
         if (Main.scanner.hasNextInt()) {
@@ -53,11 +53,11 @@ public class Home {
             Main.scanner.nextLine();
         }
         }
-        if (account.getGachaCurrency()-choice*160 > account.getGachaCurrency()){
+        if (account.getGachaCurrency()-choice*gacha.COST > account.getGachaCurrency()){
             System.out.println("You do not have enough Gacha Currency: "+ account.getGachaCurrency() + ", Gacha cancelled");
         }
         else{
-            account.setGachaCurrency(account.getGachaCurrency()-choice*160);
+            account.setGachaCurrency(account.getGachaCurrency()-choice*gacha.COST);
             PlayerCharacter[] pulled = getGacha().pullCharacter(choice);
             for (int i = 0; i<choice; i++){
                 if (account.getPlayerCharacterUnlocked()[pulled[i].getOwnedIndex()]==false){

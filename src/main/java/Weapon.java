@@ -134,13 +134,13 @@ public class Weapon {
      * Attack: (getAttackMod()), MaxHP mod: (getHpMod())<br>
      * (getDescription())<br>
      * Special effect: (getSpecialEffect()<br>
-     * Rarity: (getRarity())
+     * Rarity: (getRarity()) + Stars
      * the getEquippedTo().getName() section will only show up if the weapon is equipped to a PLayerCharacter object
      * @return detailed string representation of the weapon object
      */
     public String detailedToString(){
         return getName() +  ": \nAttack: " + getAttackMod() + ", MaxHP mod: " + 
-        getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect() + "\n" + "Rarity: " + getRarity();
+        getHpMod() + ". \n" + getDescription() + "\n" + getSpecialEffect() + "\n" + "Rarity: " + getRarity() + " Stars";
     }
 
 }
