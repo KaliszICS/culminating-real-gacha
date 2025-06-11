@@ -83,7 +83,7 @@ public class Login {
                         home.battle();
                         break;
                     case 2:
-                        home.shop();
+                        home.shop(account);
                         break;
                     case 3:
                         home.changeTeam();

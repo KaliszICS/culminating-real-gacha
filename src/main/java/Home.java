@@ -118,15 +118,17 @@ public class Home {
         account.setGachaCurrency(account.getGachaCurrency() + battle.getBattleReward());
     }
 
-    public void shop() {
+    public void shop(Account account) {
 
         System.out.println("\nWelcome to the shop!");
+        System.out.println("Shop Currency: " + account.getShopCurrency() + "\n");
 
         if (shop.getItemsOnSale().size()>0) {
-            System.out.println("Here are the items currently on sale: ");
-            System.out.println(shop.getItemsOnSale().get(0).getName());
-            System.out.println(shop.getItemsOnSale().get(1).getName());
-            System.out.println(shop.getItemsOnSale().get(2).getName());
+            System.out.println("Here are the items currently on sale:");
+            for (int i=0; i<shop.getItemsOnSale().size(); i++) {
+                System.out.println(shop.getItemsOnSale().get(i).getName());
+            }
+            System.out.println("");
         }
 
         else {
@@ -156,28 +158,25 @@ public class Home {
                         case 2:
                             if (shop.getItemsOnSale().size()>0) {
                                 System.out.println("Which item would you like to buy?\n");
-                                System.out.println("1 - " + shop.getItemsOnSale().get(0).getName());
-                                System.out.println("2 - " + shop.getItemsOnSale().get(1).getName());
-                                System.out.println("3 - " + shop.getItemsOnSale().get(2).getName());
+
+                                for (int i=0; i<shop.getItemsOnSale().size(); i++) {
+                                    System.out.println(i+1 + " - " + shop.getItemsOnSale().get(i).getName());
+                                }
+
                                 System.out.println("\nPlease enter your choice: ");
 
                                 if (Main.scanner.hasNextInt()) {
                                     int buyChoice = Main.scanner.nextInt();
                                     Main.scanner.nextLine();
 
-                                    switch (buyChoice) {
-                                        //buyChoice is the item index +1
-                                        case 1:
-                                            shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
-                                            break;
-                                        case 2:
-                                            shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
-                                            break;
-                                        case 3:
-                                            shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
-                                            break;
-                                        default:
-                                            System.out.println("\nInvalid choice.\n");
+                                    //buyChoice is the item index +1
+                                    if (buyChoice>=1 && buyChoice<=shop.getItemsOnSale().size()) {
+                                        shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
+                                        break;                                      
+                                    }
+
+                                    else {
+                                        System.out.println("\nInvalid choice.\n");
                                     }
                                 }
                                 else {

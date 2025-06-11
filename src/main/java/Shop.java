@@ -18,7 +18,7 @@ public class Shop {
     };
 
     //ArrayList of items that are on sale; will show 3 at one time for the player to choose from, unless they refresh to see 3 randomly selected ones from the ITEMS array constant
-    protected ArrayList<Item> itemsOnSale;
+    private ArrayList<Item> itemsOnSale;
     
     /**
      * Constructor that creates a shop and initializes the itemsOnSale ArrayList as a new ArrayList of type Item
@@ -29,7 +29,7 @@ public class Shop {
 
     /**
      * 
-     * @param account the player's account, so that the methd can access their shopCurrency
+     * @param account the player's account, so that the method can access their shopCurrency
      * @return A String that mentions whether the player was able to buy a shop resfresh or not
      */
     public void refresh(Account account) {
@@ -82,7 +82,7 @@ public class Shop {
         if (nullTeamCounter!=4) {
             this.itemsOnSale.remove(item);
             account.setShopCurrency(account.getShopCurrency()-item.getCost());
-            System.out.println("\nYou have succesfully bought " + item.getName() + "!");
+            System.out.println("\nYou have succesfully bought " + item.getName() + "!\n");
         }
     }
 
