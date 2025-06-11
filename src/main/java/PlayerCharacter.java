@@ -80,6 +80,9 @@ public class PlayerCharacter extends Entity {
     protected void skill(Entity[] targets) {
         switch (getSkillEffect()) {
             case "Damage":
+                if (getWeaponEquipped()!=null){
+                    setAttack(getAttack() + getWeaponEquipped().getAttackMod());
+                }
                 for (int i = 0; i < targets.length; i++) {
                     Random random = new Random();
                     if (random.nextInt(101)>getCritChance()){
@@ -198,6 +201,9 @@ public class PlayerCharacter extends Entity {
 
     @Override
     public int turnBegin(int skillPointsAvailable, Entity[] targets) {
+        if (getWeaponEquipped()!=null){
+            setMaxHp(getWeaponEquipped().getHpMod()+super.getMaxHpDefault());
+        }
         System.out.println(getName() + "'s turn!");
         boolean choosing = true;
         while (choosing) {
@@ -229,6 +235,9 @@ public class PlayerCharacter extends Entity {
 
     @Override
         protected void normalAttack(Entity target) {
+        if (getWeaponEquipped()!=null){
+            setAttack(getAttack() + getWeaponEquipped().getAttackMod());
+        }
         Random random = new Random();
         if (random.nextInt(100)+1>getCritChance()){
             setAttack(getAttack()*getCritDamage());

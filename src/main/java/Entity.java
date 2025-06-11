@@ -5,12 +5,12 @@
  */
 public abstract class Entity implements Comparable<Entity> {
     private int maxHp;
+    private int maxHpDefault;
     private int hp;
     private int speed;
     private int actionPoints;
     private int attack;
     private int attackDefault;
-
     private String name;
     private int numTargetSkill;
 
@@ -25,6 +25,7 @@ public abstract class Entity implements Comparable<Entity> {
      */
     public Entity(int maxHp, int speed, int attack, String name, int numTargetSkill) {
         this.maxHp = maxHp;
+        this.maxHpDefault = maxHp;
         this.hp = maxHp;
         this.numTargetSkill = numTargetSkill;
         this.speed = speed;
@@ -146,6 +147,13 @@ public abstract class Entity implements Comparable<Entity> {
         this.maxHp = maxHp;
     }
 
+    /**
+     * Returns the default Max hp of character (without any added modifiers)
+     * @returns the default Max hp of character (without any added modifiers)
+     */
+    public int getMaxHpDefault() {
+        return maxHpDefault;
+    }
 
     /**
      * Returns the current hp of the entity.
