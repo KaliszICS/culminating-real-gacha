@@ -3,6 +3,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Home class holding all the main operations of the game, storing a gacha object of every weapon and character in the game, and a shop object. Most of the user input is done here.
+ * @version 1.0.0
+ * @author gacha
+ * @see Gacha
+ * @see Shop
+ */
 public class Home {
     // every character added manually
     
@@ -33,6 +40,10 @@ public class Home {
     private boolean playing;
     private Gacha gacha;
 
+    /**
+     * Creates a new home object with specified account.
+     * @param account the account for use in game operations
+     */
     public Home(Account account) {
         this.account = account;
         this.playing = true;
@@ -40,6 +51,10 @@ public class Home {
         this.gacha = new Gacha(PLAYER_CHARACTER_LIST, WEAPONS);
     }
 
+    /**
+     * Asks for how many pulls the user wants to spend for characters, then either does nothing if the player does not have enough pulls or runs Gacha.pullCharacter with specified number of pulls.
+     * @see Gacha#pullCharacter
+     */
     public void characterGacha() {
         System.out.println("You currently have : "+ account.getGachaCurrency() + " Gacha Currencies");
         System.out.println("How many times do you want to pull? (" + gacha.COST + " Gacha Currency per pull)");
@@ -74,6 +89,10 @@ public class Home {
         }
     }
     
+    /**
+     * Asks for how many pulls the user wants to spend for weapons, then either does nothing if the player does not have enough pulls or runs Gacha.pullWeapon with specified number of pulls.
+     * @see Gacha#pullWeapon
+     */
     public void weaponGacha() {
         System.out.println("You currently have : "+ account.getGachaCurrency() + " Gacha Currencies");
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
