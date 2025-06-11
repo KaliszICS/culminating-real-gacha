@@ -149,7 +149,7 @@ public class Home {
 		while (choosing) {
 			System.out.println("What would you like to do?");
             System.out.println();
-            System.out.println("You currently have : "+ account.getGachaCurrency() + "Gacha Currencies");
+            System.out.println("You currently have : "+ account.getShopCurrency() + " Shop Currencies");
             System.out.println();
 			System.out.println("1 - Refresh Items on Sale (Cost: 150 shop currency)");
             if (shop.getItemsOnSale().size()>0) {

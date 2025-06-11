@@ -42,7 +42,7 @@ public class Account {
         this.password = password;
         this.playerCharacterUnlocked = new boolean[9];//there are 9 characters in the game
         this.weaponsUnlocked = new boolean[8];
-        this.gachaCurrency = 10000000;
+        this.gachaCurrency = 1600;
         this.shopCurrency = 0;
         this.team = new Team();
     }

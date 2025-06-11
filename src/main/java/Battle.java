@@ -94,7 +94,7 @@ public class Battle {
                 if (e instanceof PlayerCharacter) {
                     setTeammatesAlive(getTeammatesAlive() - 1);
                 } else {
-                    int baseRewardYield = 10;
+                    int baseRewardYield = 50;//they get 50 gacha currencies per enemy defeated times the current wave num (difficulty of enemy)
                     setEnemiesAlive(getEnemiesAlive() - 1);
                     setBattleReward(getBattleReward() + baseRewardYield * getWaveNum());
                 }
