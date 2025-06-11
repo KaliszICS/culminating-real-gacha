@@ -116,6 +116,12 @@ public class Home {
         Battle battle = new Battle(account.getTeam().getOnTeam());
         battle.startBattle();
         account.setGachaCurrency(account.getGachaCurrency() + battle.getBattleReward());
+        for (int i = 0; i<account.getTeam().getOnTeam().length;i++){
+            if (account.getTeam().getOnTeam()[i].getHp()<=0){
+            account.getTeam().getOnTeam()[i].setActionPoints((int)(account.getTeam().getOnTeam()[i].getSpeed()*1.25+100));
+            account.getTeam().getOnTeam()[i].setHp(1);
+            }
+        }
     }
 
     public void shop(Account account) {
