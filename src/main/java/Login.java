@@ -86,6 +86,7 @@ public class Login {
     /**
      * Acts as the main menu of the game. Gets user input for what operation to do, then runs the corresponding method from the Home class for that operation.
      * @param account the account used for game operations
+     * @see Home
      */
     public static void gameStart(Account account) {
         Home home = new Home(account);
