@@ -193,7 +193,7 @@ public abstract class Entity implements Comparable<Entity> {
     public int getnumTargetSkill() {
         return numTargetSkill;
     }
-
+    
     public String getName() {
         return this.name;
     }
@@ -207,7 +207,7 @@ public abstract class Entity implements Comparable<Entity> {
         if (getName().equals("Zero-Line")){
             return getName() + ": " + getActionPoints();
         }
-        return getName() + " - " + getHp() + "/" + getMaxHp() + ": " + getActionPoints();
+        return getName() + " - " + getHp() + "/" + getMaxHp() + ", Action points: " + getActionPoints();
     }
 
     @Override

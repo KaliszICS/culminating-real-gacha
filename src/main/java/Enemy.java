@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Class representing an enemy in battle, stores their difficulty and reward on death.
+ * Class representing an enemy in battle.
  * @author gacha
- * @version 1.0.1
+ * @version 1.0.0
  */
 public class Enemy extends Entity {
     /**
@@ -19,6 +19,10 @@ public class Enemy extends Entity {
         super(maxHp, speed, attack, name, numTargets);
     }
 
+    /**
+     * Enemy implementation of selectTarget. Adds every PlayerCharacter object in enemies into an Entity array and passes it into Entity implementation.
+     * @see Entity#selectTarget
+     */
     @Override
     protected Entity[] selectTarget(int mainTarget, Entity[] enemies, int attackType) {
         ArrayList<Entity> targetable = new ArrayList<>();
@@ -31,6 +35,13 @@ public class Enemy extends Entity {
         return super.selectTarget(mainTarget, targetable.toArray(tempArr), 1);
     }
     
+    /**
+     * Enemy implementation of attack. Runs selectTarget with specified parameters, then runs normalAttack if attackType is 1 or skill if attackType is 2.
+     * @see Entity#attack
+     * @see Enemy#selectTarget
+     * @see Entity#normalAttack
+     * @see Enemy#skill
+     */
     @Override
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         if (getName().equals("Zero-Line")){
@@ -46,7 +57,8 @@ public class Enemy extends Entity {
     }
 
     /**
-     * 
+     * Enemy implementation of skill. Enemies can only have Damage-type skills, so normalAttack is run on every Entity in targets.
+     * @see Enemy#skill
      */
     @Override
     protected void skill(Entity[] targets) {
@@ -55,6 +67,10 @@ public class Enemy extends Entity {
         }
     }
 
+    /**
+     * Enemy implementation of turnBegin. Chooses randomly between normalAttack and skill, with a 70% chance for normal attack, then randomly chooses a mainTarget for the attack.
+     * @see Entity#turnBegin
+     */
     @Override
     public int turnBegin(int skillPointsAvailable, Entity[] targets) {
         if (getName().equals("Zero-Line")){
