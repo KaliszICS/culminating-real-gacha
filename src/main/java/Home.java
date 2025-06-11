@@ -41,7 +41,7 @@ public class Home {
     }
 
     public void characterGacha() {
-        System.out.println("You currently have : "+ account.getGachaCurrency() + "Gacha Currencies");
+        System.out.println("You currently have : "+ account.getGachaCurrency() + " Gacha Currencies");
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
         int choice = 0;
         while (choice==0){
@@ -72,7 +72,7 @@ public class Home {
     }
     
     public void weaponGacha() {
-        System.out.println("You currently have : "+ account.getGachaCurrency() + "Gacha Currencies");
+        System.out.println("You currently have : "+ account.getGachaCurrency() + " Gacha Currencies");
         System.out.println("How many times do you want to pull? (160 Gacha Currency per pull)");
         int choice = 0;
         while (choice==0){
