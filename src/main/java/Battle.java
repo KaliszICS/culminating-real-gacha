@@ -29,16 +29,15 @@ public class Battle {
     }
 
     public void startBattle() {
-        while (getTeammatesAlive() > 0){
-            if (getEnemiesAlive()==0){     
-                nextBattle();     
-            }   
-            if (getTeammatesAlive()!=0){
+        while (getTeammatesAlive() > 0 && getEnemiesAlive() > 0) { 
             reOrganizeTurnOrder();
             takeTurn(getEntities().get(0));                
-            }
         }
-        endBattle();
+        if (getTeammatesAlive() <= 0) {
+            endBattle();
+        } else {
+            nextBattle();
+        }
     }
 
     public void endBattle() {
