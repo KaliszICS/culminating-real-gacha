@@ -1,7 +1,10 @@
 import java.util.Random;
 import java.util.ArrayList;
+
 /**
- * testing agin again again again
+ * A shop class that has 10 items in a constant array that can be bought, randomized into an ArrayList of items on sale, with a refresh method for refreshing the items on sale in the ArrayList, and a buy method that purchases the item from the shop
+ * @author Gacha
+ * @version 1.0.0
  */
 public class Shop {
 
@@ -28,7 +31,7 @@ public class Shop {
     }
 
     /**
-     * 
+     * A refresh method that takes in an account parameter to refresh the items in the items on sale ArrayList; if the player does not have enough shop currency an error message plays, otherwise, it removes the currency from their account and randomizes 3 new items
      * @param account the player's account, so that the method can access their shopCurrency
      * @return A String that mentions whether the player was able to buy a shop resfresh or not
      */
@@ -62,7 +65,7 @@ public class Shop {
     }
 
     /**
-     * 
+     * A buy method that takes in an item and an account to purchase the item from the shop and apply to the characters; it will take shop currency from the account and use the item apply method, and remove the item from the items on sale ArrayList
      * @param item the item the player wants to buy
      * @param account the player's account that the item should be applied to
      * @return A String message that mentions whether the item was able to be bought or not
@@ -88,7 +91,7 @@ public class Shop {
 
     /**
      * Getter method
-     * @return An ArrayList<Item> of the itemsOnSale
+     * @return An ArrayList<Item> of the items on Sale
      */
     public ArrayList<Item> getItemsOnSale() {
         return this.itemsOnSale;

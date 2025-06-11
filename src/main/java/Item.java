@@ -1,5 +1,7 @@
 /**
- * 
+ * An item class that has a name, cost, description, effect type, and effect potency instance variables with getters, and an apply method for applying the item to a team 
+ * @author Gacha
+ * @version 1.0.0
  */
 class Item {
 
@@ -27,7 +29,7 @@ class Item {
     }
 
     /**
-     * 
+     * An apply method that takes in a team parameter and applies the effect potency to the effect type of each character equipped on the team
      * @param team
      */
     public void apply(Team team) {
