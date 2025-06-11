@@ -6,19 +6,8 @@ public class Team {
         this.onTeam = new PlayerCharacter[4];
         this.numCharactersOnTeam = 0;
     }
-
-    public String displayPlayerCharacter() {
-        String team = "Team:\n";
-        for (int i = 0; i < onTeam.length; i++) {
-            team += (i) + " - ";
-            if (getOnTeam()[i] == null) {
-                team += "EMPTY\n";
-            } else {
-                team += getOnTeam()[i].toString() + "\n";
-            }
-        }
-        return team;
-    }
+    
+    
 
     public void addToTeam(PlayerCharacter character) {
         int openSpace = 0;
@@ -55,5 +44,19 @@ public class Team {
 
     public void setNumCharactersOnTeam(int numCharactersOnTeam) {
         this.numCharactersOnTeam = numCharactersOnTeam;
+    }
+
+    @Override
+    public String toString() {
+        String team = "Team:\n";
+        for (int i = 0; i < onTeam.length; i++) {
+            team += (i) + " - ";
+            if (getOnTeam()[i] == null) {
+                team += "EMPTY\n";
+            } else {
+                team += getOnTeam()[i].toString() + "\n";
+            }
+        }
+        return team;
     }
 }

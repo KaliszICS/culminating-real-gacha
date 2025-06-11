@@ -216,7 +216,7 @@ public class Home {
     public void changeTeam() {
         boolean choosing = true;
         while (choosing){
-            System.out.println(account.getTeam().displayPlayerCharacter());
+            System.out.println(account.getTeam().toString());
             boolean canAdd = account.getTeam().getNumCharactersOnTeam() < 4;
             boolean canRemove = account.getTeam().getNumCharactersOnTeam() > 0;
             int exitOption = 1;
