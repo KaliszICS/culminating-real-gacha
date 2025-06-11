@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+/**
+ * 
+ */
 public class Battle {
     private int teammatesAlive;
     private int enemiesAlive;
