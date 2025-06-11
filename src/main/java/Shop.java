@@ -69,11 +69,21 @@ public class Shop {
      */
     public void buy(Item item, Account account) {
 
-        //If item is valid, remove from itemsOnSale, take money from shopCurrency, give to the account's team, and give output message
-        this.itemsOnSale.remove(item);
-        account.setShopCurrency(account.getShopCurrency()-item.getCost());
+        //If item is valid, remove from itemsOnSale, take money from shopCurrency, and give to the account's team
         item.apply(account.getTeam());
-        System.out.println("\nYou have succesfully bought " + item.getName() + "!");
+        int nullTeamCounter = 4;
+
+        for (int i=0; i<account.getTeam().getOnTeam().length; i++) {
+            if (account.getTeam().getOnTeam()[i]!=null) {
+                nullTeamCounter--;
+            }
+        }
+
+        if (nullTeamCounter!=4) {
+            this.itemsOnSale.remove(item);
+            account.setShopCurrency(account.getShopCurrency()-item.getCost());
+            System.out.println("\nYou have succesfully bought " + item.getName() + "!");
+        }
     }
 
     /**

@@ -36,69 +36,75 @@ class Item {
         switch (getEffectType()) {
 
             case "Speed":
-                int counter = 4;
+                //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
+                int speedCounter = 4;
 
                 for (int i=0; i<team.getOnTeam().length; i++) {
-                    //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
 
                     if (team.getOnTeam()[i]!=null) {
                         team.getOnTeam()[i].setSpeed(team.getOnTeam()[i].getSpeed() + (getEffectPotency()*5));
-                        counter--;
+                        speedCounter--;
                     }
                 }
 
-                if (counter==4) {
+                if (speedCounter==4) {
+                    System.out.println("\nYou do not have any characters on your team, have a minimum of one character on your team before buying an item.\n");
+                }
+                
+                break;
+
+            case "CritChance":
+                //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
+                int critChanceCounter = 4;
+
+                for (int i=0; i<team.getOnTeam().length; i++) {
+
+                    if (team.getOnTeam()[i]!=null) {
+                        team.getOnTeam()[i].setCritChance(team.getOnTeam()[i].getCritChance() + (getEffectPotency()*5));
+                        critChanceCounter--;
+                    }
+                }
+
+                if (critChanceCounter==4) {
+                    System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
+                }
+
+                break;
+
+            case "CritDamage":
+                //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
+                int critDamageCounter = 4;
+
+                for (int i=0; i<team.getOnTeam().length; i++) {
+
+                    if (team.getOnTeam()[i]!=null) {
+                        team.getOnTeam()[i].setCritDamage(team.getOnTeam()[i].getCritDamage() + (getEffectPotency()*5));
+                        critDamageCounter--;
+                    }
+                }
+
+                if (critDamageCounter==4) {
                     System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
                 }
                 
                 break;
 
-            case "CritChance": 
-                for (int i=0; i<team.getOnTeam().length; i++) {
-                    //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
-                    int counter = 4;
-
-                    if (team.getOnTeam()[i]!=null) {
-                        team.getOnTeam()[i].setCritChance(team.getOnTeam()[i].getCritChance() + (getEffectPotency()*5));
-                        counter--;
-                    }
-
-                    if (counter==4) {
-                        System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
-                    }
-                }
-                break;
-
-            case "CritDamage":
-                for (int i=0; i<team.getOnTeam().length; i++) {
-                    //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
-                    int counter = 4;
-
-                    if (team.getOnTeam()[i]!=null) {
-                        team.getOnTeam()[i].setCritDamage(team.getOnTeam()[i].getCritDamage() + (getEffectPotency()*5));
-                        counter--;
-                    }
-
-                    if (counter==4) {
-                        System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
-                    }
-                }
-                break;
-
             case "Health":
+                //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
+                int healthCounter = 4;
+
                 for (int i=0; i<team.getOnTeam().length; i++) {
-                    //Have a counter that checks to see if there are 0 characters on team, in which a message will tell the player accordingly
-                    int counter = 4;
 
                     if (team.getOnTeam()[i]!=null) {
                         team.getOnTeam()[i].setMaxHp(team.getOnTeam()[i].getMaxHp() + (getEffectPotency()*5));
-                        counter--;
-                    }
-
-                    if (counter==4) {
-                        System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
+                        healthCounter--;
                     }
                 }
+
+                if (healthCounter==4) {
+                    System.out.println("You do not have any characters on your team, have a minimum of one character on your team before buying an item");
+                }
+
                 break;
         }
     }
