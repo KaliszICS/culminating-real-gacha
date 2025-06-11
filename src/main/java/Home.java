@@ -53,7 +53,10 @@ public class Home {
             Main.scanner.nextLine();
         }
         }
-        if (account.getGachaCurrency()-choice*gacha.COST > account.getGachaCurrency()){
+        if(choice<0){
+            System.out.println("Invalid input, Gacha cancelled");
+        }
+        else if (choice*gacha.COST > account.getGachaCurrency()){
             System.out.println("You do not have enough Gacha Currency: "+ account.getGachaCurrency() + ", Gacha cancelled");
         }
         else{
@@ -85,10 +88,10 @@ public class Home {
         }
         }
         if(choice<0){
-            System.out.println("You do not have enough Gacha Currency: "+ account.getGachaCurrency() + ", Gacha cancelled");
+            System.out.println("Invalid input, Gacha cancelled");
         }
-        else if (account.getGachaCurrency()-choice*160 > account.getGachaCurrency()){
-            System.out.println("You do not have enough Gacha Currency: "+ account.getGachaCurrency() + ", Gacha cancelled");
+        else if (choice*gacha.COST > account.getGachaCurrency()){
+            System.out.println("You do not have enough Gacha Currency, you currently have: "+ account.getGachaCurrency() + ", Gacha cancelled");
         }
         else{
             account.setGachaCurrency(account.getGachaCurrency()-choice*160);
