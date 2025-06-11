@@ -73,6 +73,7 @@ public class Login {
             System.out.println("3 - Change Team");
             System.out.println("4 - Character Gacha");
             System.out.println("5 - Weapon Gacha");
+            System.out.println("6 - View account");
             System.out.println("6 - Logout\n");
             System.out.print("Please enter your choice: ");
             if (Main.scanner.hasNextInt()) {
@@ -103,11 +104,16 @@ public class Login {
                         }
                         break;
                     case 6:
+                        home.viewAccount();
+                    case 7:
                         home.logout();
                         break;
+                    default:
+                        System.out.println("Invalid choice.");
                 }
             } else {
-                 Main.scanner.next();
+                System.out.println("Invalid choice.");
+                Main.scanner.next();
              }
         }
     }
