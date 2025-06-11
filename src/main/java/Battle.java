@@ -75,7 +75,7 @@ public class Battle {
     }
 
     private void takeTurn(Entity entity) {  
-        displayTurnOrder();
+        displayTurnOrder();//shows currently who's alive and who's coming up
         System.out.println();
         Entity[] entityArr = new Entity[]{};
         entityArr = (Entity[]) getEntities().toArray(entityArr);
