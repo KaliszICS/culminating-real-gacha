@@ -43,35 +43,46 @@ public class Weapon {
         return this.attackMod;
     }
 
-    public void setAttackMod(int attackMod) {
-        this.attackMod = attackMod;
-    }
-
+    /**
+     * returns the hp modifier that the weapon applies on its equipped character
+     * @return the hp modifier
+     */
     public int getHpMod() {
         return hpMod;
     }
     
+    /**
+     * returns the special effect of the weapon (what it can do during battle)
+     * @return the special effect of the weapon
+     */
     public String getSpecialEffect() {
             return this.specialEffect;
     }
 
+    /**
+     * returns the name of the weapon
+     * @return the name of the weapon
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * returns the description (a fun quote) of the weapon
+     * @return the description (a fun quote) of the weapon
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * returns the PlayerCharacter that the weapon is equipped to
+     * @return the PlayerCharacter that the weapon is equipped to
+     */
     public PlayerCharacter getEquippedTo() {
         return this.equippedTo;
     }
-
-    public int getOwnedIndex(){
-        return this.ownedIndex;
-    }
-
-
+    
     /**
      * equip the weapon to a PlayerCharacter (allowing its specialEffect to apply for battle())
      * @param equippedTo the PlayerCharacter object that this weapon will be equipped to
@@ -79,7 +90,15 @@ public class Weapon {
     public void setEquippedTo(PlayerCharacter equippedTo) {
         this.equippedTo = equippedTo;
     }
-
+    
+    /**
+     * Returns the index of the weapon with respect to the final static array of weapons available
+     * @return the index of the weapon with respect to the final static array of weapons available
+     */
+    public int getOwnedIndex(){
+        return this.ownedIndex;
+    }
+    
     /**
      * Returns the rarity of the weapon
      * @return the rarity (either 4 or 5) of the weapon
@@ -88,6 +107,7 @@ public class Weapon {
         return rarity;
     }
 
+    
     /**
      * Returns a simple string representation of the Weapon object. The string will be formatted as follows:<br><br>
      * Name: <br>
