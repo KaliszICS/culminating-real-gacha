@@ -45,12 +45,15 @@ public class Battle {
         this.battleReward = 0;
     }
 
+    /**
+     * starts the battle
+     */
     public void startBattle() {
         while (getTeammatesAlive() > 0 && getEnemiesAlive() > 0) { 
             reOrganizeTurnOrder();
             takeTurn(getEntities().get(0));//the entity on top of the turn order takes their turn                
         }
-        if (getTeammatesAlive() <= 0) {
+        if (getTeammatesAlive() <= 0) {//if the entire team died, battle ends
             endBattle();
             
         } else {
@@ -58,6 +61,9 @@ public class Battle {
         }
     }
 
+    /**
+     * ends the battle and resets the team's attack and max hp to before weapons are applied
+     */
     public void endBattle() {
         for (int i = 0; i<team.length; i++){
             if (team[i]!=null){//if character on team have a weapon, their special effects and modifiers are applied here
