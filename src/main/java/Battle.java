@@ -115,7 +115,7 @@ public class Battle {
             }
             return;
         }
-        
+
         Entity[] entityArr = new Entity[]{};
         entityArr = (Entity[]) getEntities().toArray(entityArr);//converts the arraylist of entities to an array to be used in entity.turnBegin
         setSkillPoints(getSkillPoints() - entity.turnBegin(getSkillPoints(), entityArr));//entity.turnBegin returns the skill point they used
@@ -125,7 +125,7 @@ public class Battle {
 
         entity.turnEnd();
         for (Entity e : entityArr) {
-            if (e.getHp() <= 0) {
+            if (e.getHp() <= 0) {//checks who died and remove them from battle
                 if (e instanceof PlayerCharacter) {
                     setTeammatesAlive(getTeammatesAlive() - 1);
                 } else {
@@ -138,6 +138,13 @@ public class Battle {
         }
     }
 
+    /**
+     * prints a string of the current turn order in the following format: <br><br>
+     * Turn order: <br>
+     * (first entity.toString())<br>
+     * (second entity.toString())<br>
+     * ect.
+     */
     private void displayTurnOrder() {
         System.out.println("Turn order:");
         for (Entity e : getEntities()) {
@@ -145,6 +152,9 @@ public class Battle {
         }
     }
 
+    /**
+     * uses binary insertion sort to reOrganize the turn order from highest aciton point to lowest
+     */
     private void reOrganizeTurnOrder() {
         for (int i = 1; i < getEntities().size(); i++) {
             int start = 0;
@@ -176,50 +186,98 @@ public class Battle {
         }
     }
 
+    /**
+     * returns the number of teammates currently alive
+     * @return the number of teammates currently alive
+     */
     public int getTeammatesAlive() {
         return this.teammatesAlive;
     }
 
+    /**
+     * changes the number of teammates currently alive to given param
+     * @param teammatesAlive the new number of teammates alive
+     */
     public void setTeammatesAlive(int teammatesAlive) {
         this.teammatesAlive = teammatesAlive;
     }
 
+    /**
+     * returns the number of enemies currently alive
+     * @return the number of enemies currently alive
+     */
     public int getEnemiesAlive() {
         return this.enemiesAlive;
     }
 
+    /**
+     * changes the number of enemies currently alive to given param
+     * @param enemiesAlive the number of enemies currently alive
+     */
     public void setEnemiesAlive(int enemiesAlive) {
         this.enemiesAlive = enemiesAlive;
     }
 
+    /**
+     * returns the arraylist of entities in battle
+     * @return the arraylist of entities in battle
+     */
     public ArrayList<Entity> getEntities() {
         return entities;
     }
-
-    public int getSkillPoints() {
-        return skillPoints;
-    }
-
-    public void setSkillPoints(int skillPoints) {
-        this.skillPoints = skillPoints;
-    }
-
+    
+    /**
+     * changes the arraylist of entities in battle to given arraylist
+     * @param entities the arraylist of entities in battle
+     */
     public void setEntities(ArrayList<Entity> entities) {
         this.entities = entities;
     }
 
+    /**
+     * returns the number of skillpoint that the team can use for skill
+     * @return the number of skillpoint that the team can use for skill
+     */
+    public int getSkillPoints() {
+        return skillPoints;
+    }
+
+    /**
+     * changes the number of skillpoint that the team can use for skill to given param
+     * @param skillPoints the number of skillpoint that the team can use for skill
+     */
+    public void setSkillPoints(int skillPoints) {
+        this.skillPoints = skillPoints;
+    }
+
+    /**
+     * returns the current wave number
+     * @return the current wave number
+     */
     public int getWaveNum() {
         return waveNum;
     }
 
+    /**
+     * changes the current wave number to the parameter given
+     * @param waveNum the new wave number
+     */
     public void setWaveNum(int waveNum) {
         this.waveNum = waveNum;
     }
 
+    /**
+     * returns the battle reward obtained from defeating enemies
+     * @return the battle reward obtained from defeating enemies
+     */
     public int getBattleReward() {
         return battleReward;
     }
 
+    /**
+     * changes the battle reward to given parameter
+     * @param battleReward the new battle reward
+     */
     public void setBattleReward(int battleReward) {
         this.battleReward = battleReward;
     }
