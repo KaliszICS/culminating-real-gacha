@@ -307,16 +307,16 @@ public class Home {
             if (canAdd) {
                 exitOption++;
                 removeOption++;
-                System.out.println("1: Add a character to team");
+                System.out.println("1 - Add a character to team");
             }
 
             if (canRemove) {
                 exitOption += 2;
-                System.out.println(removeOption + ": Remove a character from team");
-                System.out.println((removeOption + 1) + ": Equip weapons");
+                System.out.println(removeOption + " - Remove a character from team");
+                System.out.println((removeOption + 1) + " - Equip weapons");
             }
 
-            System.out.println(exitOption + ": Exit");
+            System.out.println(exitOption + " - Exit");
             
             if (Main.scanner.hasNextInt()) {
                 int choice = Main.scanner.nextInt();
@@ -344,7 +344,7 @@ public class Home {
                         }
 
                         for (int i = 0; i<applicablePC.size(); i++){
-                            System.out.println("Index " + (i + 1) + ": " + applicablePC.get(i).detailedToString());
+                            System.out.println((i + 1) + " - " + applicablePC.get(i).detailedToString());
                         }
 
                         if (applicablePC.size()==0){
@@ -527,9 +527,9 @@ public class Home {
             }
 
             System.out.println("\nWhat would you like to do?");
-            System.out.println("1: Equip weapon");
-            System.out.println("2: Unequip weapon");
-            System.out.println("3: Exit");
+            System.out.println("1 - Equip weapon");
+            System.out.println("2 - Unequip weapon");
+            System.out.println("3 - Exit");
 
             int choice = 0;
             if (Main.scanner.hasNextInt()) {
@@ -560,7 +560,7 @@ public class Home {
                                     if (getAccount().getWeaponsUnlocked()[i]) {
                                         foundWeapon = true;
                                         weapCount++;
-                                        System.out.println(weapCount + ": " + WEAPONS[i].toString());
+                                        System.out.println(weapCount + " - " + WEAPONS[i].toString());
                                     }
                                 }
 
