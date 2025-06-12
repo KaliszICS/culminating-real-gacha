@@ -376,6 +376,8 @@ public class Home {
                             choosing = false;
                         }
                         choosing = true;
+                    } else {
+                        removeCharacter();
                     }
                 }
 
@@ -384,31 +386,7 @@ public class Home {
                         if (account.getTeam().getNumCharactersOnTeam() == 4) {
                             equipWeapons();
                         } else {
-                            System.out.println("\nChoose a character to remove using their index on team: ");
-                                                    
-                            while (choosing){
-                                if (Main.scanner.hasNextInt()){
-                                    int characterToRemove = Main.scanner.nextInt();
-                                    Main.scanner.nextLine();
-                                    
-                                    if (characterToRemove>=0&&characterToRemove<=3){
-                                        if (account.getTeam().getOnTeam()[characterToRemove]!=null){
-                                            account.getTeam().removeFromTeam(characterToRemove);
-                                            choosing = false;
-                                        }
-                                    }
-
-                                    else {
-                                        System.out.println("\nPlease enter a valid number.");
-                                    }
-                                }
-
-                                else {
-                                    Main.scanner.next();
-                                }
-                            }
-
-                            choosing = true;
+                            removeCharacter();
                         }
                     }
                 }
@@ -712,5 +690,31 @@ public class Home {
         }
 
         return str + "\n";
+    }
+
+    private void removeCharacter() {
+        boolean choosing = true;
+        System.out.println("\nChoose a character to remove using their index on team: ");                              
+        while (choosing){
+            if (Main.scanner.hasNextInt()){
+                int characterToRemove = Main.scanner.nextInt();
+                Main.scanner.nextLine();
+                
+                if (characterToRemove>=0&&characterToRemove<=3){
+                    if (account.getTeam().getOnTeam()[characterToRemove]!=null){
+                        account.getTeam().removeFromTeam(characterToRemove);
+                        choosing = false;
+                    }
+                }
+
+                else {
+                    System.out.println("\nPlease enter a valid number.");
+                }
+            }
+
+            else {
+                Main.scanner.next();
+            }
+        }
     }
 }
