@@ -80,15 +80,19 @@ public class Team {
      */
     @Override
     public String toString() {
-        String team = "Team:\n";
+        String team = "\nTeam:\n";
         for (int i = 0; i < onTeam.length; i++) {
+            
             team += (i) + " - ";
             if (getOnTeam()[i] == null) {
                 team += "EMPTY\n";
-            } else {
+            }
+            
+            else {
                 team += getOnTeam()[i].toString() + "\n";
             }
         }
+        
         return team;
     }
 }

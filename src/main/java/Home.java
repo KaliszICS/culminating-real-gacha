@@ -317,6 +317,7 @@ public class Home {
             }
 
             System.out.println(exitOption + " - Exit");
+            System.out.println("\nPlease enter your choice: ");
             
             if (Main.scanner.hasNextInt()) {
                 int choice = Main.scanner.nextInt();
@@ -326,10 +327,10 @@ public class Home {
                     choosing = false;
                 }
                 
-                else if (choice ==1) {
-                    if (account.getTeam().getNumCharactersOnTeam()!=4){
+                else if (choice == 1) {
+                    if (account.getTeam().getNumCharactersOnTeam()!=4) {
                         
-                        //does not do anything
+                        //does not do anything if team full
                         ArrayList<PlayerCharacter> applicablePC= new ArrayList<>();
                         for (int i = 0; i<PLAYER_CHARACTER_LIST.length;i++){
                             if (account.getPlayerCharacterUnlocked()[i]){
@@ -356,8 +357,8 @@ public class Home {
                             System.out.println("\nChoose a character to add, it will be added to the first open slot: ");
                         }
 
-                        while (choosing){
-                            if (Main.scanner.hasNextInt()){
+                        while (choosing) {
+                            if (Main.scanner.hasNextInt()) {
                                 int characterToAdd = Main.scanner.nextInt() - 1;
                                 Main.scanner.nextLine();    
                                 if (characterToAdd>-1 && characterToAdd<applicablePC.size()){                    
@@ -365,12 +366,12 @@ public class Home {
                                     applicablePC.remove(characterToAdd);
                                 }
 
-                                else{
+                                else {
                                     System.out.println("\nInput invalid.");
                                 }
                             }
 
-                            else{
+                            else {
                                 Main.scanner.next();
                             }
                             choosing = false;
@@ -379,8 +380,9 @@ public class Home {
                     }
                 }
 
-                else if (choice ==2){
-                    if (account.getTeam().getNumCharactersOnTeam()!=0){
+                else if (choice ==2) {
+                    if (account.getTeam().getNumCharactersOnTeam()!=0) {
+
                         //does not do anything
                         System.out.println("\nChoose a character to remove: ");
                         
@@ -396,15 +398,16 @@ public class Home {
                                     }
                                 }
 
-                                else{
+                                else {
                                     System.out.println("\nPlease enter a valid number.");
                                 }
                             }
 
-                            else{
+                            else {
                                 Main.scanner.next();
                             }
                         }
+
                         choosing = true;
                     }
                 }
@@ -413,7 +416,7 @@ public class Home {
                     equipWeapons();
                 }
 
-                else{
+                else {
                     Main.scanner.next();
                 }
             }
