@@ -199,7 +199,7 @@ public class PlayerCharacter extends Entity {
     @Override
     protected Entity[] selectTarget(int mainTarget, Entity[] enemies, int attackType) {
         ArrayList<Entity> targetable = new ArrayList<>();
-        if (getSkillEffect().equals("Damage") || getSkillEffect().equals("Push") ||attackType == 1){
+        if (getSkillEffect().equals("Damage") || getSkillEffect().equals("Push") || attackType == 1){
             for (int i = 0; i < enemies.length; i++) {
                 if (enemies[i] instanceof Enemy&& !enemies[i].getName().equals("Zero-Line")) {
                     targetable.add(enemies[i]);
@@ -245,7 +245,8 @@ public class PlayerCharacter extends Entity {
         Entity[] targets = new Entity[]{};
         if (getUltCharge() == getUltMax()) {
             System.out.println(getName() + " activates their ultimate!");
-            targets = selectTarget(mainTarget, enemies, attackType);
+            int skillType = 2;
+            targets = selectTarget(mainTarget, enemies, skillType);
             ultimate(targets);
         } else {
             if (attackType == 1) {
