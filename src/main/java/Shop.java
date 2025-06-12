@@ -73,7 +73,6 @@ public class Shop {
 
     public void buy(Item item, Account account) {
         //If item is valid, remove from itemsOnSale, take money from shopCurrency, and give to the account's team
-        item.apply(account.getTeam());
         int nullTeamCounter = 4;
 
         for (int i=0; i<account.getTeam().getOnTeam().length; i++) {
@@ -87,6 +86,7 @@ public class Shop {
             account.setShopCurrency(account.getShopCurrency()-item.getCost());
             System.out.println("\nYou have succesfully bought " + item.getName() + "!\n");
         }
+        item.apply(account.getTeam());
     }
 
     /**
