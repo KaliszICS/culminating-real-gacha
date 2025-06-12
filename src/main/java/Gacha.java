@@ -17,7 +17,7 @@ public class Gacha{
     private Weapon[] fiveStarWeapon;
 
     public final int COST = 160; //160 gacha currency is taken from account for each pull
-    public final int REPEAT_COMPENSATION = 100; //the shop currency given for each repetitive character obtained
+    public final int REPEAT_COMPENSATION = 25; //the shop currency given for each repetitive character obtained
 
 
     /**
@@ -34,20 +34,22 @@ public class Gacha{
         ArrayList<Weapon> fourStarWp = new ArrayList<>();
         ArrayList<Weapon> fiveStarWp = new ArrayList<>();
         
-        for (int i = 0; i<playerCharacterList.length; i++){//add a charater to their respective rarity's arraylist
-            if (playerCharacterList[i].getRarity()==4){
+        for (int i = 0; i<playerCharacterList.length; i++) {//add a charater to their respective rarity's arraylist
+            if (playerCharacterList[i].getRarity()==4) {
                 fourStarCharacter.add(playerCharacterList[i]);
             }
-            else{
+
+            else {
                 fiveStarCharacter.add(playerCharacterList[i]);
             }
         }
         
-        for (int i = 0; i<weapons.length; i++){//add a weapon to their respective rarity's arraylist
-            if (weapons[i].getRarity()==4){
+        for (int i = 0; i<weapons.length; i++) {//add a weapon to their respective rarity's arraylist
+            if (weapons[i].getRarity()==4) {
                 fourStarWp.add(weapons[i]);
             }
-            else{
+
+            else {
                 fiveStarWp.add(weapons[i]);
             }
         }
@@ -62,7 +64,6 @@ public class Gacha{
         fourStarWeapon = fourStarWp.toArray(fourStarWeapon);
         fiveStarWeapon = new Weapon[fiveStarWp.size()];
         fiveStarWeapon = fiveStarWp.toArray(fiveStarWeapon);
-
     }
 
     /**
@@ -75,17 +76,19 @@ public class Gacha{
         Weapon[] pulledWeapon = new Weapon[numOfPulls];
 
         for (int i = 0; i < numOfPulls; i++){
-            if(random.nextDouble() <= rates4Star){//pulls from the 4 star list if the random given is under the four star rate
+            if(random.nextDouble() <= rates4Star) { //pulls from the 4 star list if the random given is under the four star rate
                 pulledWeapon[i] = this.fourStarWeapon[random.nextInt(fourStarWeapon.length)];
                 System.out.println(pulledWeapon[i].detailedToString());
                 System.out.println();
             }
-            else{//pulls from the 5 star list
+
+            else { //pulls from the 5 star list
                 pulledWeapon[i] = this.fiveStarWeapon[random.nextInt(fiveStarWeapon.length)];
                 System.out.println(pulledWeapon[i].detailedToString());
                 System.out.println();
             }
         }
+
         return pulledWeapon;
     }
 
@@ -97,18 +100,21 @@ public class Gacha{
     public PlayerCharacter[] pullCharacter(int numOfPulls){
         Random random = new Random();
         PlayerCharacter[] pulledPC = new PlayerCharacter[numOfPulls];
+
         for (int i = 0; i < numOfPulls; i++){
-            if(random.nextDouble() <= rates4Star){//pulls from the 4 star list if the random given is under the four star rate
+            if(random.nextDouble() <= rates4Star) { //pulls from the 4 star list if the random given is under the four star rate
                 pulledPC[i] = this.fourStarPC[random.nextInt(fourStarPC.length)];
                 System.out.println(pulledPC[i].detailedToString());
                 System.out.println();
             }
-            else{//pulls from the 5 star list
+
+            else { //pulls from the 5 star list
                 pulledPC[i] = this.fiveStarPC[random.nextInt(fiveStarPC.length)];
                 System.out.println(pulledPC[i].detailedToString());
                 System.out.println();
             }
         }
+
         return pulledPC;
     }
 }

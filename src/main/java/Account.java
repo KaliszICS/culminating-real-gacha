@@ -131,9 +131,9 @@ public class Account {
      */
     @Override
     public String toString() {
-        String accString = "Username: " + getUserName() + "\n";
+        String accString = "\nUsername: " + getUserName() + "\n";
         accString += getTeam().toString();
-        accString += "Pull currency: " + getGachaCurrency() + "\n" + "Shop currency: " + getShopCurrency();
+        accString += "Pull currency: " + getGachaCurrency() + "\n" + "Shop currency: " + getShopCurrency() + "\n";
         return accString;
     }
 }

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+
 /**
  * Class representing a player character, holds their ultimates, rarity, equipped weapon, among other stats.
  * @author gacha
@@ -85,9 +86,11 @@ public class PlayerCharacter extends Entity {
      */
     public void ultimate(Entity[] targets) {
         int runSkillTimesForUlt = 3;
+
         for (int i = 0; i < runSkillTimesForUlt; i++) {
             skill(targets);
         }
+
         setUltCharge(0);
     }
 
@@ -109,18 +112,22 @@ public class PlayerCharacter extends Entity {
      */
     @Override
     protected void skill(Entity[] targets) {
+        
         switch (getSkillEffect()) {
             case "Damage":
                 for (int i = 0; i < targets.length; i++) {
                     Random random = new Random();
+                    
                     if (random.nextInt(101)>getCritChance()){
                         setAttack(getAttack()*getCritDamage());
                         setAttack(getAttack()*4);//default multiplier of 4 for skill
                     }
-                        super.normalAttack(targets[i]);
-                        setAttack(getAttackDefault());
+
+                    super.normalAttack(targets[i]);
+                    setAttack(getAttackDefault());
                 }
                 break;
+
             case "Heal":
             //heals allies
                 for (int i = 0; i < targets.length; i++) {
@@ -128,7 +135,9 @@ public class PlayerCharacter extends Entity {
                     System.out.println(targets[i].getName() + " was healed for " + change + " HP!");
                     targets[i].setHp(Math.min(targets[i].getMaxHp(), targets[i].getHp() + change));
                 }
+                
                 break;
+
             case "Push":
                 // reduces enemy action point
                 for (int i = 0; i < targets.length; i++) {

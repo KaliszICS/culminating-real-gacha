@@ -32,11 +32,11 @@ public class Main {
 						}
 						break;
 					case 3:
-						System.out.println("Goodbye!");
+						System.out.println("\nGoodbye!\n");
 						scanner.close();
 						return;
 					default:
-						System.out.println("Invalid choice.");
+						System.out.println("\nInvalid choice.");
 				}
 			}
 
