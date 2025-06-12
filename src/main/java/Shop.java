@@ -83,6 +83,10 @@ public class Shop {
 
         if (nullTeamCounter!=4) {
             this.itemsOnSale.remove(item);
+            if (account.getShopCurrency()<item.getCost()){
+                System.out.println("You do not have enough Shop Currency");
+                return;
+            }
             account.setShopCurrency(account.getShopCurrency()-item.getCost());
             System.out.println("\nYou have succesfully bought " + item.getName() + "!\n");
         }
