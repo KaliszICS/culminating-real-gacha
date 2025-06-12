@@ -125,7 +125,7 @@ public class Login {
                         break;
 
                     case 2:
-                        home.shop(account);
+                        home.shop();
                         break;
 
                     case 3:

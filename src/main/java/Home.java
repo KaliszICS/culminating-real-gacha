@@ -141,6 +141,10 @@ public class Home {
         }
     }
 
+    /**
+     * Handles starting and ending battles for the user. Makes sure users can't enter battles with an empty team, and pays out accumulated rewards in battle.
+     * @see Battle
+     */
     public void battle() {
         boolean hasCharacter = false;
         
@@ -170,7 +174,13 @@ public class Home {
         }
     }
 
-    public void shop(Account account) {
+    /**
+     * Handles shop user input. Allows the user to either refresh the shop to restock it, or to buy items.<br><br>
+     * 
+     * The user cannot buy items if the shop is empty, and can only refresh the shop in this state.
+     * @see Shop
+     */
+    public void shop() {
 
         System.out.println("\nWelcome to the shop!");
         System.out.println("Shop Currency: " + account.getShopCurrency() + "\n");
@@ -261,16 +271,29 @@ public class Home {
 		}
     }
 
+    /**
+     * Prints out the account in string form.
+     */
     public void viewAccount() {
         System.out.println(account.toString());
     }
 
+    /**
+     * Sets the playing boolean to false to stop the game, and saves the account information to its file.
+     */
     public void logout() {
         System.out.println("\nYour characters will go back home, leaving behind their weapon and team.\nDon't forget to reassign them once you come back!\n");
         setPlaying(false);
         save();
     }
 
+    /**
+     * Handles user input for team change operations. Allows the user to add or remove playercharacters, and to change their weapons via equipWeapons().<br><br>
+     * 
+     * The user can only add playercharacters if their team isn't full, and they cannot remove or equip weapons if their team is empty.
+     * @see Team
+     * @see Home#equipWeapons
+     */
     public void changeTeam() {
         boolean choosing = true;
         
@@ -401,6 +424,9 @@ public class Home {
         }
     }
 
+    /**
+     * Saves the account information to a file. This file will be named (account.username).cha.
+     */
     private void save() {
         BufferedWriter writer = null;
 
@@ -428,26 +454,53 @@ public class Home {
         }
     }
     
+    /**
+     * Returns the account object in use for the game.
+     * @return the account object in use for the game
+     */
     public Account getAccount() {
         return this.account;
     }
 
+    /**
+     * Returns the shop object in use for the game.
+     * @return the shop object in use for the game
+     */
     public Shop getShop() {
         return this.shop;
     }
 
+    /**
+     * Returns true if the game is active, and false if not.
+     * @return true if the game is active, and false if not
+     */
     public boolean isPlaying() {
         return this.playing;
     }
 
+    /**
+     * Changes the state of the game.
+     * @param playing the new state of the game, true if the game is active and false if not
+     */
     public void setPlaying(boolean playing) {
         this.playing = playing;
     }
 
+    /**
+     * Returns the gacha object in use for the game.
+     * @return the gacha object in use for the game
+     */
     public Gacha getGacha() {
         return this.gacha;
     }
 
+    /**
+     * Handles weapon-related operations for playercharacters on the account's team.<br><br>
+     * 
+     * Allows the user to either equip or unequip weapons and uses user input to determine whether to equip or unequip, and which weapon should be part of the operation.<br><br>
+     * 
+     * Weapons cannot be equipped to multiple playercharacters at once, so this is checked for here.
+     */
     private void equipWeapons() {
         boolean choosing = true;
         PlayerCharacter[] team = getAccount().getTeam().getOnTeam();
@@ -636,6 +689,11 @@ public class Home {
         }
     }
 
+    /**
+     * Converts a boolean array into a string. The string will contain 0 at indexes where the boolean array is false, and 1 at indexes where the boolean array is true. Used for file saving purposes.
+     * @param arr the boolean array to be converted
+     * @return a string form of arr following specifications
+     */
     private String convertBoolArrToString(boolean[] arr) {
         String str = "";
 
