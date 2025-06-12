@@ -382,33 +382,35 @@ public class Home {
 
                 else if (choice ==2) {
                     if (account.getTeam().getNumCharactersOnTeam()!=0) {
+                        if (account.getTeam().getNumCharactersOnTeam() == 4) {
+                            equipWeapons();
+                        } else {
+                            System.out.println("\nChoose a character to remove using their index on team: ");
+                                                    
+                            while (choosing){
+                                if (Main.scanner.hasNextInt()){
+                                    int characterToRemove = Main.scanner.nextInt();
+                                    Main.scanner.nextLine();
+                                    
+                                    if (characterToRemove>=0&&characterToRemove<=3){
+                                        if (account.getTeam().getOnTeam()[characterToRemove]!=null){
+                                            account.getTeam().removeFromTeam(characterToRemove);
+                                            choosing = false;
+                                        }
+                                    }
 
-                        //does not do anything
-                        System.out.println("\nChoose a character to remove using their index on team: ");
-                        
-                        while (choosing){
-                            if (Main.scanner.hasNextInt()){
-                                int characterToRemove = Main.scanner.nextInt();
-                                Main.scanner.nextLine();
-                                
-                                if (characterToRemove>=0&&characterToRemove<=3){
-                                    if (account.getTeam().getOnTeam()[characterToRemove]!=null){
-                                        account.getTeam().removeFromTeam(characterToRemove);
-                                        choosing = false;
+                                    else {
+                                        System.out.println("\nPlease enter a valid number.");
                                     }
                                 }
 
                                 else {
-                                    System.out.println("\nPlease enter a valid number.");
+                                    Main.scanner.next();
                                 }
                             }
 
-                            else {
-                                Main.scanner.next();
-                            }
+                            choosing = true;
                         }
-
-                        choosing = true;
                     }
                 }
                 
