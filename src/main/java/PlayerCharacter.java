@@ -447,6 +447,12 @@ public class PlayerCharacter extends Entity {
         return skillEffect;
     }
 
+    /**
+     * Returns a string representation of the playercharacter. This is formatted in the following way:<br><br>
+     * 
+     * (this.name) - (this.hp)/(this.maxHp), Action points: (this.actionPoints), Ultimate Charge: (this.ultCharge)/(this.ultMax)
+     * @return a string representation of the playercharacter
+     */
     @Override
     public String toString() {
         return super.toString() + ", Ultimate Charge: " + getUltCharge() + "/" + getUltMax();
