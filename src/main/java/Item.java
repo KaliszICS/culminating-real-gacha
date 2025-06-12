@@ -44,7 +44,7 @@ class Item {
                 for (int i=0; i<team.getOnTeam().length; i++) {
 
                     if (team.getOnTeam()[i]!=null) {
-                        team.getOnTeam()[i].setSpeed(team.getOnTeam()[i].getSpeed() + (getEffectPotency()*5));
+                        team.getOnTeam()[i].setSpeed(team.getOnTeam()[i].getSpeed() + (getEffectPotency()*30));//300 is the base multiplier for speed
                         speedCounter--;
                     }
                 }
@@ -62,7 +62,7 @@ class Item {
                 for (int i=0; i<team.getOnTeam().length; i++) {
 
                     if (team.getOnTeam()[i]!=null) {
-                        team.getOnTeam()[i].setCritChance(team.getOnTeam()[i].getCritChance() + (getEffectPotency()*5));
+                        team.getOnTeam()[i].setCritChance(team.getOnTeam()[i].getCritChance() + (getEffectPotency()*10));//300 is the base multiplier for critChance
                         critChanceCounter--;
                     }
                 }
@@ -80,7 +80,7 @@ class Item {
                 for (int i=0; i<team.getOnTeam().length; i++) {
 
                     if (team.getOnTeam()[i]!=null) {
-                        team.getOnTeam()[i].setCritDamage(team.getOnTeam()[i].getCritDamage() + (getEffectPotency()*5));
+                        team.getOnTeam()[i].setCritDamage(team.getOnTeam()[i].getCritDamage() + (getEffectPotency()*30));//300 is the base multiplier for critDMG
                         critDamageCounter--;
                     }
                 }
@@ -98,7 +98,7 @@ class Item {
                 for (int i=0; i<team.getOnTeam().length; i++) {
 
                     if (team.getOnTeam()[i]!=null) {
-                        team.getOnTeam()[i].setMaxHp(team.getOnTeam()[i].getMaxHp() + (getEffectPotency()*5));
+                        team.getOnTeam()[i].setMaxHp(team.getOnTeam()[i].getMaxHp() + (getEffectPotency()*300));//300 is the base multiplier for health
                         healthCounter--;
                     }
                 }
