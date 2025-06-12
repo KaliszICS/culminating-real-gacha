@@ -384,7 +384,7 @@ public class Home {
                     if (account.getTeam().getNumCharactersOnTeam()!=0) {
 
                         //does not do anything
-                        System.out.println("\nChoose a character to remove: ");
+                        System.out.println("\nChoose a character to remove using their index on team: ");
                         
                         while (choosing){
                             if (Main.scanner.hasNextInt()){
