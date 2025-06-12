@@ -70,9 +70,8 @@ public class Shop {
      * @param account the player's account that the item should be applied to
      * @return A String message that mentions whether the item was able to be bought or not
      */
-    
-    public void buy(Item item, Account account) {
 
+    public void buy(Item item, Account account) {
         //If item is valid, remove from itemsOnSale, take money from shopCurrency, and give to the account's team
         item.apply(account.getTeam());
         int nullTeamCounter = 4;
