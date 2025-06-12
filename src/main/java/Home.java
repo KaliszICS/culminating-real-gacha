@@ -289,7 +289,6 @@ public class Home {
 
     /**
      * Handles user input for team change operations. Allows the user to add or remove playercharacters, and to change their weapons via equipWeapons().<br><br>
-     * 
      * The user can only add playercharacters if their team isn't full, and they cannot remove or equip weapons if their team is empty.
      * @see Team
      * @see Home#equipWeapons

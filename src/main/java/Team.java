@@ -8,7 +8,7 @@ public class Team {
     private int numCharactersOnTeam;
     
     /**
-     * creates an empty team. 
+     * Creates an empty team. 
      */
     public Team() {
         this.onTeam = new PlayerCharacter[4];//4 is the max amount of PlayerCharacters allowed on team
@@ -16,16 +16,18 @@ public class Team {
     }
     
     /**
-     * adds a PlayerCharacter to the first empty space on the team, increase the number of characters on team by 1
+     * Adds a PlayerCharacter to the first empty space on the team, increase the number of characters on team by 1
      */
     public void addToTeam(PlayerCharacter character) {
         int openSpace = 0;
+        
         for (int i = 0; i<getOnTeam().length; i++){
             if (getOnTeam()[i]==null){
                 openSpace = i;
                 i=getOnTeam().length;
             }
         }
+
         getOnTeam()[openSpace] = character;
         setNumCharactersOnTeam(getNumCharactersOnTeam()+1);
     }
@@ -39,13 +41,14 @@ public class Team {
         if (getOnTeam()[index].getWeaponEquipped()!=null){
             getOnTeam()[index].getWeaponEquipped().setEquippedTo(null);
         }
+
         getOnTeam()[index].setWeaponEquipped(null);
         getOnTeam()[index] = null;
         setNumCharactersOnTeam(getNumCharactersOnTeam()-1);
     }
 
     /**
-     * returns the array of PlayerCharacters on the team
+     * Returns the array of PlayerCharacters on the team
      * @return the array of PlayerCharacters on the team
      */
     public PlayerCharacter[] getOnTeam() {
@@ -53,7 +56,7 @@ public class Team {
     }
 
     /**
-     * returns the number of characters currently on team
+     * Returns the number of characters currently on team
      * @return the number of characters currently on team
      */
     public int getNumCharactersOnTeam() {
@@ -61,7 +64,7 @@ public class Team {
     }
 
     /**
-     * changes the number of characters currently on team to the given parameter
+     * Changes the number of characters currently on team to the given parameter
      */
     public void setNumCharactersOnTeam(int numCharactersOnTeam) {
         this.numCharactersOnTeam = numCharactersOnTeam;
