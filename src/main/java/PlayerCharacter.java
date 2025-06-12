@@ -268,7 +268,7 @@ public class PlayerCharacter extends Entity {
         System.out.println(getName() + "'s turn!");
         boolean choosing = true;
         if (getUltCharge() == getUltMax()) {
-            // arbitrary values
+            // arbitrary values assigned, which will not be used
             attack(1, 0, targets);
             return 0;
         } else {
