@@ -84,7 +84,6 @@ public class PlayerCharacter extends Entity {
      * @see PlayerCharacter#skill
      */
     public void ultimate(Entity[] targets) {
-        System.out.println(getName() + " activates their ultimate!");
         int runSkillTimesForUlt = 3;
         for (int i = 0; i < runSkillTimesForUlt; i++) {
             skill(targets);
@@ -208,18 +207,19 @@ public class PlayerCharacter extends Entity {
 
         System.out.println("Please choose your main target (target will be in the center of aoe): ");
         for (int i = 0; i < targetable.size(); i++) {
-            System.out.println((i) + " - " + targetable.get(i).toString());
+            System.out.println((i + 1) + " - " + targetable.get(i).toString());
         }
         boolean choosing = true;
         int target = 0;
         while (choosing) {
             if (Main.scanner.hasNextInt()) {
-                target = Main.scanner.nextInt();
+                target = Main.scanner.nextInt() - 1;
                 Main.scanner.nextLine();
                 if (target >= 0 && target < targetable.size()) {
                     choosing = false;
                 }
             } else {
+                System.out.println("Invalid choice.");
                 Main.scanner.next();
             }
         }
@@ -235,6 +235,7 @@ public class PlayerCharacter extends Entity {
     public void attack(int attackType, int mainTarget, Entity[] enemies) {
         Entity[] targets = new Entity[]{};
         if (getUltCharge() == getUltMax()) {
+            System.out.println(getName() + " activates their ultimate!");
             targets = selectTarget(mainTarget, enemies, attackType);
             ultimate(targets);
         } else {
@@ -249,35 +250,41 @@ public class PlayerCharacter extends Entity {
     }
 
     /**
-     * Playercharacter implementation of turnBegin. Gets type of attack through user input and passes it into attack with an arbitrary value for mainTarget.
+     * Playercharacter implementation of turnBegin. Gets type of attack through user input and passes it into attack with an arbitrary value for mainTarget. If ultimate is charged, arbitrary values are passed for attackType and mainTarget.
      * @see Entity#turnBegin
      */
     @Override
     public int turnBegin(int skillPointsAvailable, Entity[] targets) {
         System.out.println(getName() + "'s turn!");
         boolean choosing = true;
-        while (choosing) {
-            System.out.println("What kind of attack would you like to do?");
-            System.out.println("1 - Normal Attack");
-            System.out.println("2 - Skill: " + getSkillEffect());
-            System.out.println("Skill points available: " + skillPointsAvailable);
-            System.out.print("Enter your choice: ");
-            if (Main.scanner.hasNextInt()) {
-                int choice = Main.scanner.nextInt();
-                Main.scanner.nextLine();
-                if (choice == 2 && skillPointsAvailable == 0) {
-                    System.out.println("Out of skill points, can't use skill.");
-                } else if (choice > 2 || choice < 1) {
-                    System.out.println("Invalid number entered.");
-                } else {
-                    attack(choice, 0, targets);
-                    if (choice == 2) {
-                        return 1;
+        if (getUltCharge() == getUltMax()) {
+            // arbitrary values
+            attack(1, 0, targets);
+            return 0;
+        } else {
+            while (choosing) {
+                System.out.println("What kind of attack would you like to do?");
+                System.out.println("1 - Normal Attack");
+                System.out.println("2 - Skill: " + getSkillEffect());
+                System.out.println("Skill points available: " + skillPointsAvailable);
+                System.out.print("Enter your choice: ");
+                if (Main.scanner.hasNextInt()) {
+                    int choice = Main.scanner.nextInt();
+                    Main.scanner.nextLine();
+                    if (choice == 2 && skillPointsAvailable == 0) {
+                        System.out.println("Out of skill points, can't use skill.");
+                    } else if (choice > 2 || choice < 1) {
+                        System.out.println("Invalid number entered.");
+                    } else {
+                        attack(choice, 0, targets);
+                        if (choice == 2) {
+                            return 1;
+                        }
+                        choosing = false;
                     }
-                    choosing = false;
+                } else {
+                    Main.scanner.next();
                 }
-            } else {
-                Main.scanner.next();
             }
         }
         return -1;
@@ -428,5 +435,10 @@ public class PlayerCharacter extends Entity {
      */
     public String getSkillEffect() {
         return skillEffect;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Ultimate Charge: " + getUltCharge() + "/" + getUltMax();
     }
 }

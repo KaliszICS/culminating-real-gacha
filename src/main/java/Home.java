@@ -142,10 +142,13 @@ public class Home {
         battle.startBattle();
         account.setGachaCurrency(account.getGachaCurrency() + battle.getBattleReward());
         for (int i = 0; i<account.getTeam().getOnTeam().length;i++){
-            if (account.getTeam().getOnTeam()[i].getHp()<=0){
-            account.getTeam().getOnTeam()[i].setActionPoints((int)(account.getTeam().getOnTeam()[i].getSpeed()*1.25+100));
-            account.getTeam().getOnTeam()[i].setHp(1);
+            if (account.getTeam().getOnTeam()[i] != null) {
+                if (account.getTeam().getOnTeam()[i].getHp()<=0){
+                    account.getTeam().getOnTeam()[i].setActionPoints((int)(account.getTeam().getOnTeam()[i].getSpeed()*1.25+100));
+                    account.getTeam().getOnTeam()[i].setHp(1);
+                }
             }
+            
         }
     }
 
@@ -286,7 +289,7 @@ public class Home {
                             }
                         }
                         for (int i = 0; i<applicablePC.size(); i++){
-                            System.out.println("Index " + i + ": " + applicablePC.get(i).detailedToString());
+                            System.out.println("Index " + (i + 1) + ": " + applicablePC.get(i).detailedToString());
                         }
                         if (applicablePC.size()==0){
                             System.out.println("You have no more characters to add");
@@ -297,7 +300,7 @@ public class Home {
                         }
                         while (choosing){
                             if (Main.scanner.hasNextInt()){
-                                int characterToAdd = Main.scanner.nextInt();
+                                int characterToAdd = Main.scanner.nextInt() - 1;
                                 Main.scanner.nextLine();    
                                 if (characterToAdd>-1 && characterToAdd<applicablePC.size()){                    
                                     account.getTeam().addToTeam(applicablePC.get(characterToAdd));

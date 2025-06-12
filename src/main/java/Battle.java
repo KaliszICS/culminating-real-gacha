@@ -31,8 +31,10 @@ public class Battle {
             if (team[i]!=null){//if character on team have a weapon, their special effects and modifiers are applied here
                 this.entities.add(team[i]);
                 team[i].weaponEffect();
-                team[i].setAttack(team[i].getAttack() + team[i].getWeaponEquipped().getAttackMod());
-                team[i].setMaxHp(team[i].getWeaponEquipped().getHpMod()+team[i].getMaxHpDefault());
+                if (team[i].getWeaponEquipped() != null) {
+                    team[i].setAttack(team[i].getAttack() + team[i].getWeaponEquipped().getAttackMod());
+                    team[i].setMaxHp(team[i].getWeaponEquipped().getHpMod()+team[i].getMaxHpDefault());
+                }
                 setTeammatesAlive(getTeammatesAlive()+1);
             }
         }
@@ -69,6 +71,8 @@ public class Battle {
             if (team[i]!=null){//if character on team have a weapon, their special effects and modifiers are applied here
                 team[i].setAttack(team[i].getAttackDefault());
                 team[i].setMaxHp(team[i].getMaxHpDefault());
+                team[i].setHp(team[i].getMaxHp());
+                team[i].setUltCharge(0);
             }
         }
         System.out.println("Game over!");
