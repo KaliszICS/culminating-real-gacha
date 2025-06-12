@@ -192,10 +192,12 @@ public class Home {
 		while (choosing) {
 			System.out.println("What would you like to do?\n");
 			System.out.println("1 - Refresh Items on Sale (Cost: 150 shop currency)");
+            int exitOption = 2;
             if (shop.getItemsOnSale().size()>0) {
-			    System.out.println("2 - Buy Item (Will be applied to each charatcer currently on your team)");
+			    System.out.println("2 - Buy Item (Will be applied to each character currently on your team)");
+                exitOption++;
             }
-			System.out.println("3 - Exit");
+			System.out.println(exitOption + " - Exit");
 			System.out.println("\nPlease enter your choice: ");
 
 			if (Main.scanner.hasNextInt()) {
@@ -208,42 +210,46 @@ public class Home {
                             break;
                         
                         case 2:
-                            if (shop.getItemsOnSale().size()>0) {
-                                System.out.println("Which item would you like to buy?\n");
+                            if (exitOption == choice) {
+                                choosing = false;
+                            } else {
+                                if (shop.getItemsOnSale().size()>0) {
+                                    System.out.println("Which item would you like to buy?\n");
 
-                                for (int i=0; i<shop.getItemsOnSale().size(); i++) {
-                                    System.out.println(i+1 + " - " + shop.getItemsOnSale().get(i).getName());
-                                }
-
-                                System.out.println("\nPlease enter your choice: ");
-
-                                if (Main.scanner.hasNextInt()) {
-                                    int buyChoice = Main.scanner.nextInt();
-                                    Main.scanner.nextLine();
-
-                                    //buyChoice is the item index +1
-                                    if (buyChoice>=1 && buyChoice<=shop.getItemsOnSale().size()) {
-                                        shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
-                                        break;                                      
+                                    for (int i=0; i<shop.getItemsOnSale().size(); i++) {
+                                        System.out.println(i+1 + " - " + shop.getItemsOnSale().get(i).getName() + ", Cost - " + shop.getItemsOnSale().get(i).getCost());
                                     }
 
+                                    System.out.println("\nPlease enter your choice: ");
+
+                                    if (Main.scanner.hasNextInt()) {
+                                        int buyChoice = Main.scanner.nextInt();
+                                        Main.scanner.nextLine();
+
+                                        //buyChoice is the item index +1
+                                        if (buyChoice>=1 && buyChoice<=shop.getItemsOnSale().size()) {
+                                            shop.buy(shop.getItemsOnSale().get(buyChoice-1), account);
+                                            break;                                      
+                                        }
+
+                                        else {
+                                            System.out.println("\nInvalid choice.\n");
+                                        }
+                                    }
                                     else {
-                                        System.out.println("\nInvalid choice.\n");
+                                        Main.scanner.next();
                                     }
                                 }
-                                else {
-                                    Main.scanner.next();
-                                }
-                            }
-                            else {
-                                System.out.println("\nThere are currently no items on sale.\n");
                             }
                             break;
                         
                         case 3:
-                            choosing = false;
+                            if (exitOption == choice) {
+                                choosing = false;
+                            } else {
+                                System.out.println("\nInvalid choice.");
+                            }
                             break;
-
 					default:
 						System.out.println("\nInvalid choice.");
 				}
