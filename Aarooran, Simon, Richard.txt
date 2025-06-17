@@ -1,5 +1,0 @@
-Composition arrow means there should be an instance variable in your class of that the other one.  This is missing in login
-Items seems to be very segmented from most of your code and only exist in the shop, where does it go after that?
-Otherwise great work!
-
-95
